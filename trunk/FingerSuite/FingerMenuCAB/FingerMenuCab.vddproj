@@ -1,0 +1,1956 @@
+"DeployProject"
+{
+"VSVersion" = "3:701"
+"ProjectType" = "8:{AB322303-2255-48EF-A496-5904EB18DA55}"
+"IsWebType" = "8:FALSE"
+"ProjectName" = "8:FingerSuiteCab"
+"LanguageId" = "3:1033"
+"CodePage" = "3:1252"
+"SccProjectName" = "8:SAK"
+"SccLocalPath" = "8:SAK"
+"SccAuxPath" = "8:SAK"
+"SccProvider" = "8:SAK"
+    "Hierarchy"
+    {
+        "Entry"
+        {
+        "MsmKey" = "8:_069424A924014E79A9E4F140A754F4F5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_06E56CD276804583B878E9E0E918B85A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0728E216AEF74167AD8BAADEE70E13E0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1E0CAE052E804A15918FD9238FDADA06"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2071A43DA2804B2BA5F57115FAA3F6DA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_269C7719244D48C0969F57519ACCDE71"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2DA29E161E8844A094B6A86BFE138016"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2FA1C72C73724962B718E76C1D0A1569"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_34B5D56C4EB642BE8E201B40900EA474"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3E446543429846E0A891ED4DAFAFE3DD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_41DAC8783B0E494B9F281A41963F4D9E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_423F1688F1BB42589F6E0B1766A29D2F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_424692E616DE4B37B6BCA69912B6E477"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_426A8233F3F140D89A0CD4DF19358F9F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_44CC09EEF82B46D4BF3F60FA70313E78"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_462F5D6917714F3CBC30A006264B8964"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4968A356B4D349D3A72037544AA0B043"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4B66E2BC935048F6AF0183EAFB22D965"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4DC6DB2F6CF743B3B40C572065404F4F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6135CF2D732B4603B7761A242C12BF54"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_63AF83ADFD72410B99EDEC5F794993A8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6950A81DE98848DDBFC4D64AAE97416D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_69AC0219BAEF4557A3D1EDDE414C6D3C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6B758D5C5B8A42BF907750C16B70CF67"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6E74797104E74B2381B282462BEA1596"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7241CC0980C94C1B8A8FEAE04F5C304E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_732537AEC49F4B3E967BAC563F6EAB7C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_758089D7D0EB4600A014590DF3A72414"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_798691F4CA4648DCAF2AFA2533FCCA31"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7F047B364C9142B6AC2A1410D31ADAED"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_870F54E8A9BD4EFB921547DD66D24B86"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8A28CC355B494FA4ABECCDD5AB6AFDF5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8FDA47DBD69141399333BB43BFBFFEE7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_904DF226B6034E4A9B73C5B51F26894B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_911EF1071058415C92E233CBA714A589"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_92751B10532B4F98BF24AE1D49F3AA99"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_986C38E235234622AE9E538B9AB545C7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_99BBEE965DED43FE9CC54D0C615166C5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9A665E1916C74497BDE047DB16685ACC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9D53FAB8016E472796F2004B44745A6F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A360C9EF523B4F53A87822FFC5235501"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_ABB3915C46C9404B9E715752783F688A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B1CF0891D0B346BBA953A7C8EE4FDAAB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B9053073901242C5BD8E7EE0DE910F72"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B95C8B2C6514413EA8B479EFCD8FE111"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BC2D3AE085A542E48C264882654D67FE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BE54346C01824D3D9116F0AD1F24E74D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C572EA5DB4D44DF5B80EEBBA33E76E0E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C873A5BD71F944B8844F4194A2BB1EB5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CAB272556BD34B3F961662D65226DADF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CC9B7BA2A09D473F8946763B7822A5C8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CD8B9AC0A2C34163BA72B952B50E04A8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D110E52D7A9D4BE59EB7FFDE636F171B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D39D62555BAC4E94ABED1FE9736B35E4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D7D2C22574BE42A7AD4EE6CBBEC32BC4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E83F80B1CC3A4830A2D86137C951444F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E8A36EA039A44B3EA6789E30D32ED8AC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EA2D89E1CCC4429D83EBD06C0ABD22B1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EEA05BF815F84456A5BB304A6F83B46A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EFDF895BE6154E36B7DA59C7D8DFFB86"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F0299223792F4D02866A012F7286E3B6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FA1FA6B5AD3B47F5AA71046A0F60F085"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FB619366AF264802854C9EAAB1E98B20"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FFBD67B0A1D8403F9C98F62AFF0B8B27"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+    }
+    "Configurations"
+    {
+        "Debug"
+        {
+        "DisplayName" = "8:Debug"
+        "IsDebugOnly" = "11:TRUE"
+        "IsReleaseOnly" = "11:FALSE"
+        "OutputFilename" = "8:Debug\\fingersuite.cab"
+        "PackageFileSize" = "3:-2147483648"
+        "CabType" = "3:1"
+        "SignOutput" = "11:TRUE"
+        "CertificateHash" = "8:1049B790EDA3C369E9C206B44AF16B2657CC1555"
+        "TimeStampServer" = "8:"
+        }
+        "Release"
+        {
+        "DisplayName" = "8:Release"
+        "IsDebugOnly" = "11:FALSE"
+        "IsReleaseOnly" = "11:TRUE"
+        "OutputFilename" = "8:Release\\fingersuite.cab"
+        "PackageFileSize" = "3:-2147483648"
+        "CabType" = "3:1"
+        "SignOutput" = "11:TRUE"
+        "CertificateHash" = "8:1049B790EDA3C369E9C206B44AF16B2657CC1555"
+        "TimeStampServer" = "8:"
+        }
+    }
+    "Deployable"
+    {
+        "File"
+        {
+            "{BA458234-9B71-4F46-8107-E91156377184}:_069424A924014E79A9E4F140A754F4F5"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_up_vga.png"
+            "TargetName" = "8:btn_up_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_1E0CAE052E804A15918FD9238FDADA06"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_up_disabled_qvga.png"
+            "TargetName" = "8:btn_up_disabled_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_2071A43DA2804B2BA5F57115FAA3F6DA"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_button_pressed_right_vga.png"
+            "TargetName" = "8:msgbox_button_pressed_right_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_2DA29E161E8844A094B6A86BFE138016"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\settings_fingermenu.ini"
+            "TargetName" = "8:settings_fingermenu.ini"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_2FA1C72C73724962B718E76C1D0A1569"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_iconstop_qvga.png"
+            "TargetName" = "8:msgbox_iconstop_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_34B5D56C4EB642BE8E201B40900EA474"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\dpad_cursor_qvga.png"
+            "TargetName" = "8:dpad_cursor_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_3E446543429846E0A891ED4DAFAFE3DD"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_button_pressed_right_qvga.png"
+            "TargetName" = "8:msgbox_button_pressed_right_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_41DAC8783B0E494B9F281A41963F4D9E"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_up_press_qvga.png"
+            "TargetName" = "8:btn_up_press_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_423F1688F1BB42589F6E0B1766A29D2F"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_header_qvga.png"
+            "TargetName" = "8:msgbox_header_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_424692E616DE4B37B6BCA69912B6E477"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_down_vga.png"
+            "TargetName" = "8:btn_down_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_426A8233F3F140D89A0CD4DF19358F9F"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_iconinfo_vga.png"
+            "TargetName" = "8:msgbox_iconinfo_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_44CC09EEF82B46D4BF3F60FA70313E78"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_button_pressed_left_vga.png"
+            "TargetName" = "8:msgbox_button_pressed_left_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_462F5D6917714F3CBC30A006264B8964"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_up_qvga.png"
+            "TargetName" = "8:btn_up_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_4968A356B4D349D3A72037544AA0B043"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_down_press_qvga.png"
+            "TargetName" = "8:btn_down_press_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_4B66E2BC935048F6AF0183EAFB22D965"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\radio_checked_qvga.png"
+            "TargetName" = "8:radio_checked_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_4DC6DB2F6CF743B3B40C572065404F4F"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_button_normal_left_qvga.png"
+            "TargetName" = "8:msgbox_button_normal_left_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_6135CF2D732B4603B7761A242C12BF54"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_button_normal_center_qvga.png"
+            "TargetName" = "8:msgbox_button_normal_center_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_63AF83ADFD72410B99EDEC5F794993A8"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\submenu_vga.png"
+            "TargetName" = "8:submenu_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_6950A81DE98848DDBFC4D64AAE97416D"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_down_disabled_vga.png"
+            "TargetName" = "8:btn_down_disabled_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_69AC0219BAEF4557A3D1EDDE414C6D3C"
+            {
+            "SourcePath" = "8:..\\ResourceLang\\current\\FingerMenu.exe.0410.mui"
+            "TargetName" = "8:FingerMenu.exe.0410.mui"
+            "Tag" = "8:"
+            "Folder" = "8:_0D511120D5C8436898EB464BD85C0FA0"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_6B758D5C5B8A42BF907750C16B70CF67"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_button_pressed_center_qvga.png"
+            "TargetName" = "8:msgbox_button_pressed_center_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_6E74797104E74B2381B282462BEA1596"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\checked_qvga.png"
+            "TargetName" = "8:checked_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_7241CC0980C94C1B8A8FEAE04F5C304E"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_arrow_up_vga.png"
+            "TargetName" = "8:btn_arrow_up_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_732537AEC49F4B3E967BAC563F6EAB7C"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_iconstop_vga.png"
+            "TargetName" = "8:msgbox_iconstop_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_758089D7D0EB4600A014590DF3A72414"
+            {
+            "SourcePath" = "8:..\\AppToDate\\fingersuite.xml"
+            "TargetName" = "8:fingersuite.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_FC9552DB634F40BE8FAD0B2B9B5A778D"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_798691F4CA4648DCAF2AFA2533FCCA31"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\selection_qvga.png"
+            "TargetName" = "8:selection_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_7F047B364C9142B6AC2A1410D31ADAED"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_down_qvga.png"
+            "TargetName" = "8:btn_down_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_870F54E8A9BD4EFB921547DD66D24B86"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_iconwarning_qvga.png"
+            "TargetName" = "8:msgbox_iconwarning_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_8A28CC355B494FA4ABECCDD5AB6AFDF5"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_up_press_vga.png"
+            "TargetName" = "8:btn_up_press_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_8FDA47DBD69141399333BB43BFBFFEE7"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_arrow_up_qvga.png"
+            "TargetName" = "8:btn_arrow_up_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_911EF1071058415C92E233CBA714A589"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\radio_checked_vga.png"
+            "TargetName" = "8:radio_checked_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_92751B10532B4F98BF24AE1D49F3AA99"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\selection_vga.png"
+            "TargetName" = "8:selection_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_986C38E235234622AE9E538B9AB545C7"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_iconwarning_vga.png"
+            "TargetName" = "8:msgbox_iconwarning_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_99BBEE965DED43FE9CC54D0C615166C5"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_arrow_down_qvga.png"
+            "TargetName" = "8:btn_arrow_down_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_9A665E1916C74497BDE047DB16685ACC"
+            {
+            "SourcePath" = "8:..\\AppToDate\\fingersuite.ico"
+            "TargetName" = "8:fingersuite.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_FC9552DB634F40BE8FAD0B2B9B5A778D"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_9D53FAB8016E472796F2004B44745A6F"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_iconinfo_qvga.png"
+            "TargetName" = "8:msgbox_iconinfo_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_A360C9EF523B4F53A87822FFC5235501"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_button_normal_right_qvga.png"
+            "TargetName" = "8:msgbox_button_normal_right_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_ABB3915C46C9404B9E715752783F688A"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\radio_unchecked_qvga.png"
+            "TargetName" = "8:radio_unchecked_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_B1CF0891D0B346BBA953A7C8EE4FDAAB"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_button_pressed_left_qvga.png"
+            "TargetName" = "8:msgbox_button_pressed_left_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_B95C8B2C6514413EA8B479EFCD8FE111"
+            {
+            "SourcePath" = "8:GetRealDPI.exe"
+            "TargetName" = "8:GetRealDPI.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_E8E8E501DE3643D5889C73C1D3263577"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_BC2D3AE085A542E48C264882654D67FE"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_button_normal_right_vga.png"
+            "TargetName" = "8:msgbox_button_normal_right_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_BE54346C01824D3D9116F0AD1F24E74D"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_down_press_vga.png"
+            "TargetName" = "8:btn_down_press_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_C572EA5DB4D44DF5B80EEBBA33E76E0E"
+            {
+            "SourcePath" = "8:..\\ResourceLang\\current\\FingerMsgbox.exe.0410.mui"
+            "TargetName" = "8:FingerMsgbox.exe.0410.mui"
+            "Tag" = "8:"
+            "Folder" = "8:_996F075BCDE04CC18EC56EDFE9E191E4"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_C873A5BD71F944B8844F4194A2BB1EB5"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_header_vga.png"
+            "TargetName" = "8:msgbox_header_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_CAB272556BD34B3F961662D65226DADF"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\settings_fingermsgbox.ini"
+            "TargetName" = "8:settings_fingermsgbox.ini"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_CC9B7BA2A09D473F8946763B7822A5C8"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_button_normal_left_vga.png"
+            "TargetName" = "8:msgbox_button_normal_left_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_CD8B9AC0A2C34163BA72B952B50E04A8"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_button_normal_center_vga.png"
+            "TargetName" = "8:msgbox_button_normal_center_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_D110E52D7A9D4BE59EB7FFDE636F171B"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\checked_vga.png"
+            "TargetName" = "8:checked_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_D7D2C22574BE42A7AD4EE6CBBEC32BC4"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\dpad_cursor_vga.png"
+            "TargetName" = "8:dpad_cursor_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_E83F80B1CC3A4830A2D86137C951444F"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_button_pressed_center_vga.png"
+            "TargetName" = "8:msgbox_button_pressed_center_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_E8A36EA039A44B3EA6789E30D32ED8AC"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_arrow_down_vga.png"
+            "TargetName" = "8:btn_arrow_down_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_EA2D89E1CCC4429D83EBD06C0ABD22B1"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_up_disabled_vga.png"
+            "TargetName" = "8:btn_up_disabled_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_EEA05BF815F84456A5BB304A6F83B46A"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\btn_down_disabled_qvga.png"
+            "TargetName" = "8:btn_down_disabled_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_EFDF895BE6154E36B7DA59C7D8DFFB86"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_iconquestion_qvga.png"
+            "TargetName" = "8:msgbox_iconquestion_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_FA1FA6B5AD3B47F5AA71046A0F60F085"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\skins\\default\\msgbox_iconquestion_vga.png"
+            "TargetName" = "8:msgbox_iconquestion_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C5A6C4DCE6E74C95813186D3171D0C90"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_FB619366AF264802854C9EAAB1E98B20"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\submenu_qvga.png"
+            "TargetName" = "8:submenu_qvga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{BA458234-9B71-4F46-8107-E91156377184}:_FFBD67B0A1D8403F9C98F62AFF0B8B27"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\skins\\default\\radio_unchecked_vga.png"
+            "TargetName" = "8:radio_unchecked_vga.png"
+            "Tag" = "8:"
+            "Folder" = "8:_88A1CEDA202E454394511F3F5D298623"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+        }
+        "Folder"
+        {
+            "{F6DFDB62-1DD1-498B-89B7-27BAC542EE5A}:_236D0531C311421B813148AEC2F2DBE4"
+            {
+            "Name" = "8:#1911"
+            "Condition" = "8:"
+            "Property" = "8:%CE1%"
+                "Folders"
+                {
+                    "{5943FCFD-5B64-4EE4-96C9-4618EC95352A}:_0D511120D5C8436898EB464BD85C0FA0"
+                    {
+                    "Name" = "8:FingerMenu"
+                    "Condition" = "8:"
+                    "Property" = "8:_D902ACEDC70442C7BD350DD6F42C59E3"
+                        "Folders"
+                        {
+                            "{5943FCFD-5B64-4EE4-96C9-4618EC95352A}:_996BCD4BBABE45B787F68DC4ADEFD550"
+                            {
+                            "Name" = "8:skins"
+                            "Condition" = "8:"
+                            "Property" = "8:_978491A509444BC5952DA41439D434B4"
+                                "Folders"
+                                {
+                                    "{5943FCFD-5B64-4EE4-96C9-4618EC95352A}:_88A1CEDA202E454394511F3F5D298623"
+                                    {
+                                    "Name" = "8:default"
+                                    "Condition" = "8:"
+                                    "Property" = "8:_C51F5035DA38430DB71C5EC0873F6CBA"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    "{5943FCFD-5B64-4EE4-96C9-4618EC95352A}:_996F075BCDE04CC18EC56EDFE9E191E4"
+                    {
+                    "Name" = "8:FingerMsgbox"
+                    "Condition" = "8:"
+                    "Property" = "8:_0550EF1E571C4CAC9C312D3163B38242"
+                        "Folders"
+                        {
+                            "{5943FCFD-5B64-4EE4-96C9-4618EC95352A}:_628C49C7FC5B4965BADAC7611359F2E1"
+                            {
+                            "Name" = "8:skins"
+                            "Condition" = "8:"
+                            "Property" = "8:_72DFB483610B4645978F29C88E5F087B"
+                                "Folders"
+                                {
+                                    "{5943FCFD-5B64-4EE4-96C9-4618EC95352A}:_C5A6C4DCE6E74C95813186D3171D0C90"
+                                    {
+                                    "Name" = "8:default"
+                                    "Condition" = "8:"
+                                    "Property" = "8:_8A3F7E6DEFC8450591268D486BB782B0"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            "{F6DFDB62-1DD1-498B-89B7-27BAC542EE5A}:_81A425BE95CC40B0A5D9C9EFED9907A2"
+            {
+            "Name" = "8:#1912"
+            "Condition" = "8:"
+            "Property" = "8:%CE2%"
+                "Folders"
+                {
+                }
+            }
+            "{D5B00AC1-E6C3-4CC5-90FF-8E0F53D9E5E0}:_87698489B9794E5C8A01AA0BE0452DDB"
+            {
+            "DefaultLocation" = "8:%InstallDir%"
+            "Name" = "8:#1920"
+            "Condition" = "8:"
+            "Property" = "8:%InstallDir%"
+                "Folders"
+                {
+                }
+            }
+            "{F6DFDB62-1DD1-498B-89B7-27BAC542EE5A}:_A871C65F5AD148429E86231B81B3C7F0"
+            {
+            "Name" = "8:#1916"
+            "Condition" = "8:"
+            "Property" = "8:%CE11%"
+                "Folders"
+                {
+                }
+            }
+            "{27CA7284-31D3-408F-812A-1EF9ACCDB822}:_FE20B3461FCD4D13B0AE129B8B63B3F2"
+            {
+            "Name" = "8:Application Data"
+            "Condition" = "8:"
+            "Property" = "8:CUSTOMFOLDER1"
+                "Folders"
+                {
+                    "{5943FCFD-5B64-4EE4-96C9-4618EC95352A}:_E8E8E501DE3643D5889C73C1D3263577"
+                    {
+                    "Name" = "8:FingerSuite"
+                    "Condition" = "8:"
+                    "Property" = "8:_645827FD12E243B795173B0FA3F632A7"
+                        "Folders"
+                        {
+                        }
+                    }
+                    "{5943FCFD-5B64-4EE4-96C9-4618EC95352A}:_FC9552DB634F40BE8FAD0B2B9B5A778D"
+                    {
+                    "Name" = "8:AppToDate"
+                    "Condition" = "8:"
+                    "Property" = "8:_C4D03C7F4044403EA6439BA71870C5A1"
+                        "Folders"
+                        {
+                        }
+                    }
+                }
+            }
+        }
+        "Product"
+        {
+        "Name" = "8:Microsoft Visual Studio"
+        "ProductName" = "8:FingerSuite"
+        "Manufacturer" = "8:francarl"
+        "OSVersionMin" = "8:5.2"
+        "OSVersionMax" = "8:5.99"
+        "NoUninstall" = "11:FALSE"
+        "Compress" = "11:TRUE"
+        "CESetupDLL" = "8:_D39D62555BAC4E94ABED1FE9736B35E4"
+        }
+        "ProjectOutput"
+        {
+            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_06E56CD276804583B878E9E0E918B85A"
+            {
+            "SourcePath" = "8:..\\FingerSuiteCPL\\Windows Mobile 6 Professional SDK (ARMV4I)\\Debug\\FingerSuiteCPL.cpl"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_81A425BE95CC40B0A5D9C9EFED9907A2"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:0"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{DBF5EC30-A85C-4148-A5D3-7680D31AC7A5}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_0728E216AEF74167AD8BAADEE70E13E0"
+            {
+            "SourcePath" = "8:..\\FingerMsgBox\\Windows Mobile 6 Professional SDK (ARMV4I)\\Debug\\FingerMsgBox.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_996F075BCDE04CC18EC56EDFE9E191E4"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:0"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{973BE9CB-799F-435E-A537-6A92BAEF10A0}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_269C7719244D48C0969F57519ACCDE71"
+            {
+            "SourcePath" = "8:..\\FingerMenuRES\\Windows Mobile 6 Professional SDK (ARMV4I)\\Debug\\FingerMenu.exe.0409.mui"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_0D511120D5C8436898EB464BD85C0FA0"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:0"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{3690F20A-A34E-4C5A-B111-226175D9F37B}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_904DF226B6034E4A9B73C5B51F26894B"
+            {
+            "SourcePath" = "8:..\\FingerMenuCTRL\\Windows Mobile 6 Professional SDK (ARMV4I)\\Debug\\FingerMenu.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_0D511120D5C8436898EB464BD85C0FA0"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:0"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{228436FA-5FC1-4150-9A9A-E6ECC6F7FA98}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_B9053073901242C5BD8E7EE0DE910F72"
+            {
+            "SourcePath" = "8:..\\FingerMenuDLL\\Windows Mobile 6 Professional SDK (ARMV4I)\\Debug\\FingerSuiteDll.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_81A425BE95CC40B0A5D9C9EFED9907A2"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:0"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{B15E40A5-A639-4360-A2BD-41B855B74F59}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_D39D62555BAC4E94ABED1FE9736B35E4"
+            {
+            "SourcePath" = "8:..\\SetupDLL\\Windows Mobile 6 Professional SDK (ARMV4I)\\Debug\\SetupDLL.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_E8E8E501DE3643D5889C73C1D3263577"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:0"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{6761336A-5AFC-4093-BE31-2DF5570332C3}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_F0299223792F4D02866A012F7286E3B6"
+            {
+            "SourcePath" = "8:..\\FingerMsgboxRES\\Windows Mobile 6 Professional SDK (ARMV4I)\\Debug\\FingerMsgbox.exe.0409.mui"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_996F075BCDE04CC18EC56EDFE9E191E4"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:0"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{DD4D9390-7CE7-46DB-8C3B-A105298C637E}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+        }
+        "Registry"
+        {
+            "HKLM"
+            {
+                "Keys"
+                {
+                    "{B1EBC968-6B66-4532-A885-748B79AF4477}:_4B23EF274D764ACAB76FAD69D9BAA641"
+                    {
+                    "Name" = "8:Software"
+                    "Condition" = "8:"
+                        "Keys"
+                        {
+                            "{B1EBC968-6B66-4532-A885-748B79AF4477}:_546623389E73427B86CA0CD7440D2C0E"
+                            {
+                            "Name" = "8:FingerMenu"
+                            "Condition" = "8:"
+                                "Keys"
+                                {
+                                }
+                                "Values"
+                                {
+                                    "{C3684F64-58E2-4092-8E3C-D7483080DE5A}:_06F3073176F14CAAA07D0796B467757E"
+                                    {
+                                    "Name" = "8:EnableSIP"
+                                    "Condition" = "8:"
+                                    "ValueTypes" = "3:3"
+                                    "Value" = "3:1"
+                                    }
+                                    "{C3684F64-58E2-4092-8E3C-D7483080DE5A}:_080202C29B4E4B92B079685FB7FDF416"
+                                    {
+                                    "Name" = "8:EnableAnimation"
+                                    "Condition" = "8:"
+                                    "ValueTypes" = "3:3"
+                                    "Value" = "3:1"
+                                    }
+                                    "{C3684F64-58E2-4092-8E3C-D7483080DE5A}:_2964B31AB0364FB0AD43C9318CDC1D38"
+                                    {
+                                    "Name" = "8:NeverShowButtons"
+                                    "Condition" = "8:"
+                                    "ValueTypes" = "3:3"
+                                    "Value" = "3:0"
+                                    }
+                                    "{C3684F64-58E2-4092-8E3C-D7483080DE5A}:_3797E0C5B5C243268EAF85B38675304C"
+                                    {
+                                    "Name" = "8:DisableTransparency"
+                                    "Condition" = "8:"
+                                    "ValueTypes" = "3:3"
+                                    "Value" = "3:0"
+                                    }
+                                    "{C3684F64-58E2-4092-8E3C-D7483080DE5A}:_5AB0981EBC114C47A29D3A509CC51B25"
+                                    {
+                                    "Name" = "8:TransparencyLevel"
+                                    "Condition" = "8:"
+                                    "ValueTypes" = "3:3"
+                                    "Value" = "3:128"
+                                    }
+                                    "{C3684F64-58E2-4092-8E3C-D7483080DE5A}:_5DE525CE401A4FCA8F717D66F9149D98"
+                                    {
+                                    "Name" = "8:MaxScrollVelocity"
+                                    "Condition" = "8:"
+                                    "ValueTypes" = "3:3"
+                                    "Value" = "3:15"
+                                    }
+                                    "{C3684F64-58E2-4092-8E3C-D7483080DE5A}:_736F077B0A96494590E1D6B85FEB3DE4"
+                                    {
+                                    "Name" = "8:ExcludedApp00"
+                                    "Condition" = "8:"
+                                    "ValueTypes" = "3:1"
+                                    "Value" = "8:Opera9.exe"
+                                    }
+                                    "{C3684F64-58E2-4092-8E3C-D7483080DE5A}:_9385D206E9844EE5AE2DA120E5B613F2"
+                                    {
+                                    "Name" = "8:SIPBtnPressInterval"
+                                    "Condition" = "8:"
+                                    "ValueTypes" = "3:3"
+                                    "Value" = "3:1000"
+                                    }
+                                    "{C3684F64-58E2-4092-8E3C-D7483080DE5A}:_C074D35560F74160B4ABB26A0A7028A1"
+                                    {
+                                    "Name" = "8:MaxMenuItemCount"
+                                    "Condition" = "8:"
+                                    "ValueTypes" = "3:3"
+                                    "Value" = "3:0"
+                                    }
+                                    "{C3684F64-58E2-4092-8E3C-D7483080DE5A}:_E48644EA39D1487F941454677D71A858"
+                                    {
+                                    "Name" = "8:NoTranspBkgColor"
+                                    "Condition" = "8:"
+                                    "ValueTypes" = "3:1"
+                                    "Value" = "8:0 0 0"
+                                    }
+                                }
+                            }
+                            "{B1EBC968-6B66-4532-A885-748B79AF4477}:_B614E7736EDE49FBB0177AB20D5C8F1B"
+                            {
+                            "Name" = "8:FingerMsgbox"
+                            "Condition" = "8:"
+                                "Keys"
+                                {
+                                }
+                                "Values"
+                                {
+                                    "{C3684F64-58E2-4092-8E3C-D7483080DE5A}:_3F45B2E56E164D6494BE97F876455948"
+                                    {
+                                    "Name" = "8:NoTranspBkgColor"
+                                    "Condition" = "8:"
+                                    "ValueTypes" = "3:1"
+                                    "Value" = "8:0 0 0"
+                                    }
+                                    "{C3684F64-58E2-4092-8E3C-D7483080DE5A}:_BE9C1286178F477294B6548FA1EF8418"
+                                    {
+                                    "Name" = "8:TransparencyLevel"
+                                    "Condition" = "8:"
+                                    "ValueTypes" = "3:3"
+                                    "Value" = "3:128"
+                                    }
+                                    "{C3684F64-58E2-4092-8E3C-D7483080DE5A}:_DEDD55AD12B54CD09B07F8118A66DEAD"
+                                    {
+                                    "Name" = "8:DisableTransparency"
+                                    "Condition" = "8:"
+                                    "ValueTypes" = "3:3"
+                                    "Value" = "3:0"
+                                    }
+                                }
+                            }
+                        }
+                        "Values"
+                        {
+                        }
+                    }
+                }
+            }
+            "HKCU"
+            {
+                "Keys"
+                {
+                }
+            }
+            "HKCR"
+            {
+                "Keys"
+                {
+                }
+            }
+            "HKU"
+            {
+                "Keys"
+                {
+                }
+            }
+            "HKPU"
+            {
+                "Keys"
+                {
+                }
+            }
+        }
+        "Shortcut"
+        {
+            "{971D45E9-E38C-49AC-B36E-4C5BEA533350}:_49AE62950A3A47D4B746A069703E67FF"
+            {
+            "Name" = "8:FingerMsgbox"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "Target" = "8:_0728E216AEF74167AD8BAADEE70E13E0"
+            "Folder" = "8:_A871C65F5AD148429E86231B81B3C7F0"
+            "WorkingFolder" = "8:_996F075BCDE04CC18EC56EDFE9E191E4"
+            }
+            "{971D45E9-E38C-49AC-B36E-4C5BEA533350}:_D4BAD4F1DCBE4D6083CE95576E6EC7D2"
+            {
+            "Name" = "8:FingerMenu"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "Target" = "8:_904DF226B6034E4A9B73C5B51F26894B"
+            "Folder" = "8:_A871C65F5AD148429E86231B81B3C7F0"
+            "WorkingFolder" = "8:_0D511120D5C8436898EB464BD85C0FA0"
+            }
+        }
+    }
+}

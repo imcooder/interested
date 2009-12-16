@@ -1,0 +1,257 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PAGE1 DIALOG  0, 0, 167, 117
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_AUTOSTART_MENU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,139,18,14,10
+    LTEXT           "Autostart FingerMenu at boot",IDC_LBL_AUTOSTART_MENU,14,18,111,8
+    CONTROL         "",IDC_AUTOSTART_MSGBOX,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,139,40,14,10
+    LTEXT           "Autostart FingerMsgbox at boot",IDC_STATIC,14,40,111,8
+END
+
+IDD_PAGE2 DIALOG  0, 0, 167, 183
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Transparency Level (0-255)",IDC_LBL_TRANSLEVEL,7,44,92,12
+    EDITTEXT        IDC_TRANSLEVEL,101,41,40,14,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPIN_TRANSLEVEL,"msctls_updown32",UDS_ARROWKEYS,144,37,13,22
+    CONTROL         "",IDC_ENABLE_SIP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,143,111,10,10
+    LTEXT           "Enable FingerMenu for SIP",-1,7,112,101,8
+    LTEXT           "Max Visible Item Count (0 for max)",IDC_LBL_MAXCOUNT,7,64,88,18
+    EDITTEXT        IDC_MAXCOUNT,101,65,40,14,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPIN_MAXCOUNT,"msctls_updown32",UDS_ARROWKEYS,144,61,11,22
+    LTEXT           "Scroll Velocity",IDC_LBL_MAXVELOCITY,7,93,51,10
+    EDITTEXT        IDC_MAXVELOCITY,100,90,40,14,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPIN_MAXVELOCITY,"msctls_updown32",UDS_ARROWKEYS,144,86,11,22
+    CONTROL         "",IDC_ENABLE_TRANSPARENCY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,144,9,10,10
+    LTEXT           "Disable bkg transparency",-1,7,9,101,8
+    LTEXT           "",IDC_CL_BKGCOLORTRANSP,112,25,24,8,WS_BORDER
+    LTEXT           "Background (no transparency)",-1,7,24,101,10
+    PUSHBUTTON      "...",IDC_BTN_BKGCOLORTRANSP,139,23,19,11
+    CONTROL         "",IDC_DISABLE_BTNS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,143,123,10,10
+    LTEXT           "Never show scroll buttons",-1,7,125,101,8
+    CONTROL         "",IDC_ENABLE_ANIMATION,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,143,136,10,10
+    LTEXT           "Enable animation",-1,7,138,101,8
+END
+
+IDD_PAGE3 DIALOG  0, 0, 167, 155
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_CB_PROCESSES,13,15,99,44,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Add",IDC_BTN_ADDPROGRAM,119,14,32,14
+    LISTBOX         IDC_LB_PROCESSES,13,31,100,98,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Remove",IDC_BTN_REMOVEPROGRAMS,119,49,32,14
+    PUSHBUTTON      "Refresh",IDC_BTN_REFRESH,119,32,32,14
+END
+
+IDD_PAGE4 DIALOG  0, 0, 167, 155
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_CB_SKIN_FINGERMENU,16,33,137,38,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Skin for FingerMenu",IDC_LBL_CB_SKIN_FINGERMENU,16,21,136,8
+    COMBOBOX        IDC_CB_SKIN_FINGERMSGBOX,16,73,137,44,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Skin for FingerMsgbox",IDC_STATIC,16,61,136,8
+END
+
+IDD_PAGEABOUT DIALOG  0, 0, 167, 155
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_PAGE5 DIALOG  0, 0, 167, 183
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Transparency Level (0-255)",IDC_LBL_TRANSLEVEL,7,44,92,12
+    EDITTEXT        IDC_TRANSLEVEL,101,41,40,14,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPIN_TRANSLEVEL,"msctls_updown32",UDS_ARROWKEYS,144,37,13,22
+    CONTROL         "",IDC_ENABLE_TRANSPARENCY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,144,9,10,10
+    LTEXT           "Disable bkg transparency",-1,7,9,101,8
+    LTEXT           "",IDC_CL_BKGCOLORTRANSP,112,25,24,8,WS_BORDER
+    LTEXT           "Background (no transparency)",-1,7,24,102,10
+    PUSHBUTTON      "...",IDC_BTN_BKGCOLORTRANSP,139,23,19,11
+END
+
+IDD_PAGE7 DIALOG  0, 0, 167, 155
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_LB_PROCESSES,13,15,100,114,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Remove",IDC_BTN_REMOVEPROGRAMS,119,15,32,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_PAGE1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 160
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 111
+    END
+
+    IDD_PAGE2, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 160
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 177
+    END
+
+    IDD_PAGE3, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 160
+        TOPMARGIN, 8
+        BOTTOMMARGIN, 149
+    END
+
+    IDD_PAGE4, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 160
+        TOPMARGIN, 8
+        BOTTOMMARGIN, 149
+    END
+
+    IDD_PAGEABOUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 160
+        TOPMARGIN, 8
+        BOTTOMMARGIN, 149
+    END
+
+    IDD_PAGE5, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 160
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 177
+    END
+
+    IDD_PAGE7, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 160
+        TOPMARGIN, 8
+        BOTTOMMARGIN, 149
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Italian (Italy) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)
+#ifdef _WIN32
+LANGUAGE LANG_ITALIAN, SUBLANG_ITALIAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_FingerSuiteApplet   ICON                    "res\\FingerMenuCPL.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_FingerSuiteApplet   "FingerSuite"
+    IDS_Description_FingerSuiteApplet "Configuration control panel applet"
+    IDS_Task_FingerSuiteApplet 
+                            "Configure FingerMenu and FingerMsgBox application"
+    IDS_Keywords_FingerSuiteApplet "Finger friendly menu messagebox"
+END
+
+#endif    // Italian (Italy) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
