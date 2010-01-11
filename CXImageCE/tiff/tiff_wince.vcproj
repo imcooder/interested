@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8,00"
+	Version="9.00"
 	Name="tiff"
 	ProjectGUID="{075B4445-2F3F-4B31-864C-A333778D1D00}"
 	RootNamespace="tiff"
 	Keyword="MFCProj"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -16,6 +17,9 @@
 		/>
 		<Platform
 			Name="Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+		/>
+		<Platform
+			Name="STANDARDSDK_500 (ARMV4I)"
 		/>
 	</Platforms>
 	<ToolFiles>
@@ -88,6 +92,9 @@
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
 				OutputFile="$(PlatformName)\$(ConfigurationName)/tiff.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
 			/>
 			<Tool
 				Name="VCCodeSignTool"
@@ -173,6 +180,9 @@
 				OutputFile="$(PlatformName)\$(ConfigurationName)/tiff.bsc"
 			/>
 			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
 				Name="VCCodeSignTool"
 			/>
 			<Tool
@@ -254,6 +264,9 @@
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
 				OutputFile="$(PlatformName)\$(ConfigurationName)/tiff.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
 			/>
 			<Tool
 				Name="VCCodeSignTool"
@@ -339,6 +352,9 @@
 				OutputFile="$(PlatformName)\$(ConfigurationName)/tiff.bsc"
 			/>
 			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
 				Name="VCCodeSignTool"
 			/>
 			<Tool
@@ -420,6 +436,9 @@
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
 				OutputFile="$(PlatformName)\$(ConfigurationName)/tiff.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
 			/>
 			<Tool
 				Name="VCCodeSignTool"
@@ -505,6 +524,183 @@
 				OutputFile="$(PlatformName)\$(ConfigurationName)/tiff.bsc"
 			/>
 			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|STANDARDSDK_500 (ARMV4I)"
+			OutputDirectory="STANDARDSDK_500 (ARMV4I)\$(ConfigurationName)"
+			IntermediateDirectory="STANDARDSDK_500 (ARMV4I)\$(ConfigurationName)"
+			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="1"
+				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/tiff.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\zlib,..\wcecompat\include"
+				PreprocessorDefinitions="DEBUG;_WIN32_WCE=$(CEVER);$(CePlatform);ARM;_ARM_;ARMV4;UNDER_CE=$(CEVER);UNICODE;_LIB"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/tiff.pch"
+				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
+				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
+				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				Culture="1036"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(PlatformName)\$(ConfigurationName)\tiff.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/tiff.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|STANDARDSDK_500 (ARMV4I)"
+			OutputDirectory="STANDARDSDK_500 (ARMV4I)\$(ConfigurationName)"
+			IntermediateDirectory="STANDARDSDK_500 (ARMV4I)\$(ConfigurationName)"
+			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="2"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="1"
+				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/tiff.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="..\zlib,..\wcecompat\include"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);$(CePlatform);NDEBUG;ARM;_ARM_;ARMV4;UNDER_CE=$(CEVER);UNICODE;_LIB"
+				StringPooling="true"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="true"
+				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/tiff.pch"
+				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
+				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
+				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
+				WarningLevel="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				Culture="1036"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(PlatformName)\$(ConfigurationName)\tiff.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/tiff.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
 				Name="VCCodeSignTool"
 			/>
 			<Tool
@@ -581,6 +777,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_aux.c"
@@ -630,6 +843,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -691,6 +921,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_codec.c"
@@ -740,6 +987,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -801,6 +1065,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_dir.c"
@@ -850,6 +1131,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -911,6 +1209,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_dirread.c"
@@ -960,6 +1275,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -1021,6 +1353,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_dumpmode.c"
@@ -1070,6 +1419,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -1131,6 +1497,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_fax3.c"
@@ -1180,6 +1563,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -1241,6 +1641,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_getimage.c"
@@ -1290,6 +1707,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -1351,6 +1785,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_luv.c"
@@ -1400,6 +1851,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -1461,6 +1929,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_next.c"
@@ -1510,6 +1995,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -1571,6 +2073,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_open.c"
@@ -1620,6 +2139,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -1681,6 +2217,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_pixarlog.c"
@@ -1730,6 +2283,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -1791,6 +2361,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_print.c"
@@ -1840,6 +2427,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -1901,6 +2505,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_strip.c"
@@ -1950,6 +2571,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -2011,6 +2649,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_thunder.c"
@@ -2060,6 +2715,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -2121,6 +2793,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_version.c"
@@ -2170,6 +2859,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -2231,6 +2937,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_write.c"
@@ -2286,6 +3009,23 @@
 						AdditionalIncludeDirectories=""
 					/>
 				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="tif_zip.c"
@@ -2335,6 +3075,23 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|STANDARDSDK_500 (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|STANDARDSDK_500 (ARMV4I)"
 					>
 					<Tool
 						Name="VCCLCompilerTool"

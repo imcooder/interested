@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8,00"
+	Version="9.00"
 	Name="png"
 	ProjectGUID="{65818D16-53A8-4EBD-B5B2-2CA493E1DF1A}"
 	Keyword="MFCProj"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -15,6 +16,9 @@
 		/>
 		<Platform
 			Name="Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+		/>
+		<Platform
+			Name="STANDARDSDK_500 (ARMV4I)"
 		/>
 	</Platforms>
 	<ToolFiles>
@@ -90,6 +94,9 @@
 				OutputFile="$(PlatformName)\$(ConfigurationName)/png.bsc"
 			/>
 			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
 				Name="VCCodeSignTool"
 			/>
 			<Tool
@@ -135,7 +142,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\zlib;..\wcecompat\include"
+				AdditionalIncludeDirectories="..\zlib,..\wcecompat\include"
 				PreprocessorDefinitions="DEBUG;_WIN32_WCE=$(CEVER);$(CePlatform);ARM;_ARM_;ARMV4;UNDER_CE=$(CEVER);UNICODE;_LIB"
 				RuntimeLibrary="1"
 				EnableFunctionLevelLinking="true"
@@ -172,6 +179,9 @@
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
 				OutputFile="$(PlatformName)\$(ConfigurationName)/png.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
 			/>
 			<Tool
 				Name="VCCodeSignTool"
@@ -256,6 +266,9 @@
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
 				OutputFile="$(PlatformName)\$(ConfigurationName)/png.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
 			/>
 			<Tool
 				Name="VCCodeSignTool"
@@ -343,6 +356,9 @@
 				OutputFile="$(PlatformName)\$(ConfigurationName)/png.bsc"
 			/>
 			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
 				Name="VCCodeSignTool"
 			/>
 			<Tool
@@ -428,6 +444,9 @@
 				OutputFile="$(PlatformName)\$(ConfigurationName)/png.bsc"
 			/>
 			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
 				Name="VCCodeSignTool"
 			/>
 			<Tool
@@ -511,6 +530,158 @@
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
 				OutputFile="$(PlatformName)\$(ConfigurationName)/png.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|STANDARDSDK_500 (ARMV4I)"
+			OutputDirectory="$(SolutionDir)STANDARDSDK_500 (ARMV4I)\$(ConfigurationName)"
+			IntermediateDirectory="STANDARDSDK_500 (ARMV4I)\$(ConfigurationName)"
+			ConfigurationType="4"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;$(ARCHFAM);$(_ARCHFAM_);STANDARDSHELL_UI_MODEL;_DEBUG;DEBUG"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\zlib,..\wcecompat\include"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;$(ARCHFAM);$(_ARCHFAM_);STANDARDSHELL_UI_MODEL;_DEBUG;DEBUG"
+				MinimalRebuild="true"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;$(ARCHFAM);$(_ARCHFAM_);STANDARDSHELL_UI_MODEL;_DEBUG;DEBUG"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions=" /SUBSYSTEM:WINDOWSCE,$(CEVER) /MACHINE:$(ARCHFAM)"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|STANDARDSDK_500 (ARMV4I)"
+			OutputDirectory="$(SolutionDir)STANDARDSDK_500 (ARMV4I)\$(ConfigurationName)"
+			IntermediateDirectory="STANDARDSDK_500 (ARMV4I)\$(ConfigurationName)"
+			ConfigurationType="4"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;$(ARCHFAM);$(_ARCHFAM_);STANDARDSHELL_UI_MODELNDEBUG"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="2"
+				FavorSizeOrSpeed="2"
+				AdditionalIncludeDirectories="..\zlib,..\wcecompat\include"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;$(ARCHFAM);$(_ARCHFAM_);STANDARDSHELL_UI_MODELNDEBUG"
+				MinimalRebuild="false"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;$(ARCHFAM);$(_ARCHFAM_);STANDARDSHELL_UI_MODELNDEBUG"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions=" /SUBSYSTEM:WINDOWSCE,$(CEVER) /MACHINE:$(ARCHFAM)"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
 			/>
 			<Tool
 				Name="VCCodeSignTool"
