@@ -85,6 +85,15 @@ abstract public class ZLPaintContext {
 
 	abstract protected void setFontInternal(String family, int size, boolean bold, boolean italic, boolean underline);
 
+	public void setTextUnderline(boolean underline) {
+		myFontIsUnderlined = underline;
+		setTextUnderlineInternal(underline);
+	}
+	abstract public void setTextUnderlineInternal(boolean underline );
+	
+	public boolean getTextUnderline() {
+		return myFontIsUnderlined;
+	}
 	abstract public void setTextColor(ZLColor color);
 	final public void setLineColor(ZLColor color) {
 		setLineColor(color, LineStyle.SOLID_LINE);

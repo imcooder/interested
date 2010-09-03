@@ -17,6 +17,12 @@
 		<node name="openBook" value="打开图书" />
 		<node name="deleteBook" value="删除图书" />
 	</node>
+	<node name="SelectionOperator">
+		<node name="underline" value="下划线" />
+		<node name="copystring" value="摘抄" />
+		<node name="translate" value="翻译" />
+		<node name="highlight" value="标记" />		
+	</node>
 	<node name="networkView">
 		<node name="openCatalog" value="打开书库目录" />
 		<node name="showResults" value="显示结果"/>
@@ -178,6 +184,12 @@
 				<node name="horizontal" value="横向翻阅">
 					<node name="summaryOn" value="横向翻阅" />
 					<node name="summaryOff" value="纵向翻阅" />
+				</node>
+			</node>
+			<node name="AutoPage" value="自动翻页">
+			<node name="AutoPage" value="时间设定">
+				<node name="disable" value="关闭" />
+				<node name="unit" value="秒" />
 				</node>
 			</node>
 		</node>

@@ -1,5 +1,5 @@
 #include <jni.h>
-
+#include "../HanvonUtil.h"
 #include "liblinebreak-2.0/linebreak.h"
 
 extern "C"
@@ -9,6 +9,7 @@ void Java_org_vimgadgets_linebreak_LineBreaker_init(JNIEnv *env, jobject thiz) {
 
 extern "C"
 void Java_org_vimgadgets_linebreak_LineBreaker_setLineBreaksForCharArray(JNIEnv *env, jobject thiz, jcharArray data, jint offset, jint length, jstring lang, jbyteArray breaks) {
+	LOGD("Enter setLineBreaksForCharArray\n");
 	jchar* dataArray = env->GetCharArrayElements(data, 0);
 	jbyte* breaksArray = env->GetByteArrayElements(breaks, 0);
 	const char *langArray = (lang != 0) ? env->GetStringUTFChars(lang, 0) : 0;
@@ -20,10 +21,12 @@ void Java_org_vimgadgets_linebreak_LineBreaker_setLineBreaksForCharArray(JNIEnv 
 	}
 	env->ReleaseByteArrayElements(breaks, breaksArray, 0);
 	env->ReleaseCharArrayElements(data, dataArray, 0);
+	LOGD("Leave setLineBreaksForCharArray\n");
 }
 
 extern "C"
 void Java_org_vimgadgets_linebreak_LineBreaker_setLineBreaksForString(JNIEnv *env, jobject thiz, jstring data, jstring lang, jbyteArray breaks) {
+	LOGD("Enter setLineBreaksForString\n");
 	const jchar* dataArray = env->GetStringChars(data, 0);
 	jbyte* breaksArray = env->GetByteArrayElements(breaks, 0);
 	const size_t len = env->GetStringLength(data);
@@ -36,4 +39,5 @@ void Java_org_vimgadgets_linebreak_LineBreaker_setLineBreaksForString(JNIEnv *en
 	}
 	env->ReleaseByteArrayElements(breaks, breaksArray, 0);
 	env->ReleaseStringChars(data, dataArray);
+	LOGD("Leave setLineBreaksForString\n");
 }

@@ -23,6 +23,9 @@ import java.util.*;
 
 import org.geometerplus.zlibrary.core.application.ZLApplication;
 
+import android.util.Log;
+import com.hanvon.Trace;
+
 final class ZLTextSelectionModel {
 	final static class BoundElement extends ZLTextPosition {
 		boolean Exists;
@@ -130,6 +133,7 @@ final class ZLTextSelectionModel {
 	}
 
 	boolean extendTo(int x, int y) {
+		Trace.DBGMSG(1, "3\n");
 		if (!myIsActive || myView.myCurrentPage.TextElementMap.isEmpty()) {
 			return false;
 		}
@@ -142,10 +146,13 @@ final class ZLTextSelectionModel {
 
 		if (!mySecondBound.Before.Exists) {
 			startSelectionScrolling(false);
+			Trace.DBGMSG(1, "4\n");
 		} else if (!mySecondBound.After.Exists) {
 			startSelectionScrolling(true);
+			Trace.DBGMSG(1, "5\n");
 		} else {
 			stopSelectionScrolling();
+			Trace.DBGMSG(1, "6\n");
 		}
 
 		if (!oldRange.Left.equalsTo(newRange.Left) || !oldRange.Right.equalsTo(newRange.Right)) {

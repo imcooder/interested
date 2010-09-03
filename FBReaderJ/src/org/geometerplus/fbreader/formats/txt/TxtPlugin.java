@@ -17,28 +17,32 @@
  * 02110-1301, USA.
  */
 
-package org.geometerplus.zlibrary.text.model;
+package org.geometerplus.fbreader.formats.txt;
 
-import java.util.List;
+import java.io.IOException;
 
-public interface ZLTextModel {
-	String getId();
-	String getLanguage();
+import org.geometerplus.fbreader.bookmodel.BookModel;
+import org.geometerplus.fbreader.library.Book;
+import org.geometerplus.fbreader.formats.FormatPlugin;
+import org.geometerplus.zlibrary.core.filesystem.ZLFile;
 
-	int getParagraphsNumber();
-	ZLTextParagraph getParagraph(int index);
+public class TxtPlugin extends FormatPlugin {	
+	@Override
+	public boolean acceptsFile(ZLFile file) {
+		return "txt".equals(file.getExtension());
+	}
 
-	void removeAllMarks();
-	ZLTextMark getFirstMark();
-	ZLTextMark getLastMark();
-	ZLTextMark getNextMark(ZLTextMark position);
-	ZLTextMark getPreviousMark(ZLTextMark position);
+	@Override
+	public boolean readMetaInfo(Book book) {
+		return true;//new HtmlMetaInfoReader(book).readMetaInfo();
+	}
 
-	List<ZLTextMark> getMarks();
-	List<ZLTextUnderLineMark> getUnderLineMarks();
-	// text length for paragraphs from 0 to index
-	int getTextLength(int index);
-	
-	int search(final String text, int startIndex, int endIndex, boolean ignoreCase);
-	boolean setUnderline(int paragraphIndexLeft, int elementIndexLeft, int charIndexLeft, int paragraphIndexRight, int elementIndexRight, int charIndexRight);
+	@Override
+	public boolean readModel(BookModel model) {
+		try {
+			return new TxtReader(model).readBook();
+		} catch (IOException e) {
+			return false;
+		}
+	}
 }

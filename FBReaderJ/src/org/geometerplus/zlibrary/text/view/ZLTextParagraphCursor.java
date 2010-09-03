@@ -24,6 +24,7 @@ import org.vimgadgets.linebreak.LineBreaker;
 
 import org.geometerplus.zlibrary.core.image.*;
 import org.geometerplus.zlibrary.text.model.*;
+import org.geometerplus.zlibrary.text.view.ZLTextWord.MarkType;
 
 public final class ZLTextParagraphCursor {
 	private static final class Processor {
@@ -34,23 +35,57 @@ public final class ZLTextParagraphCursor {
 		private int myFirstMark;
 		private int myLastMark;
 		private final List<ZLTextMark> myMarks;
-		
-		private Processor(ZLTextParagraph paragraph, LineBreaker lineBreaker, List<ZLTextMark> marks, int paragraphIndex, ArrayList<ZLTextElement> elements) {
+		private int myFirstUnderLineMark;
+		private int myLastUnderLineMark;
+		private final List<ZLTextUnderLineMark> myUnderLineMarks;
+		private Processor(ZLTextParagraph paragraph, LineBreaker lineBreaker, List<ZLTextMark> marks, List<ZLTextUnderLineMark> underlineMarks, int paragraphIndex, ArrayList<ZLTextElement> elements) {
 			myParagraph = paragraph;
 			myLineBreaker = lineBreaker;
 			myElements = elements;
 			myMarks = marks;
-			final ZLTextMark mark = new ZLTextMark(paragraphIndex, 0, 0);
-			int i;
-			for (i = 0; i < myMarks.size(); i++) {
-				if (((ZLTextMark)myMarks.get(i)).compareTo(mark) >= 0) {
-					break;
+			myUnderLineMarks = underlineMarks;
+			myOffset = 0;
+			
+			
+			// /
+			{
+				final ZLTextMark mark = new ZLTextMark(paragraphIndex, 0, 0);
+				int i;
+				for (i = 0; i < myMarks.size(); i++) {
+					if (((ZLTextMark) myMarks.get(i)).compareTo(mark) >= 0) {
+						break;
+					}
+				}
+				myFirstMark = i;
+				myLastMark = myFirstMark;
+				for (; (myLastMark != myMarks.size())
+						&& (((ZLTextMark) myMarks.get(myLastMark)).ParagraphIndex == paragraphIndex); myLastMark++) {
+					;
+				}
+
+			}
+
+			// ////////////////////////////
+			{
+				myFirstUnderLineMark = 0;
+				myLastUnderLineMark = 0;
+				final ZLTextUnderLineMark underlineMark = new ZLTextUnderLineMark(
+						paragraphIndex, 0, 0);
+				int i;
+				for (i = 0; i < myUnderLineMarks.size(); i++) {
+					if (((ZLTextUnderLineMark) myUnderLineMarks.get(i))
+							.compareTo(underlineMark) >= 0) {
+						break;
+					}
+				}
+				myFirstUnderLineMark = i;
+				myLastUnderLineMark = myFirstUnderLineMark;
+				for (; (myLastUnderLineMark != myUnderLineMarks.size())
+						&& (((ZLTextUnderLineMark) myUnderLineMarks
+								.get(myLastUnderLineMark)).nParagraphIndex == paragraphIndex); myLastUnderLineMark++) {
+					;
 				}
 			}
-			myFirstMark = i;
-			myLastMark = myFirstMark;
-			for (; (myLastMark != myMarks.size()) && (((ZLTextMark)myMarks.get(myLastMark)).ParagraphIndex == paragraphIndex); myLastMark++);
-			myOffset = 0;
 		}
 
 		void fill() {
@@ -160,7 +195,14 @@ public final class ZLTextParagraphCursor {
 			for (int i = myFirstMark; i < myLastMark; ++i) {
 				final ZLTextMark mark = (ZLTextMark)myMarks.get(i);
 				if ((mark.Offset < paragraphOffset + len) && (mark.Offset + mark.Length > paragraphOffset)) {
-					word.addMark(mark.Offset - paragraphOffset, mark.Length);
+					word.addMark(mark.Offset - paragraphOffset, mark.Length, MarkType.TYPE_HIGHLINGHT_SEARCH);
+				}
+			}
+			
+			for (int i = myFirstUnderLineMark; i < myLastUnderLineMark; ++i) {
+				final ZLTextUnderLineMark underlineMark = (ZLTextUnderLineMark)myUnderLineMarks.get(i);
+				if ((underlineMark.nOffset < offset + len) && (underlineMark.nOffset + underlineMark.nLength > offset)) {
+					word.addMark(Math.max(underlineMark.nOffset, offset) - offset, Math.min(underlineMark.nOffset + underlineMark.nLength, offset + len) - Math.max(underlineMark.nOffset, offset), MarkType.TYPE_HIGHLINGHT);
 				}
 			}
 			myElements.add(word);		
@@ -190,7 +232,7 @@ public final class ZLTextParagraphCursor {
 		ZLTextParagraph	paragraph = Model.getParagraph(Index);
 		switch (paragraph.getKind()) {
 			case ZLTextParagraph.Kind.TEXT_PARAGRAPH:
-				new Processor(paragraph, new LineBreaker(Model.getLanguage()), Model.getMarks(), Index, myElements).fill();
+				new Processor(paragraph, new LineBreaker(Model.getLanguage()), Model.getMarks(), Model.getUnderLineMarks(), Index, myElements).fill();
 				break;
 			default:
 				break;

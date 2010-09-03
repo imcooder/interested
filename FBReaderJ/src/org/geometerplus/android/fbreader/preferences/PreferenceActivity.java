@@ -106,6 +106,10 @@ public class PreferenceActivity extends ZLPreferenceActivity {
 		scrollingCategory.addOption(scrollingPreferences.VolumeKeysOption, "volumeKeys");
 		scrollingCategory.addOption(scrollingPreferences.AnimateOption, "animated");
 		scrollingCategory.addOption(scrollingPreferences.HorizontalOption, "horizontal");
+		
+		final Category autoPage = createCategory("AutoPage");		
+		autoPage.addPreference(new AutoPagePreference(this, autoPage.Resource, "AutoPage"));
+		
 	}
 }
 
@@ -138,5 +142,46 @@ class ScrollbarTypePreference extends ZLStringListPreference {
 			}
 		}
 		myReader.ScrollbarTypeOption.setValue(intValue);
+	}
+}
+
+
+class AutoPagePreference extends ZLStringListPreference {
+	
+	private FBReader myReader;
+	protected String strDisable;
+	AutoPagePreference(Context context, ZLResource rootResource, String resourceKey) {
+		super(context, rootResource, resourceKey);
+		myReader = (FBReader)FBReader.Instance();		
+		final String[] names = new String[myReader.autoPageElapse.length + 1];		
+		final ZLResource r = rootResource.getResource(resourceKey);
+		String unit = r.getResource("unit").getValue();
+		strDisable = r.getResource("disable").getValue();
+		names[0] = strDisable;
+		for (int i = 0; i < myReader.autoPageElapse.length; ++i) {
+			names[i + 1] = String.valueOf(myReader.autoPageElapse[i]) + unit;			
+		}
+		setLists(names, names);
+		String initValue =String.valueOf(myReader.AutoPageOption.getValue());
+		if(initValue.equals("0")) {
+			initValue = strDisable;
+		}
+		if(true != setInitialValue(initValue)) {
+			initValue =  "0" + unit; 
+		}
+		setInitialValue(initValue);
+	}
+
+	public void onAccept() {
+		final String value = getValue();
+		int intValue = 0;
+		if(!value.equals(strDisable)) {
+			try{
+				intValue =  Integer.valueOf(value).intValue(); 
+			} catch(NumberFormatException e){
+				
+			}	
+		}			
+		myReader.AutoPageOption.setValue(intValue);
 	}
 }

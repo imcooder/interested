@@ -17,28 +17,20 @@
  * 02110-1301, USA.
  */
 
-package org.geometerplus.zlibrary.text.model;
+package org.geometerplus.zlibrary.core.txt;
 
-import java.util.List;
+import java.io.InputStream;
+import java.io.IOException;
+import org.parser.txt.*;
 
-public interface ZLTextModel {
-	String getId();
-	String getLanguage();
-
-	int getParagraphsNumber();
-	ZLTextParagraph getParagraph(int index);
-
-	void removeAllMarks();
-	ZLTextMark getFirstMark();
-	ZLTextMark getLastMark();
-	ZLTextMark getNextMark(ZLTextMark position);
-	ZLTextMark getPreviousMark(ZLTextMark position);
-
-	List<ZLTextMark> getMarks();
-	List<ZLTextUnderLineMark> getUnderLineMarks();
-	// text length for paragraphs from 0 to index
-	int getTextLength(int index);
-	
-	int search(final String text, int startIndex, int endIndex, boolean ignoreCase);
-	boolean setUnderline(int paragraphIndexLeft, int elementIndexLeft, int charIndexLeft, int paragraphIndexRight, int elementIndexRight, int charIndexRight);
+public abstract class ZLTxtProcessor {
+	public static boolean read(ZLTxtReader reader, String path) {
+		
+		TxtParser parser = new TxtParser(reader, path);			
+			reader.startDocumentHandler();
+			parser.doIt();
+			reader.endDocumentHandler();
+				
+		return true;
+	}
 }

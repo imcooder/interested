@@ -56,6 +56,7 @@ public class ColorProfile {
 	public final ZLColorOption BackgroundOption;
 	public final ZLColorOption SelectionBackgroundOption;
 	public final ZLColorOption HighlightingOption;
+	public final ZLColorOption KeywordHighlightingOption;
 	public final ZLColorOption RegularTextOption;
 	public final ZLColorOption HyperlinkTextOption;
 
@@ -76,6 +77,8 @@ public class ColorProfile {
 				new ZLColorOption("Colors", name + ":SelectionBackground", new ZLColor(82, 131, 194));
 			HighlightingOption =
 				new ZLColorOption("Colors", name + ":Highlighting", new ZLColor(96, 96, 128));
+			KeywordHighlightingOption = 
+				new ZLColorOption("Colors", name + ":KeywordHighlighting", new ZLColor(255, 0, 0));
 			RegularTextOption =
 				new ZLColorOption("Colors", name + ":Text", new ZLColor(192, 192, 192));
 			HyperlinkTextOption =
@@ -87,6 +90,8 @@ public class ColorProfile {
 				new ZLColorOption("Colors", name + ":SelectionBackground", new ZLColor(82, 131, 194));
 			HighlightingOption =
 				new ZLColorOption("Colors", name + ":Highlighting", new ZLColor(255, 192, 128));
+			KeywordHighlightingOption =
+				new ZLColorOption("Colors", name + ":KeywordHighlighting", new ZLColor(255, 0, 0));
 			RegularTextOption =
 				new ZLColorOption("Colors", name + ":Text", new ZLColor(0, 0, 0));
 			HyperlinkTextOption =

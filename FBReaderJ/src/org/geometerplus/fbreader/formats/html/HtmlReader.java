@@ -35,6 +35,8 @@ import org.geometerplus.zlibrary.text.model.ZLTextParagraph;
 import org.geometerplus.zlibrary.core.xml.ZLXMLProcessor;
 import org.geometerplus.fbreader.formats.xhtml.XHTMLReader;
 
+import android.util.Log;
+
 public class HtmlReader extends BookReader implements ZLHtmlReader {
 	private final byte[] myStyleTable = new byte[HtmlTag.TAG_NUMBER];
 	{
@@ -71,10 +73,10 @@ public class HtmlReader extends BookReader implements ZLHtmlReader {
 	private int myOLCounter = 0;
 	private byte[] myControls = new byte[10];
 	private byte myControlsNumber = 0;
-	
+
 	public HtmlReader(BookModel model) throws UnsupportedEncodingException {
 		super(model);
-		try {	
+		try {
 			String encoding = model.Book.getEncoding();
 			myAttributeDecoder = createDecoder();
 			setByteDecoder(createDecoder());
@@ -83,10 +85,11 @@ public class HtmlReader extends BookReader implements ZLHtmlReader {
 		}
 	}
 
-	protected final CharsetDecoder createDecoder() throws UnsupportedEncodingException {
+	protected final CharsetDecoder createDecoder()
+			throws UnsupportedEncodingException {
 		return Charset.forName(Model.Book.getEncoding()).newDecoder()
-			.onMalformedInput(CodingErrorAction.REPLACE)
-			.onUnmappableCharacter(CodingErrorAction.REPLACE);
+				.onMalformedInput(CodingErrorAction.REPLACE)
+				.onUnmappableCharacter(CodingErrorAction.REPLACE);
 	}
 
 	public boolean readBook() throws IOException {
@@ -108,10 +111,12 @@ public class HtmlReader extends BookReader implements ZLHtmlReader {
 		addByteData(data, start, length);
 	}
 
-	private HashMap<String,char[]> myEntityMap;
+	private HashMap<String, char[]> myEntityMap;
+
 	public void entityDataHandler(String entity) {
 		if (myEntityMap == null) {
-			myEntityMap = new HashMap<String,char[]>(ZLXMLProcessor.getEntityMap(XHTMLReader.xhtmlDTDs()));
+			myEntityMap = new HashMap<String, char[]>(
+					ZLXMLProcessor.getEntityMap(XHTMLReader.xhtmlDTDs()));
 		}
 		char[] data = myEntityMap.get(entity);
 		if (data == null) {
@@ -123,7 +128,7 @@ public class HtmlReader extends BookReader implements ZLHtmlReader {
 					} else {
 						number = Integer.parseInt(entity.substring(1));
 					}
-					data = new char[] { (char)number };
+					data = new char[] { (char) number };
 				} catch (NumberFormatException e) {
 				}
 			}
@@ -138,11 +143,12 @@ public class HtmlReader extends BookReader implements ZLHtmlReader {
 	private void openControl(byte control) {
 		addControl(control, true);
 		if (myControlsNumber == myControls.length) {
-			myControls = ZLArrayUtils.createCopy(myControls, myControlsNumber, 2 * myControlsNumber);
+			myControls = ZLArrayUtils.createCopy(myControls, myControlsNumber,
+					2 * myControlsNumber);
 		}
 		myControls[myControlsNumber++] = control;
 	}
-	
+
 	private void closeControl(byte control) {
 		for (int i = 0; i < myControlsNumber; i++) {
 			addControl(myControls[i], false);
@@ -165,185 +171,231 @@ public class HtmlReader extends BookReader implements ZLHtmlReader {
 			myControls[i] = myControls[i + 1];
 		}
 	}
-	
+
 	private void startNewParagraph() {
 		endParagraph();
 		beginParagraph(ZLTextParagraph.Kind.TEXT_PARAGRAPH);
 	}
-	
+
 	public final void endElementHandler(String tagName) {
 		endElementHandler(HtmlTag.getTagByName(tagName));
 	}
 
 	public void endElementHandler(byte tag) {
 		switch (tag) {
-			case HtmlTag.SCRIPT:
-			case HtmlTag.SELECT:
-			case HtmlTag.STYLE:
-			case HtmlTag.P:
-				startNewParagraph();
-				break;
+		case HtmlTag.SCRIPT:
+		case HtmlTag.SELECT:
+		case HtmlTag.STYLE:
+		case HtmlTag.P:
+			startNewParagraph();
+			break;
 
-			case HtmlTag.H1:
-			case HtmlTag.H2:
-			case HtmlTag.H3:
-			case HtmlTag.H4:
-			case HtmlTag.H5:
-			case HtmlTag.H6:
-			case HtmlTag.PRE:
-				closeControl(myStyleTable[tag]);
-				startNewParagraph();
-				break;
+		case HtmlTag.H1:
+		case HtmlTag.H2:
+		case HtmlTag.H3:
+		case HtmlTag.H4:
+		case HtmlTag.H5:
+		case HtmlTag.H6:
+		case HtmlTag.PRE:
+			closeControl(myStyleTable[tag]);
+			startNewParagraph();
+			break;
 
-			case HtmlTag.A:
-				closeControl(myHyperlinkType);
-				break;
+		case HtmlTag.A:
+			closeControl(myHyperlinkType);
+			break;
 
-			case HtmlTag.BODY:
-				break;
+		case HtmlTag.BODY:
+			break;
 
-			case HtmlTag.HTML:
-				//unsetCurrentTextModel();
-				break;
-				
-			case HtmlTag.B:
-			case HtmlTag.S:
-			case HtmlTag.SUB:
-			case HtmlTag.SUP:
-			case HtmlTag.EM:
-			case HtmlTag.DFN:
-			case HtmlTag.CITE:
-			case HtmlTag.CODE:
-			case HtmlTag.STRONG:
-			case HtmlTag.I:
-				closeControl(myStyleTable[tag]);
-				break;
+		case HtmlTag.HTML:
+			// unsetCurrentTextModel();
+			break;
 
-			case HtmlTag.OL:
-				myOrderedListIsStarted = false;
-				myOLCounter = 0;
-				break;
-				
-			case HtmlTag.UL:
-				myUnorderedListIsStarted = false;
-				break;
-				
-			default:
-				break;
+		case HtmlTag.B:
+		case HtmlTag.S:
+		case HtmlTag.SUB:
+		case HtmlTag.SUP:
+		case HtmlTag.EM:
+		case HtmlTag.DFN:
+		case HtmlTag.CITE:
+		case HtmlTag.CODE:
+		case HtmlTag.STRONG:
+		case HtmlTag.I:
+			closeControl(myStyleTable[tag]);
+			break;
+
+		case HtmlTag.OL:
+			myOrderedListIsStarted = false;
+			myOLCounter = 0;
+			break;
+
+		case HtmlTag.UL:
+			myUnorderedListIsStarted = false;
+			break;
+
+		default:
+			break;
 		}
 	}
 
-	public final void startElementHandler(String tagName, int offset, ZLHtmlAttributeMap attributes) {
+	public final void startElementHandler(String tagName, int offset,
+			ZLHtmlAttributeMap attributes) {
 		startElementHandler(HtmlTag.getTagByName(tagName), offset, attributes);
 	}
 
-	public void startElementHandler(byte tag, int offset, ZLHtmlAttributeMap attributes) {
+	public void startElementHandler(byte tag, int offset,
+			ZLHtmlAttributeMap attributes) {
 		switch (tag) {
-			case HtmlTag.HTML:
-				break;
+		case HtmlTag.HTML:
+			break;
+		case HtmlTag.META: {
+			String strContent = attributes.getStringValue("content",
+					myAttributeDecoder);
+			if ((strContent != null) && (strContent.length() != 0)) {
+				int nBegin = strContent.indexOf("charset");
+				if (nBegin != -1) {
+					int nEnd = -1;
+					nBegin += new String("charset").length();
+					for (int nIndex = nBegin; nIndex < strContent.length(); nIndex++) {
+						if (-1 == nEnd) {
+							if (strContent.charAt(nIndex) == ' '
+									|| strContent.charAt(nIndex) == '=') {
 
-			case HtmlTag.BODY:
-				setMainTextModel();
-				pushKind(FBTextKind.REGULAR);
-				beginParagraph(ZLTextParagraph.Kind.TEXT_PARAGRAPH);
-				break;
-
-			case HtmlTag.P:
-				if (mySectionStarted) {
-					mySectionStarted = false;
-				} else if (myInsideTitle) {
-					addContentsData(SPACE);
-				}
-				beginParagraph(ZLTextParagraph.Kind.TEXT_PARAGRAPH);
-				break;
-
-			case HtmlTag.A:{
-				String ref = attributes.getStringValue(myHrefAttribute, myAttributeDecoder);
-				if ((ref != null) && (ref.length() != 0)) {
-					if (ref.charAt(0) == '#') {
-						myHyperlinkType = FBTextKind.FOOTNOTE;
-						ref = ref.substring(1);
-					} else {
-						myHyperlinkType = FBTextKind.EXTERNAL_HYPERLINK;
+							} else {
+								nBegin = nIndex;
+								nEnd = nIndex;
+								continue;
+							}
+						} else {
+							if (strContent.charAt(nIndex) != ' '
+									&& strContent.charAt(nIndex) != '\''
+									&& strContent.charAt(nIndex) != '\"') {
+								nEnd++;
+							} else {
+								break;
+							}
+						}
 					}
-					addHyperlinkControl(myHyperlinkType, ref);
-					myControls[myControlsNumber] = myHyperlinkType;
-					myControlsNumber++;
-				}
-				break;
-			}
-			
-			case HtmlTag.IMG: {
-				/*
-				String ref = attributes.getStringValue(mySrcAttribute, myAttributeDecoder);
-				if ((ref != null) && (ref.length() != 0)) {
-					addImageReference(ref, (short)0);
-					String filePath = ref;
-					if (!":\\".equals(ref.substring(1, 3))) {
-						filePath = Model.Book.File.getPath();
-						filePath = filePath.substring(0, filePath.lastIndexOf('\\') + 1) + ref;
+					if (nBegin < nEnd && nEnd < strContent.length()) {
+						String strCharset = strContent.substring(nBegin, nEnd + 1);
+						CharsetDecoder innerByteDecoder = Charset.forName(
+								strCharset).newDecoder();
+						if (innerByteDecoder != null) {
+							innerByteDecoder
+									.onMalformedInput(CodingErrorAction.REPLACE);
+							innerByteDecoder
+									.onUnmappableCharacter(CodingErrorAction.REPLACE);
+							setByteDecoder(innerByteDecoder);
+						}
 					}
-					addImage(ref, new ZLFileImage("image/auto", ZLFile.createFileByPath(filePath)));
+
 				}
-				*/
-				break;
 			}
-			
-			case HtmlTag.B:
-			case HtmlTag.S:
-			case HtmlTag.SUB:
-			case HtmlTag.SUP:
-			case HtmlTag.PRE:
-			case HtmlTag.STRONG:
-			case HtmlTag.CODE:
-			case HtmlTag.EM:
-			case HtmlTag.CITE:
-			case HtmlTag.DFN:
-			case HtmlTag.I:
-				openControl(myStyleTable[tag]);
-				break;
-				
-			case HtmlTag.H1:
-			case HtmlTag.H2:
-			case HtmlTag.H3:
-			case HtmlTag.H4:
-			case HtmlTag.H5:
-			case HtmlTag.H6:
-				startNewParagraph();
-				openControl(myStyleTable[tag]);
-				break;
-				
-			case HtmlTag.OL:
-				myOrderedListIsStarted = true;
-				break;
-				
-			case HtmlTag.UL:
-				myUnorderedListIsStarted = true;
-				break;
-				
-			case HtmlTag.LI:
-				startNewParagraph();
-				if (myOrderedListIsStarted) {
-					char[] number = (new Integer(++myOLCounter)).toString().toCharArray();
-					addData(number);
-					addData(new char[] {'.', ' '});
+
+		}		
+			break;
+		case HtmlTag.BODY:
+			setMainTextModel();
+			pushKind(FBTextKind.REGULAR);
+			beginParagraph(ZLTextParagraph.Kind.TEXT_PARAGRAPH);
+			break;
+
+		case HtmlTag.P:
+			if (mySectionStarted) {
+				mySectionStarted = false;
+			} else if (myInsideTitle) {
+				addContentsData(SPACE);
+			}
+			beginParagraph(ZLTextParagraph.Kind.TEXT_PARAGRAPH);
+			break;
+
+		case HtmlTag.A: {
+			String ref = attributes.getStringValue(myHrefAttribute,
+					myAttributeDecoder);
+			if ((ref != null) && (ref.length() != 0)) {
+				if (ref.charAt(0) == '#') {
+					myHyperlinkType = FBTextKind.FOOTNOTE;
+					ref = ref.substring(1);
 				} else {
-					addData(new char[] {'*', ' '});
+					myHyperlinkType = FBTextKind.EXTERNAL_HYPERLINK;
 				}
-				break;
-				
-			case HtmlTag.SCRIPT:
-			case HtmlTag.SELECT:
-			case HtmlTag.STYLE:
-				endParagraph();
-				break;
-				
-			case HtmlTag.TR: 
-			case HtmlTag.BR:
-				startNewParagraph();
-				break;
-			default:
-				break;
+				addHyperlinkControl(myHyperlinkType, ref);
+				myControls[myControlsNumber] = myHyperlinkType;
+				myControlsNumber++;
+			}
+			break;
+		}
+
+		case HtmlTag.IMG: {
+			/*
+			 * String ref = attributes.getStringValue(mySrcAttribute,
+			 * myAttributeDecoder); if ((ref != null) && (ref.length() != 0)) {
+			 * addImageReference(ref, (short)0); String filePath = ref; if
+			 * (!":\\".equals(ref.substring(1, 3))) { filePath =
+			 * Model.Book.File.getPath(); filePath = filePath.substring(0,
+			 * filePath.lastIndexOf('\\') + 1) + ref; } addImage(ref, new
+			 * ZLFileImage("image/auto", ZLFile.createFileByPath(filePath))); }
+			 */
+			break;
+		}
+
+		case HtmlTag.B:
+		case HtmlTag.S:
+		case HtmlTag.SUB:
+		case HtmlTag.SUP:
+		case HtmlTag.PRE:
+		case HtmlTag.STRONG:
+		case HtmlTag.CODE:
+		case HtmlTag.EM:
+		case HtmlTag.CITE:
+		case HtmlTag.DFN:
+		case HtmlTag.I:
+			openControl(myStyleTable[tag]);
+			break;
+
+		case HtmlTag.H1:
+		case HtmlTag.H2:
+		case HtmlTag.H3:
+		case HtmlTag.H4:
+		case HtmlTag.H5:
+		case HtmlTag.H6:
+			startNewParagraph();
+			openControl(myStyleTable[tag]);
+			break;
+
+		case HtmlTag.OL:
+			myOrderedListIsStarted = true;
+			break;
+
+		case HtmlTag.UL:
+			myUnorderedListIsStarted = true;
+			break;
+
+		case HtmlTag.LI:
+			startNewParagraph();
+			if (myOrderedListIsStarted) {
+				char[] number = (new Integer(++myOLCounter)).toString()
+						.toCharArray();
+				addData(number);
+				addData(new char[] { '.', ' ' });
+			} else {
+				addData(new char[] { '*', ' ' });
+			}
+			break;
+
+		case HtmlTag.SCRIPT:
+		case HtmlTag.SELECT:
+		case HtmlTag.STYLE:
+			endParagraph();
+			break;
+
+		case HtmlTag.TR:
+		case HtmlTag.BR:
+			startNewParagraph();
+			break;
+		default:
+			break;
 		}
 	}
 }

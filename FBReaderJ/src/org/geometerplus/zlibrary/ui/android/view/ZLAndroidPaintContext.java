@@ -139,7 +139,9 @@ public final class ZLAndroidPaintContext extends ZLPaintContext {
 	public void setTextColor(ZLColor color) {
 		myTextPaint.setColor(Color.rgb(color.Red, color.Green, color.Blue));
 	}
-
+	public void setTextUnderlineInternal(boolean underline) {
+		myTextPaint.setUnderlineText(underline);
+	}
 	public void setLineColor(ZLColor color, int style) {
 		// TODO: use style
 		myLinePaint.setColor(Color.rgb(color.Red, color.Green, color.Blue));
