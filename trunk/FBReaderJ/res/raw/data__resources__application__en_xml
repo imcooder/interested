@@ -16,6 +16,12 @@
 		<node name="openBook" value="Open book"/>
 		<node name="deleteBook" value="Delete book"/>
 	</node>
+	<node name="SelectionOperator">
+		<node name="underline" value="Underline" />
+		<node name="copystring" value="Copy" />
+		<node name="translate" value="Translate" />
+		<node name="highlight" value="Highlight" />		
+	</node>
 	<node name="networkView">
 		<node name="openCatalog" value="Open catalog"/>
 		<node name="showResults" value="Show results"/>
@@ -177,6 +183,12 @@
 				<node name="horizontal" value="Horizontal scrolling">
 					<node name="summaryOn" value="Scroll pages horizontally"/>
 					<node name="summaryOff" value="Scroll pages vertically"/>
+				</node>
+			</node>
+			<node name="AutoPage" value="Auto Page">
+				<node name="AutoPage" value="Time Setting">
+					<node name="disable" value="disable" />
+					<node name="unit" value="s" />
 				</node>
 			</node>
 		</node>

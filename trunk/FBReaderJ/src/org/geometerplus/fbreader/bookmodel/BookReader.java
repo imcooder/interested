@@ -24,7 +24,9 @@ import org.geometerplus.zlibrary.core.util.*;
 
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CodingErrorAction;
 
 import org.geometerplus.zlibrary.core.image.ZLImage;
 import org.geometerplus.zlibrary.text.model.*;
@@ -56,7 +58,11 @@ public class BookReader {
 
 	public BookReader(BookModel model) {
 		Model = model;
-		myCurrentContentsTree = model.TOCTree;
+		myCurrentContentsTree = model.TOCTree;		
+		myByteDecoder = Charset.forName("utf-8").newDecoder();
+		myByteDecoder.onMalformedInput(CodingErrorAction.REPLACE);
+		myByteDecoder.onUnmappableCharacter(CodingErrorAction.REPLACE);
+		
 	}
 
 	public final void setByteDecoder(CharsetDecoder decoder) {

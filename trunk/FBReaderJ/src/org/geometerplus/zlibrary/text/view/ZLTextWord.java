@@ -20,7 +20,7 @@
 package org.geometerplus.zlibrary.text.view;
 
 import org.geometerplus.zlibrary.core.view.ZLPaintContext;
-
+import com.hanvon.*;
 public final class ZLTextWord extends ZLTextElement { 
 	public final char[] Data;
 	public final int Offset;
@@ -28,15 +28,24 @@ public final class ZLTextWord extends ZLTextElement {
 	private int myWidth = -1;
 	private Mark myMark;
 	private int myParagraphOffset;
-
+	public byte[] marktype = null;
+	
+	interface MarkType{
+		int TYPE_UNDERLINE = 0x1;
+		int TYPE_HIGHLINGHT = 0x2;
+		int TYPE_HIGHLINGHT_SEARCH = 0x4;		 
+	}
 	class Mark {
+		
 		public final int Start;
 		public final int Length;
+		public int Type;
 		private Mark myNext;
 
-		private Mark(int start, int length) {
+		private Mark(int start, int length, int type) {
 			Start = start;
 			Length = length;
+			Type = type;
 			myNext = null;
 		}
 
@@ -53,6 +62,14 @@ public final class ZLTextWord extends ZLTextElement {
 		Data = data;
 		Offset = offset;
 		Length = length;
+		if(Length > 0) {
+			marktype = new byte[Length];
+			if(marktype != null) {
+				for(int nIdx = 0; nIdx < marktype.length; nIdx ++) {
+					marktype[nIdx] = 0;
+				}
+			}
+		}
 		myParagraphOffset = paragraphOffset;
 	}
 
@@ -64,9 +81,9 @@ public final class ZLTextWord extends ZLTextElement {
 		return myParagraphOffset;
 	}
 	
-	public void addMark(int start, int length) {
+	public void addMark(int start, int length, int type) {
 		Mark existingMark = myMark;
-		Mark mark = new Mark(start, length);
+		Mark mark = new Mark(start, length, type);
 		if ((existingMark == null) || (existingMark.Start > start)) {
 			mark.setNext(existingMark);
 			myMark = mark;
@@ -76,9 +93,15 @@ public final class ZLTextWord extends ZLTextElement {
 			}
 			mark.setNext(existingMark.getNext());
 			existingMark.setNext(mark);
-		}		
+		}
+		
+		///
+		Trace.DBGMSG(1, "addMark %d %d %d\n", start, start + length, marktype.length);
+		for(int nIdx = start; nIdx < Math.min(start + length, marktype.length); nIdx ++) {
+			marktype[nIdx] |= type;
+		}
+		
 	}
-	
 	public int getWidth(ZLPaintContext context) {
 		int width = myWidth;
 		if (width == -1) {

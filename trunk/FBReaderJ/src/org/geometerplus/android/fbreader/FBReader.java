@@ -28,15 +28,20 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import org.geometerplus.zlibrary.core.application.ZLApplication;
+import org.geometerplus.zlibrary.core.resources.ZLResource;
 import org.geometerplus.zlibrary.ui.android.library.ZLAndroidActivity;
 import org.geometerplus.zlibrary.ui.android.library.ZLAndroidApplication;
 import org.geometerplus.zlibrary.ui.android.R;
 
 import org.geometerplus.fbreader.fbreader.ActionCode;
+import org.geometerplus.android.fbreader.SelectionButtonPanel;
+
+import java.util.*;
+import org.parser.txt.TxtParser;
 
 public final class FBReader extends ZLAndroidActivity {
-	static FBReader Instance;
-
+	public static FBReader Instance;
+		
 	private int myFullScreenFlag;
 
 	private static class TextSearchButtonPanel implements ZLApplication.ButtonPanel {
@@ -55,9 +60,12 @@ public final class FBReader extends ZLAndroidActivity {
 				ControlPanel.updateStates();
 			}
 		}
+		public void init() {
+			
+		}
 	}
 	private static TextSearchButtonPanel myPanel;
-
+	protected static SelectionButtonPanel mySelectionPanel;
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
@@ -77,6 +85,8 @@ public final class FBReader extends ZLAndroidActivity {
 			myPanel = new TextSearchButtonPanel();
 			ZLApplication.Instance().registerButtonPanel(myPanel);
 		}
+		
+		
 	}
 
 	@Override
@@ -104,8 +114,14 @@ public final class FBReader extends ZLAndroidActivity {
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
             p.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             p.addRule(RelativeLayout.CENTER_HORIZONTAL);
-            root.addView(myPanel.ControlPanel, p);
+            root.addView(myPanel.ControlPanel, p);      
+            
+            
 		}
+		if(null == mySelectionPanel ) {
+			mySelectionPanel = new SelectionButtonPanel(findViewById(R.id.main_view));
+			mySelectionPanel.init();
+		}				
 	}
 
 	private PowerManager.WakeLock myWakeLock;
@@ -150,6 +166,7 @@ public final class FBReader extends ZLAndroidActivity {
 		if (myPanel.ControlPanel != null) {
 			if (show) {
 				myPanel.ControlPanel.show(true);
+				//myPanel.ControlPanel.offsetTopAndBottom(50);
 			} else {
 				myPanel.ControlPanel.hide(false);
 			}
@@ -179,6 +196,12 @@ public final class FBReader extends ZLAndroidActivity {
 		final org.geometerplus.fbreader.fbreader.FBReader fbreader =
 			(org.geometerplus.fbreader.fbreader.FBReader)ZLApplication.Instance();
 		startSearch(fbreader.TextSearchPatternOption.getValue(), true, null, false);
+		return true;
+	}
+	public boolean showSelectionPanel() {
+		if(mySelectionPanel != null) {
+			mySelectionPanel.show(true);
+		}
 		return true;
 	}
 }

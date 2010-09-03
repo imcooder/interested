@@ -28,6 +28,8 @@ import org.geometerplus.fbreader.formats.fb2.FB2Plugin;
 import org.geometerplus.fbreader.formats.html.HtmlPlugin;
 import org.geometerplus.fbreader.formats.oeb.OEBPlugin;
 import org.geometerplus.fbreader.formats.pdb.MobipocketPlugin;
+import org.geometerplus.fbreader.formats.plucker.PluckerPlugin;
+import org.geometerplus.fbreader.formats.txt.TxtPlugin;;
 
 public class PluginCollection {
 	private static PluginCollection ourInstance;
@@ -41,10 +43,10 @@ public class PluginCollection {
 		if (ourInstance == null) {
 			ourInstance = new PluginCollection();
 			ourInstance.myPlugins.add(new FB2Plugin());
-			//ourInstance.myPlugins.add(new PluckerPlugin());
+			ourInstance.myPlugins.add(new PluckerPlugin());
 			//ourInstance->myPlugins.push_back(new DocBookPlugin());
-			//ourInstance.myPlugins.add(new HtmlPlugin());
-			//ourInstance.myPlugins.add(new TxtPlugin());
+			ourInstance.myPlugins.add(new HtmlPlugin());
+			ourInstance.myPlugins.add(new TxtPlugin());
 			//ourInstance.myPlugins.add(new PalmDocPlugin());
 			ourInstance.myPlugins.add(new MobipocketPlugin());
 			//ourInstance.myPlugins.add(new ZTXTPlugin());

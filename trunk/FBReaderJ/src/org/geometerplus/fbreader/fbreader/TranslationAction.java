@@ -17,28 +17,18 @@
  * 02110-1301, USA.
  */
 
-package org.geometerplus.zlibrary.text.model;
+package org.geometerplus.fbreader.fbreader;
 
-import java.util.List;
+import org.geometerplus.android.fbreader.preferences.PreferenceActivity;
 
-public interface ZLTextModel {
-	String getId();
-	String getLanguage();
+import org.geometerplus.zlibrary.ui.android.dialogs.ZLAndroidDialogManager;
 
-	int getParagraphsNumber();
-	ZLTextParagraph getParagraph(int index);
+class TranslationAction extends FBAction {
+	TranslationAction(FBReader fbreader) {
+		super(fbreader);
+	}
 
-	void removeAllMarks();
-	ZLTextMark getFirstMark();
-	ZLTextMark getLastMark();
-	ZLTextMark getNextMark(ZLTextMark position);
-	ZLTextMark getPreviousMark(ZLTextMark position);
-
-	List<ZLTextMark> getMarks();
-	List<ZLTextUnderLineMark> getUnderLineMarks();
-	// text length for paragraphs from 0 to index
-	int getTextLength(int index);
-	
-	int search(final String text, int startIndex, int endIndex, boolean ignoreCase);
-	boolean setUnderline(int paragraphIndexLeft, int elementIndexLeft, int charIndexLeft, int paragraphIndexRight, int elementIndexRight, int charIndexRight);
+	public void run() {
+		//Reader.getTextView().applyUnderToSelection();
+	}
 }

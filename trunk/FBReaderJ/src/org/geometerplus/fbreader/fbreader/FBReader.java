@@ -65,6 +65,10 @@ public final class FBReader extends ZLApplication {
 	final ZLStringOption ColorProfileOption =
 		new ZLStringOption("Options", "ColorProfile", ColorProfile.DAY);
 
+	public final int autoPageElapse[] = {0, 10, 30, 60};
+	public final ZLIntegerRangeOption AutoPageOption =
+		new ZLIntegerRangeOption("Options", "AutoPage", 0, 100, 0);
+	
 	private final ZLKeyBindings myBindings = new ZLKeyBindings("Keys");
 
 	public final FBView BookTextView;
@@ -113,6 +117,12 @@ public final class FBReader extends ZLApplication {
 		addAction(ActionCode.SWITCH_TO_DAY_PROFILE, new SwitchProfileAction(this, ColorProfile.DAY));
 		addAction(ActionCode.SWITCH_TO_NIGHT_PROFILE, new SwitchProfileAction(this, ColorProfile.NIGHT));
 
+		
+		addAction(ActionCode.SELECTION_UNDERLINE, new UnderLineAction(this));
+		addAction(ActionCode.SELECTION_COPYSTRING, new CopyStringAction(this));
+		addAction(ActionCode.SELECTION_TRANSLATE, new TranslationAction(this));
+		addAction(ActionCode.SELECTION_HIGHLIGHT, new HighLightAction(this));
+		
 		BookTextView = new FBView(this);
 		FootnoteView = new FBView(this);
 

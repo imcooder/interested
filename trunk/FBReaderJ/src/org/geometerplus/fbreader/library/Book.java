@@ -68,7 +68,8 @@ public class Book {
 
 		final FileInfoSet fileInfos = new FileInfoSet(bookFile);
 
-		Book book = BooksDatabase.Instance().loadBookByFile(fileInfos.getId(bookFile), bookFile);
+		Book book = BooksDatabase.Instance().loadBookByFile(
+				fileInfos.getId(bookFile), bookFile);
 		if (book != null) {
 			book.loadLists();
 		}
@@ -92,7 +93,7 @@ public class Book {
 
 	private long myId;
 
-	private String myEncoding;
+	private String myEncoding = "utf-8";
 	private String myLanguage;
 	private String myTitle;
 	private List<Author> myAuthors;
@@ -108,6 +109,9 @@ public class Book {
 		myEncoding = encoding;
 		myLanguage = language;
 		myIsSaved = true;
+		if (myEncoding == null) {
+			myEncoding = new String("utf-8");
+		}
 	}
 
 	Book(ZLFile file) {
@@ -123,9 +127,11 @@ public class Book {
 		if ((myTitle == null) || (myTitle.length() == 0)) {
 			setTitle(File.getName(true));
 		}
-		final String demoPathPrefix = Paths.BooksDirectoryOption.getValue() + java.io.File.separator + "Demos" + java.io.File.separator;
+		final String demoPathPrefix = Paths.BooksDirectoryOption.getValue()
+				+ java.io.File.separator + "Demos" + java.io.File.separator;
 		if (File.getPath().startsWith(demoPathPrefix)) {
-			final String demoTag = ZLResource.resource("library").getResource("demo").getValue();
+			final String demoTag = ZLResource.resource("library")
+					.getResource("demo").getValue();
 			setTitle(getTitle() + " (" + demoTag + ")");
 			addTag(demoTag);
 		}
@@ -141,7 +147,8 @@ public class Book {
 	}
 
 	public List<Author> authors() {
-		return (myAuthors != null) ? Collections.unmodifiableList(myAuthors) : Collections.<Author>emptyList();
+		return (myAuthors != null) ? Collections.unmodifiableList(myAuthors)
+				: Collections.<Author> emptyList();
 	}
 
 	void addAuthorWithNoCheck(Author author) {
@@ -187,7 +194,8 @@ public class Book {
 				while ((index >= 0) && (strippedName.charAt(index) == ' ')) {
 					--index;
 				}
-				strippedName = strippedName.substring(0, index + 1) + ' ' + strippedKey;
+				strippedName = strippedName.substring(0, index + 1) + ' '
+						+ strippedKey;
 			}
 		}
 
@@ -226,7 +234,8 @@ public class Book {
 		} else if (name == null) {
 			mySeriesInfo = null;
 			myIsSaved = false;
-		} else if (!mySeriesInfo.Name.equals(name) || (mySeriesInfo.Index != index)) {
+		} else if (!mySeriesInfo.Name.equals(name)
+				|| (mySeriesInfo.Index != index)) {
 			mySeriesInfo = new SeriesInfo(name, index);
 			myIsSaved = false;
 		}
@@ -255,7 +264,8 @@ public class Book {
 	}
 
 	public List<Tag> tags() {
-		return (myTags != null) ? Collections.unmodifiableList(myTags) : Collections.<Tag>emptyList();
+		return (myTags != null) ? Collections.unmodifiableList(myTags)
+				: Collections.<Tag> emptyList();
 	}
 
 	void addTagWithNoCheck(Tag tag) {
@@ -285,7 +295,8 @@ public class Book {
 		if ((myTitle != null) && ZLMiscUtil.matchesIgnoreCase(myTitle, pattern)) {
 			return true;
 		}
-		if ((mySeriesInfo != null) && ZLMiscUtil.matchesIgnoreCase(mySeriesInfo.Name, pattern)) {
+		if ((mySeriesInfo != null)
+				&& ZLMiscUtil.matchesIgnoreCase(mySeriesInfo.Name, pattern)) {
 			return true;
 		}
 		if (myAuthors != null) {
@@ -314,11 +325,13 @@ public class Book {
 			public void run() {
 				if (myId >= 0) {
 					final FileInfoSet fileInfos = new FileInfoSet(File);
-					database.updateBookInfo(myId, fileInfos.getId(File), myEncoding, myLanguage, myTitle);
+					database.updateBookInfo(myId, fileInfos.getId(File),
+							myEncoding, myLanguage, myTitle);
 				} else {
-					myId = database.insertBookInfo(File, myEncoding, myLanguage, myTitle);
+					myId = database.insertBookInfo(File, myEncoding,
+							myLanguage, myTitle);
 				}
-            
+
 				long index = 0;
 				database.deleteAllBookAuthors(myId);
 				for (Author author : authors()) {
@@ -348,11 +361,11 @@ public class Book {
 
 	@Override
 	public int hashCode() {
-		return (int)myId;
+		return (int) myId;
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		return (o instanceof Book) && (myId == ((Book)o).myId);
+		return (o instanceof Book) && (myId == ((Book) o).myId);
 	}
 }

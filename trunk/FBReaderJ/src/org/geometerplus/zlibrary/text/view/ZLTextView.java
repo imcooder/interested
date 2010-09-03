@@ -24,10 +24,17 @@ import java.util.*;
 import org.geometerplus.zlibrary.core.util.ZLColor;
 
 import org.geometerplus.zlibrary.core.application.ZLApplication;
+import org.geometerplus.zlibrary.core.image.ZLImage;
+import org.geometerplus.zlibrary.core.image.ZLImageData;
+import org.geometerplus.zlibrary.core.image.ZLImageManager;
 import org.geometerplus.zlibrary.core.view.ZLPaintContext;
 import org.geometerplus.zlibrary.text.model.*;
 import org.geometerplus.zlibrary.text.hyphenation.*;
+//import org.geometerplus.zlibrary.text.view.ZLTextParagraphCursor.Processor;
 import org.geometerplus.zlibrary.text.view.style.ZLTextStyleCollection;
+import org.vimgadgets.linebreak.LineBreaker;
+
+import com.hanvon.*;
 
 public abstract class ZLTextView extends ZLTextViewBase {
 	public interface ScrollingMode {
@@ -37,6 +44,11 @@ public abstract class ZLTextView extends ZLTextViewBase {
 		int SCROLL_PERCENTAGE = 3;
 	};
 
+	public interface FingerMode {
+		int FINGERMODE_SCROLL = 0;
+		int FINGERMODE_SELECT = 1;
+		int FINGERMODE_HIGHLIGHT = 2;
+	}
 	private ZLTextModel myModel;
 	private final ZLTextSelectionModel mySelectionModel;
 
@@ -47,7 +59,7 @@ public abstract class ZLTextView extends ZLTextViewBase {
 
 	private int myScrollingMode;
 	private int myOverlappingValue;
-
+	protected int nFingerMode;
 	private ZLTextPage myPreviousPage = new ZLTextPage();
 	ZLTextPage myCurrentPage = new ZLTextPage();
 	private ZLTextPage myNextPage = new ZLTextPage();
@@ -57,6 +69,7 @@ public abstract class ZLTextView extends ZLTextViewBase {
 	public ZLTextView(ZLPaintContext context) {
 		super(context);
  		mySelectionModel = new ZLTextSelectionModel(this);
+ 		setFingerMode(FingerMode.FINGERMODE_SCROLL);
 	}
 
 	public synchronized void setModel(ZLTextModel model) {
@@ -471,7 +484,9 @@ public abstract class ZLTextView extends ZLTextViewBase {
 				index++;
 				if (area.ChangeStyle) {
 					setTextStyle(area.Style);
-				}
+				}				
+				setTextStyle(area.Style);
+				
 				final int areaX = area.XStart;
 				final int areaY = area.YEnd - getElementDescent(element) - getTextStyle().getVerticalShift();
 				if (element instanceof ZLTextWord) {
@@ -1115,7 +1130,7 @@ public abstract class ZLTextView extends ZLTextViewBase {
 		return leftIndex;
 	}
 
-	public boolean onStylusMovePressed(int x, int y) {
+	public boolean onStylusMovePressed(int x, int y) {		
 		if (mySelectionModel.extendTo(x, y)) {
 			ZLApplication.Instance().repaintView();
 			return true;
@@ -1128,6 +1143,13 @@ public abstract class ZLTextView extends ZLTextViewBase {
 		return false;
 	}
 
+	protected boolean setFingerMode(int nMode) {
+		nFingerMode = nMode;
+		return true;
+	}
+	protected int getFingerMode() {
+		return nFingerMode;
+	}
 	protected abstract boolean isSelectionEnabled();
 
 	protected void activateSelection(int x, int y) {
@@ -1198,5 +1220,31 @@ public abstract class ZLTextView extends ZLTextViewBase {
 			}
 		}
 		return false;
+	}
+	public boolean applyUnderToSelection() {
+		Trace.DBGMSG(1, "applyUnderToSelection");
+		if(mySelectionModel == null) {
+			return false;
+		}
+		final ZLTextSelectionModel.Range range = mySelectionModel.getRange();		
+		final ZLTextSelectionModel.BoundElement lBound = range.Left;
+		final ZLTextSelectionModel.BoundElement rBound = range.Right;
+		applyUnderline(lBound.ParagraphIndex, lBound.ElementIndex, lBound.CharIndex, rBound.ParagraphIndex, rBound.ElementIndex, rBound.CharIndex);
+		
+			
+		return true;
+	}
+	public boolean applyUnderline(int paragraphIndexLeft, int elementIndexLeft, int charIndexLeft, int paragraphIndexRight, int elementIndexRight, int charIndexRight) {
+		Trace.DBGMSG(1, "applyUnderline");
+		myModel.setUnderline(paragraphIndexLeft, elementIndexLeft, charIndexLeft, paragraphIndexRight, elementIndexRight, charIndexRight);
+		
+		
+		myPreviousPage.reset();
+		myNextPage.reset();
+		if (!myCurrentPage.StartCursor.isNull()) {
+			rebuildPaintInfo();			
+			ZLApplication.Instance().repaintView();
+		}
+		return true;
 	}
 }

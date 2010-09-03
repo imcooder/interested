@@ -19,26 +19,32 @@
 
 package org.geometerplus.zlibrary.text.model;
 
-import java.util.List;
-
-public interface ZLTextModel {
-	String getId();
-	String getLanguage();
-
-	int getParagraphsNumber();
-	ZLTextParagraph getParagraph(int index);
-
-	void removeAllMarks();
-	ZLTextMark getFirstMark();
-	ZLTextMark getLastMark();
-	ZLTextMark getNextMark(ZLTextMark position);
-	ZLTextMark getPreviousMark(ZLTextMark position);
-
-	List<ZLTextMark> getMarks();
-	List<ZLTextUnderLineMark> getUnderLineMarks();
-	// text length for paragraphs from 0 to index
-	int getTextLength(int index);
+public class ZLTextUnderLineMark implements Comparable<ZLTextUnderLineMark> {
+	public final int nParagraphIndex;
+	public final int nOffset;
+	public final int nLength;	
 	
-	int search(final String text, int startIndex, int endIndex, boolean ignoreCase);
-	boolean setUnderline(int paragraphIndexLeft, int elementIndexLeft, int charIndexLeft, int paragraphIndexRight, int elementIndexRight, int charIndexRight);
+	public ZLTextUnderLineMark(int paragraphIndexA, int elementA, int charA) {
+		nParagraphIndex = paragraphIndexA;
+		nOffset = elementA;
+		nLength = charA;		
+	}
+
+	public ZLTextUnderLineMark(final ZLTextUnderLineMark mark) {
+		nParagraphIndex = mark.nParagraphIndex;
+		nOffset = mark.nOffset;
+		nLength = mark.nLength;		
+	}
+
+	public int compareTo(ZLTextUnderLineMark mark) {
+		int diff = nParagraphIndex - mark.nParagraphIndex;
+		if(0 == diff) {
+			diff = nOffset - mark.nOffset;
+		}		
+		return diff;
+	}
+
+	public String toString() {
+		return (nParagraphIndex + " " + nOffset + " " + nLength);
+	}
 }

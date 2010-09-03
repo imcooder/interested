@@ -20,9 +20,15 @@
 package org.geometerplus.zlibrary.text.model;
 
 import java.util.*;
+
 import org.geometerplus.zlibrary.core.util.*;
 
 import org.geometerplus.zlibrary.core.image.ZLImageMap;
+import org.geometerplus.zlibrary.text.view.ZLTextElement;
+//import org.geometerplus.zlibrary.text.view.ZLTextElementArea;
+import org.geometerplus.zlibrary.text.view.ZLTextFixedHSpaceElement;
+import org.geometerplus.zlibrary.text.view.ZLTextWord;
+import org.vimgadgets.linebreak.LineBreaker;
 
 public class ZLTextPlainModel implements ZLTextModel {
 	protected final String myId;
@@ -38,6 +44,7 @@ public class ZLTextPlainModel implements ZLTextModel {
 
 	protected final CharStorage myStorage;
 	private ArrayList<ZLTextMark> myMarks;
+	private ArrayList<ZLTextUnderLineMark> myUnderLineMarks;
 
 	protected final ZLImageMap myImageMap;
 
@@ -51,8 +58,8 @@ public class ZLTextPlainModel implements ZLTextModel {
 
 		private char[] myTextData;
 		private int myTextOffset;
-		private int myTextLength;
-
+		private int myTextLength;		
+		
 		private byte myControlKind;
 		private boolean myControlIsStart;
 		private byte myHyperlinkType;
@@ -88,8 +95,7 @@ public class ZLTextPlainModel implements ZLTextModel {
 		}
 		public int getTextLength() {
 			return myTextLength;
-		}
-
+		}		
 		public byte getControlKind() {
 			return myControlKind;
 		}
@@ -202,6 +208,7 @@ public class ZLTextPlainModel implements ZLTextModel {
 		myParagraphKinds = new byte[arraySize];
 		myStorage = new CachedCharStorage(dataBlockSize, directoryName, extension);
 		myImageMap = imageMap;
+		myUnderLineMarks = new ArrayList<ZLTextUnderLineMark>();
 	}
 
 	public final String getId() {
@@ -219,7 +226,7 @@ public class ZLTextPlainModel implements ZLTextModel {
 	public final ZLTextMark getLastMark() {
 		return ((myMarks == null) || myMarks.isEmpty()) ? null : myMarks.get(myMarks.size() - 1);
 	}
-
+	
 	public final ZLTextMark getNextMark(ZLTextMark position) {
 		if ((position == null) || (myMarks == null)) {
 			return null;
@@ -251,7 +258,9 @@ public class ZLTextPlainModel implements ZLTextModel {
 		}
 		return mark;
 	}
-
+	public List<ZLTextUnderLineMark> getUnderLineMarks() {
+		return (myUnderLineMarks != null) ? myUnderLineMarks : Collections.<ZLTextUnderLineMark>emptyList();
+	}
 	public final int search(final String text, int startIndex, int endIndex, boolean ignoreCase) {
 		int count = 0;
 		ZLSearchPattern pattern = new ZLSearchPattern(text, ignoreCase);
@@ -274,6 +283,7 @@ public class ZLTextPlainModel implements ZLTextModel {
 					for (int pos = ZLSearchUtil.find(textData, textOffset, textLength, pattern); pos != -1; 
 						pos = ZLSearchUtil.find(textData, textOffset, textLength, pattern, pos + 1)) {
 						myMarks.add(new ZLTextMark(index, offset + pos, pattern.getLength()));
+						//myUnderLineMarks.add(new ZLTextUnderLineMark(index, offset + pos, pattern.getLength()));
 						++count;
 					}
 					offset += textLength;						
@@ -304,5 +314,26 @@ public class ZLTextPlainModel implements ZLTextModel {
 
 	public final int getTextLength(int index) {
 		return myTextSizes[Math.max(Math.min(index, myParagraphsNumber - 1), 0)];
+	}
+	public final boolean setUnderline(int paragraphIndexLeft, int elementIndexLeft, int charIndexLeft, int paragraphIndexRight, int elementIndexRight, int charIndexRight) {
+		int count = 0;		
+		for (EntryIteratorImpl it = new EntryIteratorImpl(paragraphIndexLeft); paragraphIndexLeft <= paragraphIndexRight; it.reset(++paragraphIndexLeft)) {
+			int offset = 0;
+			while (it.hasNext()) {
+				it.next();
+				if (it.getType() == ZLTextParagraph.Entry.TEXT) {
+					char[] textData = it.getTextData();
+					int textOffset = it.getTextOffset();
+					int textLength = it.getTextLength();
+					if(textLength > 0)
+					{
+						myUnderLineMarks.add(new ZLTextUnderLineMark(paragraphIndexLeft, textOffset, textLength));
+						++ count;
+					}					
+					offset += textLength;						
+				}				
+			} 
+		}		
+		return true;
 	}
 }

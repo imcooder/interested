@@ -204,6 +204,7 @@ public abstract class ZLApplication {
 	static public interface ButtonPanel {
 		void updateStates();
 		void hide();
+		void init();
 	}
 	private final HashSet<ButtonPanel> myPanels = new HashSet<ButtonPanel>();
 	public final void registerButtonPanel(ButtonPanel panel) {
@@ -352,5 +353,12 @@ public abstract class ZLApplication {
 			}
 			return false;
 		}
+	}
+	public void onSelectionBegin() {
+		return;
+	}
+	public void onSelectionEnd() {
+		org.geometerplus.android.fbreader.FBReader.Instance.showSelectionPanel();
+		return;
 	}
 }

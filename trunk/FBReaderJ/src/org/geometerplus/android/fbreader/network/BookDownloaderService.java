@@ -42,7 +42,6 @@ import org.geometerplus.zlibrary.core.network.*;
 
 import org.geometerplus.fbreader.network.BookReference;
 
-
 public class BookDownloaderService extends Service {
 
 	public static final String BOOK_FORMAT_KEY = "org.geometerplus.android.fbreader.network.BookFormat";
@@ -60,8 +59,8 @@ public class BookDownloaderService extends Service {
 		int ALL = 0x0003;
 	}
 
-
-	private Set<String> myDownloadingURLs = Collections.synchronizedSet(new HashSet<String>());
+	private Set<String> myDownloadingURLs = Collections
+			.synchronizedSet(new HashSet<String>());
 	private Set<Integer> myOngoingNotifications = new HashSet<Integer>();
 
 	private volatile int myServiceCounter;
@@ -92,7 +91,7 @@ public class BookDownloaderService extends Service {
 	@Override
 	public void onDestroy() {
 		final NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		for (int notificationId: myOngoingNotifications) {
+		for (int notificationId : myOngoingNotifications) {
 			notificationManager.cancel(notificationId);
 		}
 		myOngoingNotifications.clear();
@@ -114,8 +113,10 @@ public class BookDownloaderService extends Service {
 		final int notifications = intent.getIntExtra(SHOW_NOTIFICATIONS_KEY, 0);
 
 		final String url = uri.toString();
-		final int bookFormat = intent.getIntExtra(BOOK_FORMAT_KEY, BookReference.Format.NONE);
-		final int referenceType = intent.getIntExtra(REFERENCE_TYPE_KEY, BookReference.Type.UNKNOWN);
+		final int bookFormat = intent.getIntExtra(BOOK_FORMAT_KEY,
+				BookReference.Format.NONE);
+		final int referenceType = intent.getIntExtra(REFERENCE_TYPE_KEY,
+				BookReference.Type.UNKNOWN);
 		String cleanURL = intent.getStringExtra(CLEAN_URL_KEY);
 		if (cleanURL == null) {
 			cleanURL = url;
@@ -124,16 +125,16 @@ public class BookDownloaderService extends Service {
 		if (myDownloadingURLs.contains(url)) {
 			if ((notifications & Notifications.ALREADY_DOWNLOADING) != 0) {
 				Toast.makeText(
-					getApplicationContext(),
-					getResource().getResource("alreadyDownloading").getValue(),
-					Toast.LENGTH_SHORT
-				).show();
+						getApplicationContext(),
+						getResource().getResource("alreadyDownloading")
+								.getValue(), Toast.LENGTH_SHORT).show();
 			}
 			doStop();
 			return;
 		}
 
-		String fileName = BookReference.makeBookFileName(cleanURL, bookFormat, referenceType);
+		String fileName = BookReference.makeBookFileName(cleanURL, bookFormat,
+				referenceType);
 		if (fileName == null) {
 			doStop();
 			return;
@@ -164,13 +165,9 @@ public class BookDownloaderService extends Service {
 			}
 			// TODO: question box: redownload?
 			/*
-			ZLDialogManager.Instance().showQuestionBox(
-				"redownloadBox", "Redownload?",
-				"no", null,
-				"yes", null,
-				null, null
-			);
-			*/
+			 * ZLDialogManager.Instance().showQuestionBox( "redownloadBox",
+			 * "Redownload?", "no", null, "yes", null, null, null );
+			 */
 			doStop();
 			startActivity(getFBReaderIntent(fileFile));
 			return;
@@ -180,51 +177,57 @@ public class BookDownloaderService extends Service {
 			title = fileFile.getName();
 		}
 		if ((notifications & Notifications.DOWNLOADING_STARTED) != 0) {
-			Toast.makeText(
-				getApplicationContext(),
-				getResource().getResource("downloadingStarted").getValue(),
-				Toast.LENGTH_SHORT
-			).show();
+			Toast.makeText(getApplicationContext(),
+					getResource().getResource("downloadingStarted").getValue(),
+					Toast.LENGTH_SHORT).show();
 		}
-		final String sslCertificate = intent.getStringExtra(SSL_CERTIFICATE_KEY);
+		final String sslCertificate = intent
+				.getStringExtra(SSL_CERTIFICATE_KEY);
 		startFileDownload(url, sslCertificate, fileFile, title);
 	}
 
 	private Intent getFBReaderIntent(final File file) {
-		final Intent intent = new Intent(getApplicationContext(), org.geometerplus.android.fbreader.FBReader.class);
+		final Intent intent = new Intent(getApplicationContext(),
+				org.geometerplus.android.fbreader.FBReader.class);
 		if (file != null) {
 			intent.setAction(Intent.ACTION_VIEW).setData(Uri.fromFile(file));
 		}
-		return intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		return intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+				| Intent.FLAG_ACTIVITY_NEW_TASK);
 	}
 
-	private Notification createDownloadFinishNotification(File file, String title, boolean success) {
+	private Notification createDownloadFinishNotification(File file,
+			String title, boolean success) {
 		final ZLResource resource = getResource();
-		final String tickerText = success ?
-			resource.getResource("tickerSuccess").getValue() :
-			resource.getResource("tickerError").getValue();
-		final String contentText = success ?
-			resource.getResource("contentSuccess").getValue() :
-			resource.getResource("contentError").getValue();
+		final String tickerText = success ? resource.getResource(
+				"tickerSuccess").getValue() : resource.getResource(
+				"tickerError").getValue();
+		final String contentText = success ? resource.getResource(
+				"contentSuccess").getValue() : resource.getResource(
+				"contentError").getValue();
 		final Notification notification = new Notification(
-			android.R.drawable.stat_sys_download_done,
-			tickerText,
-			System.currentTimeMillis()
-		);
+				android.R.drawable.stat_sys_download_done, tickerText,
+				System.currentTimeMillis());
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		final Intent intent = success ? getFBReaderIntent(file) : new Intent();
-		final PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
-		notification.setLatestEventInfo(getApplicationContext(), title, contentText, contentIntent);
+		final PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+				intent, 0);
+		notification.setLatestEventInfo(getApplicationContext(), title,
+				contentText, contentIntent);
 		return notification;
 	}
 
 	private Notification createDownloadProgressNotification(String title) {
-		final RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.download_notification);
+		final RemoteViews contentView = new RemoteViews(getPackageName(),
+				R.layout.download_notification);
 		contentView.setTextViewText(R.id.download_notification_title, title);
-		contentView.setTextViewText(R.id.download_notification_progress_text, "");
-		contentView.setProgressBar(R.id.download_notification_progress_bar, 100, 0, true);
+		contentView.setTextViewText(R.id.download_notification_progress_text,
+				"");
+		contentView.setProgressBar(R.id.download_notification_progress_bar,
+				100, 0, true);
 
-		final PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(), 0);
+		final PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+				new Intent(), 0);
 
 		final Notification notification = new Notification();
 		notification.icon = android.R.drawable.stat_sys_download;
@@ -236,17 +239,18 @@ public class BookDownloaderService extends Service {
 	}
 
 	private void startCallbackActivity() {
-		startActivity(
-			new Intent(getApplicationContext(), BookDownloaderCallback.class)
-				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-		);
+		startActivity(new Intent(getApplicationContext(),
+				BookDownloaderCallback.class)
+				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 	}
 
-	private void startFileDownload(final String urlString, final String sslCertificate, final File file, final String title) {
+	private void startFileDownload(final String urlString,
+			final String sslCertificate, final File file, final String title) {
 		myDownloadingURLs.add(urlString);
 		startCallbackActivity();
 
-		final int notificationId = NetworkNotifications.Instance().getBookDownloadingId();
+		final int notificationId = NetworkNotifications.Instance()
+				.getBookDownloadingId();
 		final Notification progressNotification = createDownloadProgressNotification(title);
 
 		final NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -256,17 +260,25 @@ public class BookDownloaderService extends Service {
 		final Handler progressHandler = new Handler() {
 			public void handleMessage(Message message) {
 				final int progress = message.what;
-				final RemoteViews contentView = (RemoteViews)progressNotification.contentView;
+				final RemoteViews contentView = (RemoteViews) progressNotification.contentView;
 
 				if (progress < 0) {
-					contentView.setTextViewText(R.id.download_notification_progress_text, "");
-					contentView.setProgressBar(R.id.download_notification_progress_bar, 100, 0, true);
+					contentView.setTextViewText(
+							R.id.download_notification_progress_text, "");
+					contentView.setProgressBar(
+							R.id.download_notification_progress_bar, 100, 0,
+							true);
 				} else {
-					contentView.setTextViewText(R.id.download_notification_progress_text, "" + progress + "%");
-					contentView.setProgressBar(R.id.download_notification_progress_bar, 100, progress, false);
+					contentView.setTextViewText(
+							R.id.download_notification_progress_text, ""
+									+ progress + "%");
+					contentView.setProgressBar(
+							R.id.download_notification_progress_bar, 100,
+							progress, false);
 				}
 				final NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-				notificationManager.notify(notificationId, progressNotification);
+				notificationManager
+						.notify(notificationId, progressNotification);
 			}
 		};
 
@@ -277,22 +289,27 @@ public class BookDownloaderService extends Service {
 				notificationManager.cancel(notificationId);
 				myOngoingNotifications.remove(Integer.valueOf(notificationId));
 				notificationManager.notify(
-					notificationId,
-					createDownloadFinishNotification(file, title, message.what != 0)
-				);
+						notificationId,
+						createDownloadFinishNotification(file, title,
+								message.what != 0));
 				startCallbackActivity();
 				doStop();
 			}
 		};
 
-		final ZLNetworkRequest request = new ZLNetworkRequest(urlString, sslCertificate) {
+		final ZLNetworkRequest request = new ZLNetworkRequest(urlString,
+				sslCertificate) {
 
-			public String handleStream(URLConnection connection, InputStream inputStream) throws IOException {
-				final int updateIntervalMillis = 1000; // FIXME: remove hardcoded time constant
+			public String handleStream(URLConnection connection,
+					InputStream inputStream) throws IOException {
+				final int updateIntervalMillis = 1000; // FIXME: remove
+														// hardcoded time
+														// constant
 
 				final int fileLength = connection.getContentLength();
 				int downloadedPart = 0;
-				long progressTime = System.currentTimeMillis() + updateIntervalMillis;
+				long progressTime = System.currentTimeMillis()
+						+ updateIntervalMillis;
 				if (fileLength <= 0) {
 					progressHandler.sendEmptyMessage(-1);
 				}
@@ -300,7 +317,8 @@ public class BookDownloaderService extends Service {
 				try {
 					outStream = new FileOutputStream(file);
 				} catch (FileNotFoundException ex) {
-					return ZLNetworkErrors.errorMessage(ZLNetworkErrors.ERROR_CREATE_FILE, file.getPath());
+					return ZLNetworkErrors.errorMessage(
+							ZLNetworkErrors.ERROR_CREATE_FILE, file.getPath());
 				}
 				try {
 					final byte[] buffer = new byte[8192];
@@ -313,18 +331,21 @@ public class BookDownloaderService extends Service {
 						if (fileLength > 0) {
 							final long currentTime = System.currentTimeMillis();
 							if (currentTime > progressTime) {
-								progressTime = currentTime + updateIntervalMillis;
-								progressHandler.sendEmptyMessage(downloadedPart * 100 / fileLength);
+								progressTime = currentTime
+										+ updateIntervalMillis;
+								progressHandler.sendEmptyMessage(downloadedPart
+										* 100 / fileLength);
 							}
-							/*if (downloadedPart * 100 / fileLength > 95) {
-								throw new IOException("debug exception");
-							}*/
+							/*
+							 * if (downloadedPart * 100 / fileLength > 95) {
+							 * throw new IOException("debug exception"); }
+							 */
 						}
 						outStream.write(buffer, 0, size);
-						/*try {
-							Thread.currentThread().sleep(200);
-						} catch (InterruptedException ex) {
-						}*/
+						/*
+						 * try { Thread.currentThread().sleep(200); } catch
+						 * (InterruptedException ex) { }
+						 */
 					}
 				} finally {
 					outStream.close();

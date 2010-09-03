@@ -67,6 +67,8 @@ public final class HtmlTag {
 
 	public static final byte TAG_NUMBER = 37;
 	
+	public static final byte META = 38;
+	
 	private static final HashMap ourTagByName = new HashMap(256, 0.2f);
 	private static final Byte ourUnknownTag;
 
@@ -75,6 +77,7 @@ public final class HtmlTag {
 		ourUnknownTag = (Byte)ourTagByName.get("unknown");
 		ourTagByName.put("html", HTML);
 		ourTagByName.put("head", HEAD);
+		ourTagByName.put("meta", META);
 		ourTagByName.put("body", BODY);
 		ourTagByName.put("title", TITLE);
 		ourTagByName.put("p", P);
