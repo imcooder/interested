@@ -28,7 +28,8 @@ public class ZLNetworkUtil {
 			return relativePath;
 		}
 
-		if (relativePath.contains("://")) {
+		if (relativePath.contains("://")
+				|| relativePath.matches("(?s)^[a-zA-Z][a-zA-Z0-9+-.]*:.*$")) { // matches Non-relative URI; see rfc3986
 			return relativePath;
 		}
 
@@ -42,6 +43,10 @@ public class ZLNetworkUtil {
 			}
 		} else {
 			int index = baseUrl.lastIndexOf('/'); // FIXME: if (baseUrl.charAt(baseUrl.length() - 1) == '/')
+			while (index > 0 && relativePath.startsWith("../")) {
+				index = baseUrl.lastIndexOf('/', index - 1);
+				relativePath = relativePath.substring(3);
+			}
 			return baseUrl.substring(0, index + 1) + relativePath;
 		}
 	}
@@ -141,5 +146,16 @@ public class ZLNetworkUtil {
 
 	public static String getUserAgent() {
 		return "FBReader/" + ZLibrary.Instance().getVersionName() + "(java)";
+	}
+
+	public static String filterMimeType(String mime) {
+		if (mime == null) {
+			return null;
+		}
+		final int index = mime.indexOf(';');
+		if (index != -1) {
+			return mime.substring(0, index).intern();
+		}
+		return mime.intern();
 	}
 }
