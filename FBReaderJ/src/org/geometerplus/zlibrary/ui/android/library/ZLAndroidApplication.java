@@ -21,13 +21,15 @@ package org.geometerplus.zlibrary.ui.android.library;
 
 import java.util.HashMap;
 
+import android.app.Application;
+import android.os.Build;
+
 import org.geometerplus.zlibrary.core.options.ZLBooleanOption;
 import org.geometerplus.zlibrary.core.sqliteconfig.ZLSQLiteConfig;
+
 import org.geometerplus.zlibrary.ui.android.application.ZLAndroidApplicationWindow;
 import org.geometerplus.zlibrary.ui.android.dialogs.ZLAndroidDialogManager;
 import org.geometerplus.zlibrary.ui.android.image.ZLAndroidImageManager;
-
-import android.app.Application;
 
 public class ZLAndroidApplication extends Application {
 	private static ZLAndroidApplication ourApplication;
@@ -44,16 +46,25 @@ public class ZLAndroidApplication extends Application {
 		ourApplication = this;
 	}
 
+	public boolean isAlwaysShowStatusBar() {
+		return Build.DISPLAY != null && Build.DISPLAY.contains("simenxie");
+	}
+
 	ZLAndroidApplicationWindow myMainWindow;
 
+	@Override
 	public void onCreate() {
 		super.onCreate();
+		if (isAlwaysShowStatusBar()) {
+			ShowStatusBarOption.setValue(true);
+		}
 		new ZLSQLiteConfig(this);
 		new ZLAndroidImageManager();
 		new ZLAndroidDialogManager();
-		new ZLAndroidLibrary(this);		
+		new ZLAndroidLibrary(this);
 	}
 
+	@Override
 	public void onTerminate() {
 		super.onTerminate();
 	}
@@ -70,5 +81,5 @@ public class ZLAndroidApplication extends Application {
 		return myData.get(key);
 	}
 
-	private final HashMap myData = new HashMap();
+	private final HashMap<Object,Object> myData = new HashMap<Object,Object>();
 }

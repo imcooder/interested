@@ -21,21 +21,19 @@ package org.geometerplus.zlibrary.ui.android.library;
 
 import java.io.File;
 
-import org.geometerplus.zlibrary.core.application.ZLApplication;
-import org.geometerplus.zlibrary.core.filesystem.ZLPhysicalFile;
-import org.geometerplus.zlibrary.ui.android.R;
-import org.geometerplus.zlibrary.ui.android.application.ZLAndroidApplicationWindow;
-
+import android.net.Uri;
 import android.app.Activity;
+import android.os.Bundle;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.View;
-import android.view.Window;
+import android.view.*;
+
+import org.geometerplus.zlibrary.core.application.ZLApplication;
+import org.geometerplus.zlibrary.core.filesystem.ZLPhysicalFile;
+
+import org.geometerplus.zlibrary.ui.android.R;
+import org.geometerplus.zlibrary.ui.android.application.ZLAndroidApplicationWindow;
 
 public abstract class ZLAndroidActivity extends Activity {
 	protected abstract ZLApplication createApplication(String fileName);
@@ -44,7 +42,7 @@ public abstract class ZLAndroidActivity extends Activity {
 	private static final String ORIENTATION_CHANGE_COUNTER_KEY = "org.geometerplus.zlibrary.ui.android.library.androidActiviy.ChangeCounter";
 
 	@Override
-	protected void onSaveInstanceState(Bundle state) {		
+	protected void onSaveInstanceState(Bundle state) {
 		super.onSaveInstanceState(state);
 		state.putInt(REQUESTED_ORIENTATION_KEY, myOrientation);
 		state.putInt(ORIENTATION_CHANGE_COUNTER_KEY, myChangeCounter);
@@ -211,4 +209,7 @@ public abstract class ZLAndroidActivity extends Activity {
 			myChangeCounter = 0;
 		}
 	}
+
+	abstract protected void navigate();
+	abstract protected boolean canNavigate();
 }
