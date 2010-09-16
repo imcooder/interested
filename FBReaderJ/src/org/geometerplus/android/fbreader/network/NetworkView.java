@@ -57,18 +57,41 @@ class NetworkView {
 		return myInitialized;
 	}
 
-	public void initialize() {
-		NetworkLibrary.Instance().synchronize();
+	public String initialize() {
+		new SQLiteNetworkDatabase();
+
+		final NetworkLibrary library = NetworkLibrary.Instance();
+		final String error = library.initialize();
+		if (error != null) {
+			return error;
+		}
+
+		library.synchronize();
 
 		myActions.add(new NetworkBookActions());
 		myActions.add(new NetworkCatalogActions());
 		myActions.add(new SearchItemActions());
 		myActions.add(new RefillAccountActions());
+		myActions.add(new AddCustomCatalogItemActions());
 		myActions.trimToSize();
 
 		myInitialized = true;
+		return null;
 	}
 
+	// This method must be called from background thread
+	public String runBackgroundUpdate(boolean clearCache) {
+		return NetworkLibrary.Instance().runBackgroundUpdate(clearCache);
+	}
+
+	// This method MUST be called from main thread
+	// This method has effect only when runBackgroundUpdate method has returned null
+	public void finishBackgroundUpdate() {
+		NetworkLibrary library = NetworkLibrary.Instance();
+		library.finishBackgroundUpdate();
+		library.synchronize();
+		fireModelChangedInternal();
+	}
 
 	/*
 	 * NetworkLibraryItem's actions
@@ -150,9 +173,12 @@ class NetworkView {
 		}
 	}
 
-	ItemsLoadingRunnable removeItemsLoadingRunnable(String key) {
+	void removeItemsLoadingRunnable(String key) {
 		synchronized (myItemsLoadingRunnables) {
-			return myItemsLoadingRunnables.remove(key);
+			ItemsLoadingRunnable runnable = myItemsLoadingRunnables.remove(key);
+			if (runnable != null) {
+				runnable.runFinishHandler();
+			}
 		}
 	}
 
@@ -161,8 +187,8 @@ class NetworkView {
 	}
 
 	public void tryResumeLoading(NetworkBaseActivity activity, NetworkTree tree, String key, Runnable expandRunnable) {
-		final ItemsLoadingRunnable runnable = NetworkView.Instance().getItemsLoadingRunnable(key);
-		if (runnable != null && runnable.tryResume()) {
+		final ItemsLoadingRunnable runnable = getItemsLoadingRunnable(key);
+		if (runnable != null && runnable.tryResumeLoading()) {
 			openTree(activity, tree, key);
 			return;
 		}
@@ -260,19 +286,43 @@ class NetworkView {
 		void onModelChanged();
 	}
 
+	private Handler myEventHandler;
 	private LinkedList<EventListener> myEventListeners = new LinkedList<EventListener>();
 
+	/*
+	 * This method must be called only from main thread
+	 */
 	public final void addEventListener(EventListener listener) {
-		if (listener != null) {
-			myEventListeners.add(listener);
+		synchronized (myEventListeners) {
+			if (myEventHandler == null) {
+				myEventHandler = new Handler() {
+					@Override
+					public void handleMessage(Message msg) {
+						fireModelChangedInternal();
+					}
+				};
+			}
+			if (listener != null) {
+				myEventListeners.add(listener);
+			}
 		}
 	}
 
 	public final void removeEventListener(EventListener listener) {
-		myEventListeners.remove(listener);
+		synchronized (myEventListeners) {
+			myEventListeners.remove(listener);
+		}
 	}
 
 	final void fireModelChanged() {
+		synchronized (myEventListeners) {
+			if (myEventHandler != null) {
+				myEventHandler.sendEmptyMessage(0);
+			}
+		}
+	}
+
+	private final void fireModelChangedInternal() {
 		for (EventListener listener: myEventListeners) {
 			listener.onModelChanged();
 		}
@@ -348,8 +398,13 @@ class NetworkView {
 	 */
 
 	private final SearchItemTree mySearchItem = new SearchItemTree();
+	private final AddCustomCatalogItemTree myAddCustomCatalogItem = new AddCustomCatalogItemTree();
 
 	public SearchItemTree getSearchItemTree() {
 		return mySearchItem;
+	}
+
+	public AddCustomCatalogItemTree getAddCustomCatalogItemTree() {
+		return myAddCustomCatalogItem;
 	}
 }

@@ -34,19 +34,18 @@ import org.geometerplus.zlibrary.ui.android.R;
 
 import org.geometerplus.zlibrary.core.application.ZLApplication;
 
+class ActionButton extends ZoomButton {
+	final String ActionId;
+	final boolean IsCloseButton;
 
+	ActionButton(Context context, String actionId, boolean isCloseButton) {
+		super(context);
+		ActionId = actionId;
+		IsCloseButton = isCloseButton;
+	}
+}
 
 public class ControlPanel extends LinearLayout implements View.OnClickListener {
-	protected class ActionButton extends ZoomButton {
-		final String ActionId;
-		final boolean IsCloseButton;
-
-		ActionButton(Context context, String actionId, boolean isCloseButton) {
-			super(context);
-			ActionId = actionId;
-			IsCloseButton = isCloseButton;
-		}
-	}
 	private final ArrayList<ActionButton> myButtons = new ArrayList<ActionButton>();
 	private final LinearLayout myPlateLayout;
 
@@ -138,5 +137,12 @@ public class ControlPanel extends LinearLayout implements View.OnClickListener {
 			}
 		}
 		return false;
+	}
+
+	public void setExtension(View view) {
+		if (view != null) {
+			myPlateLayout.removeAllViews();
+			myPlateLayout.addView(view);
+		}
 	}
 }
