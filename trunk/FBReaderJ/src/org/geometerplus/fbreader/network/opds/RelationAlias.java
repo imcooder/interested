@@ -31,7 +31,10 @@ class RelationAlias implements Comparable<RelationAlias> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o == null || !(o instanceof RelationAlias)) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof RelationAlias)) {
 			return false;
 		}
 		RelationAlias r = (RelationAlias) o;
@@ -62,6 +65,11 @@ class RelationAlias implements Comparable<RelationAlias> {
 			return Type.compareTo(r.Type);
 		}
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "Alias(" + Alias + "; " + Type + ")";
 	}
 }
 

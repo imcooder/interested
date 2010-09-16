@@ -31,15 +31,15 @@ public class LitResBookshelfItem extends NetworkCatalogItem {
 	private boolean myForceReload;
 
 
-	public LitResBookshelfItem(NetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType) {
+	public LitResBookshelfItem(INetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType) {
 		super(link, title, summary, cover, urlByType);
 	}
 
-	public LitResBookshelfItem(NetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType, int visibility) {
+	public LitResBookshelfItem(INetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType, int visibility) {
 		super(link, title, summary, cover, urlByType, visibility);
 	}
 
-	public LitResBookshelfItem(NetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType, int visibility, int catalogType) {
+	public LitResBookshelfItem(INetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType, int visibility, int catalogType) {
 		super(link, title, summary, cover, urlByType, visibility, catalogType);
 	}
 
@@ -64,8 +64,9 @@ public class LitResBookshelfItem extends NetworkCatalogItem {
 		mgr.collectPurchasedBooks(children);
 		Collections.sort(children, new NetworkBookItemComparator());
 		for (NetworkLibraryItem item: children) {
-			listener.onNewItem(item);
+			listener.onNewItem(Link, item);
 		}
+		listener.commitItems(Link);
 		return error;
 	}
 }

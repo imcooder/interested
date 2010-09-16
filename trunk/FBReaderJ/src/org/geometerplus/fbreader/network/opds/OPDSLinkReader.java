@@ -19,296 +19,111 @@
 
 package org.geometerplus.fbreader.network.opds;
 
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.geometerplus.zlibrary.core.xml.*;
-import org.geometerplus.zlibrary.core.filesystem.ZLFile;
-import org.geometerplus.zlibrary.core.filesystem.ZLResourceFile;
+import org.geometerplus.zlibrary.core.network.ZLNetworkManager;
 
+import org.geometerplus.fbreader.Paths;
 import org.geometerplus.fbreader.network.*;
-import org.geometerplus.fbreader.network.authentication.NetworkAuthenticationManager;
-import org.geometerplus.fbreader.network.authentication.litres.LitResAuthenticationManager;
+import org.geometerplus.fbreader.network.atom.ATOMUpdated;
 
 
-public class OPDSLinkReader extends ZLXMLReaderAdapter {
+public class OPDSLinkReader {
 
-	private String mySiteName;
-	private String myTitle;
-	private String mySummary;
-	private String myIcon;
+	static final String CATALOGS_URL = "http://data.fbreader.org/catalogs/generic-1.0.xml";
 
-	private final HashMap<String, String> myLinks = new HashMap<String, String>();
-
-	private HashMap<RelationAlias, String> myRelationAliases = new HashMap<RelationAlias, String>();
-
-	private String mySearchType;
-	private final HashMap<String, String> mySearchFields = new HashMap<String, String>();
-
-	private final HashMap<String, Integer> myUrlConditions = new HashMap<String, Integer>();
-	private String myAuthenticationType;
-	private final LinkedList<URLRewritingRule> myUrlRewritingRules = new LinkedList<URLRewritingRule>();
-
-	private String mySSLCertificate;
-
-	private NetworkLink link() {
-		if (mySiteName == null || myTitle == null || myLinks.get(NetworkLink.URL_MAIN) == null) {
+	public static ICustomNetworkLink createCustomLink(int id, String siteName, String title, String summary, String icon, Map<String, String> links) {
+		if (siteName == null || title == null || links.get(INetworkLink.URL_MAIN) == null) {
 			return null;
 		}
-
-		OPDSLink opdsLink = new OPDSLink(
-			mySiteName,
-			myTitle,
-			mySummary,
-			myIcon,
-			myLinks
-		);
-
-		/*if (!mySearchType.empty()) {
-			opdsLink.setupAdvancedSearch(
-				mySearchType,
-				mySearchFields["titleOrSeries"],
-				mySearchFields["author"],
-				mySearchFields["tag"],
-				mySearchFields["annotation"]
-			);
-		}*/
-		opdsLink.setRelationAliases(myRelationAliases);
-		opdsLink.setUrlConditions(myUrlConditions);
-		opdsLink.setUrlRewritingRules(myUrlRewritingRules);
-
-		NetworkAuthenticationManager authManager = null;
-		if (myAuthenticationType == "basic") {
-			//authManager = new BasicAuthenticationManager(opdsLink, mySSLCertificate);
-		} else if (myAuthenticationType == "litres") {
-			authManager = new LitResAuthenticationManager(opdsLink, mySSLCertificate);
-		}
-		opdsLink.setAuthenticationManager(authManager);
-
-		return opdsLink;
+		return new OPDSCustomLink(id, siteName, title, summary, icon, links);
 	}
 
-	public NetworkLink readDocument(ZLFile file) {
-		mySiteName = myTitle = mySummary = myIcon = mySearchType = myAuthenticationType = mySSLCertificate = null;
-		myLinks.clear();
-		mySearchFields.clear();
-		myUrlConditions.clear();
-		myUrlRewritingRules.clear();
-		myRelationAliases.clear();
-
-		String path = file.getPath();
-		if (path.endsWith(".xml")) {
-			path = path.substring(0, path.length() - 4) + ".crt";
-			if (ZLResourceFile.createResourceFile(path).exists()) {
-				mySSLCertificate = path;
-			}
-		}
-
-		myState = READ_NOTHING;
-
-		if (!ZLXMLProcessor.read(this, file)) {
-			return null;
-		}
-
-		return link();
+	public static ICustomNetworkLink createCustomLinkWithoutInfo(String siteName, String url) {
+		final HashMap<String, String> links = new HashMap<String, String>();
+		links.put(INetworkLink.URL_MAIN, url);
+		return new OPDSCustomLink(ICustomNetworkLink.INVALID_ID, siteName, null, null, null, links);
 	}
 
+	public static final int CACHE_LOAD = 0;
+	public static final int CACHE_UPDATE = 1;
+	public static final int CACHE_CLEAR = 2;
 
-	private static final String TAG_SITE = "site";
-	private static final String TAG_LINK = "link";
-	private static final String TAG_TITLE = "title";
-	private static final String TAG_SUMMARY = "summary";
-	private static final String TAG_ICON = "icon";
-	private static final String TAG_RELATION_ALIASES = "relationAliases";
-	private static final String TAG_ALIAS = "alias";
-	private static final String TAG_SEARCH_DESCRIPTION = "advancedSearch";
-	private static final String TAG_FEEDS = "feeds";
-	private static final String TAG_AUTHENTICATION = "authentication";
-	private static final String TAG_URL_REWRITING_RULES = "urlRewritingRules";
-	private static final String TAG_FIELD = "field";
-	private static final String TAG_CONDITION = "condition";
-	private static final String TAG_RULE = "rule";
+	public static String loadOPDSLinks(int cacheMode, final NetworkLibrary.OnNewLinkListener listener) {
+		final File dirFile = new File(Paths.networkCacheDirectory());
+		if (!dirFile.exists() && !dirFile.mkdirs()) {
+			return NetworkErrors.errorMessage("cacheDirectoryError");
+		}
 
-	private static final int READ_NOTHING = 0;
-	private static final int READ_SITENAME = 1;
-	private static final int READ_TITLE = 2;
-	private static final int READ_SUMMARY = 3;
-	private static final int READ_ICON_NAME = 4;
-	private static final int READ_LINK = 5;
-	private static final int READ_SEARCH_DESCRIPTION = 6;
-	private static final int READ_SEARCH_FIELD = 7;
-	private static final int READ_FEEDS = 8;
-	private static final int READ_FEEDS_CONDITION = 9;
-	private static final int READ_URL_REWRITING_RULES = 10;
-	private static final int READ_RELATION_ALIASES = 11;
+		final String fileName = "fbreader_catalogs-"
+			+ CATALOGS_URL.substring(CATALOGS_URL.lastIndexOf(File.separator) + 1);
 
-	private int myState;
-
-	private String myAttrBuffer;
-	private final StringBuffer myBuffer = new StringBuffer();
-
-
-	@Override
-	public boolean startElementHandler(String tag, ZLStringMap attributes) {
-		tag = tag.intern();
-		if (TAG_SITE == tag) {
-			myState = READ_SITENAME;
-		} else if (TAG_TITLE == tag) {
-			myState = READ_TITLE;
-		} else if (TAG_SUMMARY == tag) {
-			myState = READ_SUMMARY;
-		} else if (TAG_ICON == tag) {
-			myState = READ_ICON_NAME;
-		} else if (TAG_LINK == tag) {
-			String linkType = attributes.getValue("rel");
-			if (linkType != null) {
-				myAttrBuffer = linkType;
-				myLinks.remove(myAttrBuffer);
-				myState = READ_LINK;
-			}
-		} else if (TAG_SEARCH_DESCRIPTION == tag) {
-			String searchType = attributes.getValue("style");
-			if (searchType != null) {
-				mySearchType = searchType;
-				myState = READ_SEARCH_DESCRIPTION;
-			}
-		} else if (myState == READ_SEARCH_DESCRIPTION && TAG_FIELD == tag) {
-			String name = attributes.getValue("name");
-			if (name != null) {
-				myAttrBuffer = name;
-				mySearchFields.remove(myAttrBuffer);
-				myState = READ_SEARCH_FIELD;
-			}
-		} else if (TAG_FEEDS == tag) {
-			myState = READ_FEEDS;
-		} else if (myState == READ_FEEDS && TAG_CONDITION == tag) {
-			String show = attributes.getValue("show");
-			if (show != null) {
-				myAttrBuffer = show;
-				myState = READ_FEEDS_CONDITION;
-			}
-		} else if (TAG_AUTHENTICATION == tag) {
-			String authenticationType = attributes.getValue("type");
-			if (authenticationType != null) {
-				myAuthenticationType = authenticationType;
-			}
-		} else if (TAG_URL_REWRITING_RULES == tag) {
-			myState = READ_URL_REWRITING_RULES;
-		} else if (myState == READ_URL_REWRITING_RULES && TAG_RULE == tag) {
-			String type  = attributes.getValue("type");
-			String apply = attributes.getValue("apply");
-			String name  = attributes.getValue("name");
-			String value = attributes.getValue("value");
-
-			int ruleApply = URLRewritingRule.APPLY_ALWAYS;
-			if (apply != null) {
-				apply = apply.intern();
-				if (apply == "external") {
-					ruleApply = URLRewritingRule.APPLY_EXTERNAL;
-				} else if (apply == "internal") {
-					ruleApply = URLRewritingRule.APPLY_INTERNAL;
-				} else if (apply != "always") {
-					type = null;
+		boolean goodCache = false;
+		File oldCache = null;
+		ATOMUpdated cacheUpdatedTime = null;
+		final File catalogsFile = new File(dirFile, fileName);
+		if (catalogsFile.exists()) {
+			switch (cacheMode) {
+			case CACHE_UPDATE:
+				final long diff = System.currentTimeMillis() - catalogsFile.lastModified();
+				final long valid = 7 * 24 * 60 * 60 * 1000; // one week in milliseconds; FIXME: hardcoded const
+				if (diff >= 0 && diff <= valid) {
+					return null;
 				}
-			}
-
-			if (type != null && name != null && value != null) {
-				if (type == "addUrlParameter") {
-					myUrlRewritingRules.add(new URLRewritingRule(URLRewritingRule.ADD_URL_PARAMETER, ruleApply, name, value));
+				/* FALLTHROUGH */
+			case CACHE_CLEAR:
+				try {
+					final OPDSLinkXMLReader reader = new OPDSLinkXMLReader();
+					reader.read(new FileInputStream(catalogsFile));
+					cacheUpdatedTime = reader.getUpdatedTime();
+				} catch (FileNotFoundException e) {
+					throw new RuntimeException("That's impossible!!!", e); 
 				}
-			}
-		} else if (TAG_RELATION_ALIASES == tag) {
-			myState = READ_RELATION_ALIASES;
-		} else if (myState == READ_RELATION_ALIASES && TAG_ALIAS == tag) {
-			String alias = attributes.getValue("alias");
-			String name  = attributes.getValue("name");
-			String type  = attributes.getValue("type");
-			if (alias != null && name != null) {
-				if (alias.length() == 0) {
-					alias = null;
+
+				oldCache = new File(dirFile, "_" + fileName);
+				oldCache.delete();
+				if (!catalogsFile.renameTo(oldCache)) {
+					catalogsFile.delete();
+					oldCache = null;
 				}
-				myRelationAliases.put(new RelationAlias(alias, type), name);
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean endElementHandler(String tag) {
-		tag = tag.intern();
-
-		String bufferContent = myBuffer.toString().trim();
-		myBuffer.delete(0, myBuffer.length());
-
-		if (bufferContent.length() != 0) {
-			switch (myState) {
-				case READ_NOTHING:
-				case READ_SEARCH_DESCRIPTION:
-				case READ_FEEDS:
-				case READ_URL_REWRITING_RULES:
-				case READ_RELATION_ALIASES:
-					break;
-				case READ_SITENAME:
-					mySiteName = bufferContent;
-					break;
-				case READ_TITLE:
-					myTitle = bufferContent;
-					break;
-				case READ_SUMMARY:
-					mySummary = bufferContent;
-					break;
-				case READ_ICON_NAME:
-					myIcon = bufferContent;
-					break;
-				case READ_LINK:
-					myLinks.put(myAttrBuffer, bufferContent);
-					break;
-				case READ_SEARCH_FIELD:
-					mySearchFields.put(myAttrBuffer, bufferContent);
-					break;
-				case READ_FEEDS_CONDITION:
-					myUrlConditions.put(
-						bufferContent,
-						myAttrBuffer.equals("signedIn") ? 
-							OPDSLink.FeedCondition.SIGNED_IN : 
-							OPDSLink.FeedCondition.NEVER
-					);
-					break;
-			}
-		}
-
-		if (myState == READ_SEARCH_FIELD) {
-			myState = READ_SEARCH_DESCRIPTION;
-		} else if (myState == READ_FEEDS_CONDITION) {
-			myState = READ_FEEDS;
-		} else if (myState == READ_URL_REWRITING_RULES && TAG_RULE == tag) {
-			//myState = myState;
-		} else if (myState == READ_RELATION_ALIASES && TAG_ALIAS == tag) {
-			//myState = myState;
-		} else {
-			myState = READ_NOTHING;
-		}
-		return false;
-	}
-
-	@Override
-	public void characterDataHandler(char[] data, int start, int length) {
-		switch (myState) {
-			case READ_NOTHING:
-			case READ_SEARCH_DESCRIPTION:
-			case READ_FEEDS:
-			case READ_URL_REWRITING_RULES:
-			case READ_RELATION_ALIASES:
 				break;
-			case READ_SITENAME:
-			case READ_TITLE:
-			case READ_SUMMARY:
-			case READ_ICON_NAME:
-			case READ_LINK:
-			case READ_SEARCH_FIELD:
-			case READ_FEEDS_CONDITION:
-				myBuffer.append(data, start, length);
+			case CACHE_LOAD:
+				goodCache = true;
 				break;
+			default:
+				throw new IllegalArgumentException("Invalid cacheMode value (" + cacheMode
+						+ ") in OPDSLinkReader.loadOPDSLinks method");
+			}
 		}
-	}
 
+		String error = null;
+		if (!goodCache) {
+			error = ZLNetworkManager.Instance().downloadToFile(CATALOGS_URL, catalogsFile);
+		}
+
+		if (error != null) {
+			if (oldCache == null) {
+				return error;
+			}
+			catalogsFile.delete();
+			if (!oldCache.renameTo(catalogsFile)) {
+				oldCache.delete();
+				return error;
+			}
+		} else if (oldCache != null) {
+			oldCache.delete();
+			oldCache = null;
+		}
+
+		try {
+			new OPDSLinkXMLReader(listener, cacheUpdatedTime).read(new FileInputStream(catalogsFile));
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException("That's impossible!!!", e); 
+		}
+		return null;
+	}
 }

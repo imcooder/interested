@@ -29,15 +29,15 @@ import org.geometerplus.fbreader.network.opds.HtmlToString;
 
 class LitResXMLReader extends LitResAuthenticationXMLReader {
 
-	public final NetworkLink Link;
+	public final INetworkLink Link;
 	public final List<NetworkLibraryItem> Books;
 
 	private int myIndex;
 
 	private String myBookId;
 	private String myTitle;
-	private String myLanguage;
-	private String myDate;
+	//private String myLanguage;
+	//private String myDate;
 	private String mySeriesTitle;
 	private int myIndexInSeries;
 
@@ -54,8 +54,8 @@ class LitResXMLReader extends LitResAuthenticationXMLReader {
 	private HashMap<Integer, String> myURLByType = new HashMap<Integer, String>(); // TODO: remove
 	private LinkedList<BookReference> myReferences = new LinkedList<BookReference>();
 
-	public LitResXMLReader(NetworkLink link, List<NetworkLibraryItem> books) {
-		super(link.SiteName);
+	public LitResXMLReader(INetworkLink link, List<NetworkLibraryItem> books) {
+		super(link.getSiteName());
 		Link = link;
 		Books = books;
 	}
@@ -233,7 +233,7 @@ class LitResXMLReader extends LitResAuthenticationXMLReader {
 					myReferences
 				));
 
-				myBookId = myTitle = myLanguage = myDate = mySeriesTitle = mySummary = myCover = null;
+				myBookId = myTitle = /*myLanguage = myDate = */mySeriesTitle = mySummary = myCover = null;
 				myIndexInSeries = 0;
 				myAuthors.clear();
 				myTags.clear();
@@ -329,13 +329,13 @@ class LitResXMLReader extends LitResAuthenticationXMLReader {
 			break;
 		case DATE:
 			if (TAG_DATE == tag) {
-				myDate = bufferContent;
+				//myDate = bufferContent;
 				myState = TITLE_INFO;
 			}
 			break;
 		case LANGUAGE:
 			if (TAG_LANGUAGE == tag) {
-				myLanguage = bufferContent;
+				//myLanguage = bufferContent;
 				myState = TITLE_INFO;
 			}
 			break;
