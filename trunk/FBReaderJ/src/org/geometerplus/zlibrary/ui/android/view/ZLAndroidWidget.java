@@ -19,8 +19,6 @@
 
 package org.geometerplus.zlibrary.ui.android.view;
 
-import java.util.Map;
-
 import android.content.Context;
 import android.graphics.*;
 import android.view.*;
@@ -104,7 +102,7 @@ public class ZLAndroidWidget extends View {
 	private void onDrawInScrolling(Canvas canvas) {
 		final int w = getWidth();
 		final int h = getHeight();
-		final ZLAndroidPaintContext context = ZLAndroidPaintContext.Instance();
+		//final ZLAndroidPaintContext context = ZLAndroidPaintContext.Instance();
 
 		boolean stopScrolling = false;
 		if (myScrollingInProgress) {
@@ -287,6 +285,28 @@ public class ZLAndroidWidget extends View {
 		return true;
 	}
 
+
+	private class LongClickRunnable implements Runnable {
+		public void run() {
+			if (performLongClick()) {
+				myLongClickPerformed = true;
+			}
+		}
+	}
+
+	private LongClickRunnable myPendingLongClickRunnable;
+	private boolean myLongClickPerformed;
+
+	private void postLongClickRunnable() {
+        myLongClickPerformed = false;
+        if (myPendingLongClickRunnable == null) {
+            myPendingLongClickRunnable = new LongClickRunnable();
+        }
+        postDelayed(myPendingLongClickRunnable, 2 * ViewConfiguration.getLongPressTimeout());
+    }
+
+	private boolean myPendingPress;
+	private int myPressedX, myPressedY;
 	private boolean myScreenIsTouched;
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -296,15 +316,41 @@ public class ZLAndroidWidget extends View {
 		final ZLView view = ZLApplication.Instance().getCurrentView();
 		switch (event.getAction()) {
 			case MotionEvent.ACTION_UP:
-				view.onStylusRelease(x, y);
+				if (!myLongClickPerformed) {
+					if (myPendingLongClickRunnable != null) {
+						removeCallbacks(myPendingLongClickRunnable);
+					}
+					if (myPendingPress) {
+						view.onStylusPress(myPressedX, myPressedY);
+					}
+					view.onStylusRelease(x, y);
+				}
+				myPendingPress = false;
 				myScreenIsTouched = false;
 				break;
 			case MotionEvent.ACTION_DOWN:
-				view.onStylusPress(x, y);
+				postLongClickRunnable();
 				myScreenIsTouched = true;
+				myPendingPress = true;
+				myPressedX = x;
+				myPressedY = y;
 				break;
 			case MotionEvent.ACTION_MOVE:
-				view.onStylusMovePressed(x, y);
+				if (!myLongClickPerformed) {
+					if (myPendingPress) {
+						final int slop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
+						if (Math.abs(myPressedX - x) > slop || Math.abs(myPressedY - y) > slop) {
+							if (myPendingLongClickRunnable != null) {
+								removeCallbacks(myPendingLongClickRunnable);
+							}
+							view.onStylusPress(myPressedX, myPressedY);
+							myPendingPress = false;
+						}
+					}
+					if (!myPendingPress) {
+						view.onStylusMovePressed(x, y);
+					}
+				}
 				break;
 		}
 

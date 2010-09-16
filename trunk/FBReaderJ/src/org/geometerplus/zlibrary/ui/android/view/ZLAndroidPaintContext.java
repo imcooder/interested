@@ -139,9 +139,7 @@ public final class ZLAndroidPaintContext extends ZLPaintContext {
 	public void setTextColor(ZLColor color) {
 		myTextPaint.setColor(Color.rgb(color.Red, color.Green, color.Blue));
 	}
-	public void setTextUnderlineInternal(boolean underline) {
-		myTextPaint.setUnderlineText(underline);
-	}
+
 	public void setLineColor(ZLColor color, int style) {
 		// TODO: use style
 		myLinePaint.setColor(Color.rgb(color.Red, color.Green, color.Blue));
@@ -227,7 +225,7 @@ public final class ZLAndroidPaintContext extends ZLPaintContext {
 		return "Sans";
 	}
 	
-	protected void fillFamiliesList(ArrayList families) {
+	protected void fillFamiliesList(ArrayList<String> families) {
 		// TODO: implement
 		families.add("Sans");
 		families.add("Serif");

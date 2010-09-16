@@ -25,12 +25,10 @@ import android.app.Application;
 import android.content.res.Resources;
 import android.content.res.AssetFileDescriptor;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.net.Uri;
 
 import org.geometerplus.zlibrary.core.library.ZLibrary;
 import org.geometerplus.zlibrary.core.filesystem.ZLResourceFile;
-import org.geometerplus.zlibrary.core.application.ZLApplication;
 
 import org.geometerplus.zlibrary.ui.android.R;
 import org.geometerplus.zlibrary.ui.android.view.ZLAndroidPaintContext;
@@ -63,6 +61,19 @@ public final class ZLAndroidLibrary extends ZLibrary {
 		}
 	}
 
+	public void navigate() {
+		if (myActivity != null)	{
+			myActivity.navigate();
+		}
+	}
+
+	public boolean canNavigate() {
+		if (myActivity != null)	{
+			return myActivity.canNavigate();
+		}
+		return false;
+	}
+
 	public void finish() {
 		if ((myActivity != null) && !myActivity.isFinishing()) {
 			myActivity.finish();
@@ -88,7 +99,8 @@ public final class ZLAndroidLibrary extends ZLibrary {
 			intent.putExtra(BookDownloaderService.SHOW_NOTIFICATIONS_KEY, BookDownloaderService.Notifications.ALL);
 			externalUrl = false;
 		}
-		reference = NetworkLibrary.Instance().rewriteUrl(reference, externalUrl);
+		// FIXME: initialize network library and use rewriteUrl!!!
+		//reference = NetworkLibrary.Instance().rewriteUrl(reference, externalUrl);
 		intent.setData(Uri.parse(reference));
 		myActivity.startActivity(intent);
 	}
@@ -113,10 +125,15 @@ public final class ZLAndroidLibrary extends ZLibrary {
 
 		AndroidResourceFile(String path) {
 			super(path);
-			final String fieldName =
-				path.replace("/", "__").replace(".", "_").replace("-", "_").toLowerCase();
+			final String drawablePrefix = "R.drawable.";
 			try {
-				myResourceId = R.raw.class.getField(fieldName).getInt(null);
+				if (path.startsWith(drawablePrefix)) {
+					final String fieldName = path.substring(drawablePrefix.length());
+					myResourceId = R.drawable.class.getField(fieldName).getInt(null);
+				} else {
+					final String fieldName = path.replace("/", "__").replace(".", "_").replace("-", "_").toLowerCase();
+					myResourceId = R.raw.class.getField(fieldName).getInt(null);
+				}
 				myExists = true;
 			} catch (NoSuchFieldException e) {
 			} catch (IllegalAccessException e) {
