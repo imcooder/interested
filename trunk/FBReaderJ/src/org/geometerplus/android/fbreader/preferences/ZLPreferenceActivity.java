@@ -52,6 +52,8 @@ abstract class ZLPreferenceActivity extends android.preference.PreferenceActivit
 			myScreen.getDialog().dismiss();
 			ZLPreferenceActivity.this.getListView().invalidateViews();
 		}
+
+	}
 	}
 
 	protected class Category {

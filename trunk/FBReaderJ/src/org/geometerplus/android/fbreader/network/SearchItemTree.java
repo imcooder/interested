@@ -53,7 +53,7 @@ public class SearchItemTree extends NetworkTree {
 
 	@Override
 	protected ZLImage createCover() {
-		ZLResourceFile file = ZLResourceFile.createResourceFile("data/searchresult.png");
+		ZLResourceFile file = ZLResourceFile.createResourceFile("R.drawable.ic_list_searchresult");
 		return new ZLFileImage("image/png", file);
 	}
 
@@ -98,5 +98,10 @@ public class SearchItemTree extends NetworkTree {
 		if (nodeIterator != null && nodeIterator.hasNext()) {
 			throw new RuntimeException("That's impossible!!!");
 		}
+	}
+
+	@Override
+	public NetworkLibraryItem getHoldedItem() {
+		return null;
 	}
 }

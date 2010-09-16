@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import org.geometerplus.zlibrary.core.resources.ZLResource;
-import org.geometerplus.zlibrary.core.dialogs.ZLDialogManager;
 
 import org.geometerplus.zlibrary.ui.android.dialogs.ZLAndroidDialogManager;
 
@@ -35,6 +34,9 @@ abstract class SearchActivity extends Activity {
 		super.onCreate(icicle);
 
 		Thread.setDefaultUncaughtExceptionHandler(new org.geometerplus.zlibrary.ui.android.library.UncaughtExceptionHandler(this));
+
+		final SearchManager manager = (SearchManager)getSystemService(SEARCH_SERVICE);
+		manager.setOnCancelListener(null);
 
 		final Intent intent = getIntent();
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -71,7 +73,7 @@ abstract class SearchActivity extends Activity {
 
 	abstract boolean runSearch(String pattern);
 	abstract void onSuccess();
-	abstract void onFailure();
+	//abstract void onFailure();
 	abstract String getWaitMessageResourceKey();
 	abstract String getFailureMessageResourceKey();
 	abstract Activity getParentActivity();

@@ -19,52 +19,39 @@
 
 package org.geometerplus.android.fbreader.network;
 
+import org.geometerplus.zlibrary.core.filesystem.ZLResourceFile;
+import org.geometerplus.zlibrary.core.image.ZLFileImage;
 import org.geometerplus.zlibrary.core.image.ZLImage;
 import org.geometerplus.zlibrary.core.resources.ZLResource;
-import org.geometerplus.zlibrary.core.util.ZLBoolean3;
 
-import org.geometerplus.fbreader.network.INetworkLink;
 import org.geometerplus.fbreader.network.NetworkLibraryItem;
 import org.geometerplus.fbreader.network.NetworkTree;
-import org.geometerplus.fbreader.network.tree.NetworkCatalogTree;
-import org.geometerplus.fbreader.network.authentication.NetworkAuthenticationManager;
 
 
-class RefillAccountTree extends NetworkTree {
+public class AddCustomCatalogItemTree extends NetworkTree {
 
-	public final INetworkLink Link;
-	public final ZLImage Cover;
-
-	public RefillAccountTree(NetworkCatalogTree parentTree) {
-		super(parentTree.Level + 1);
-		Link = parentTree.Item.Link;
-		Cover = parentTree.getCover();
+	public AddCustomCatalogItemTree() {
+		super(1);
 	}
 
 	@Override
 	public String getName() {
-		return ZLResource.resource("networkView").getResource("refillTitle").getValue();
+		return ZLResource.resource("networkView").getResource("addCustomCatalog").getValue();
 	}
 
 	@Override
 	public String getSummary() {
-		final NetworkAuthenticationManager mgr = Link.authenticationManager();
-		if (mgr.isAuthorised(false).Status == ZLBoolean3.B3_TRUE) {
-			final String account = mgr.currentAccount();
-			if (account != null) {
-				return ZLResource.resource("networkView").getResource("refillSummary").getValue().replace("%s", account);
-			}
-		}
-		return null;
-	}
-
-	@Override
-	protected ZLImage createCover() {
-		return Cover;
+		return ZLResource.resource("networkView").getResource("addCustomCatalogSummary").getValue();
 	}
 
 	@Override
 	public NetworkLibraryItem getHoldedItem() {
 		return null;
+	}
+
+	@Override
+	protected ZLImage createCover() {
+		ZLResourceFile file = ZLResourceFile.createResourceFile("R.drawable.ic_list_plus");
+		return new ZLFileImage("image/png", file);
 	}
 }

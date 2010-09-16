@@ -19,12 +19,16 @@
 
 package org.geometerplus.android.fbreader.network;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.*;
 import android.widget.BaseAdapter;
 
+import org.geometerplus.zlibrary.core.resources.ZLResource;
 import org.geometerplus.zlibrary.ui.android.R;
 
 import org.geometerplus.zlibrary.ui.android.dialogs.ZLAndroidDialogManager;
@@ -35,10 +39,7 @@ import org.geometerplus.fbreader.network.NetworkLibrary;
 
 public class NetworkLibraryActivity extends NetworkBaseActivity {
 
-	private boolean myInitialized;
-
 	private NetworkTree myTree;
-	private SearchItemTree mySearchItem;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -49,10 +50,8 @@ public class NetworkLibraryActivity extends NetworkBaseActivity {
 	}
 
 	private void prepareView() {
-		if (!myInitialized) {
-			myInitialized = true;
+		if (myTree == null) {
 			myTree = NetworkLibrary.Instance().getTree();
-			mySearchItem = NetworkView.Instance().getSearchItemTree();
 			setListAdapter(new LibraryAdapter());
 			getListView().invalidateViews();
 		}
@@ -61,21 +60,70 @@ public class NetworkLibraryActivity extends NetworkBaseActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		final NetworkView networkView = NetworkView.Instance();
-		if (!networkView.isInitialized()) {
-			final Handler handler = new Handler() {
-				public void handleMessage(Message message) {
-					prepareView();
-				}
-			};
-			((ZLAndroidDialogManager)ZLAndroidDialogManager.Instance()).wait("loadingNetworkLibrary", new Runnable() {
-				public void run() {
-					networkView.initialize();
-					handler.sendEmptyMessage(0);
-				}
-			}, this);
+		if (!NetworkView.Instance().isInitialized()) {
+			new Initializator().start();
 		} else {
 			prepareView();
+		}
+	}
+
+	private class Initializator extends Handler {
+
+		final DialogInterface.OnClickListener myListener = new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				if (which == DialogInterface.BUTTON_POSITIVE) {
+					Initializator.this.start();
+				} else {
+					NetworkLibraryActivity.this.finish();
+				}
+			}
+		};
+
+		private void runInitialization() {
+			((ZLAndroidDialogManager)ZLAndroidDialogManager.Instance()).wait("loadingNetworkLibrary", new Runnable() {
+				public void run() {
+					final String error = NetworkView.Instance().initialize();
+					Initializator.this.end(error);
+				}
+			}, NetworkLibraryActivity.this);
+		}
+
+		private void processResults(String error) {
+			final ZLResource dialogResource = ZLResource.resource("dialog");
+			final ZLResource boxResource = dialogResource.getResource("networkError");
+			final ZLResource buttonResource = dialogResource.getResource("button");
+			new AlertDialog.Builder(NetworkLibraryActivity.this)
+				.setTitle(boxResource.getResource("title").getValue())
+				.setMessage(error)
+				.setIcon(0)
+				.setPositiveButton(buttonResource.getResource("tryAgain").getValue(), myListener)
+				.setNegativeButton(buttonResource.getResource("cancel").getValue(), myListener)
+				.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					public void onCancel(DialogInterface dialog) {
+						myListener.onClick(dialog, DialogInterface.BUTTON_NEGATIVE);
+					}
+				})
+				.create().show();
+		}
+
+		@Override
+		public void handleMessage(Message message) {
+			if (message.what == 0) {
+				runInitialization(); // run initialization process
+			} else if (message.obj == null) {
+				startService(new Intent(getApplicationContext(), LibraryInitializationService.class));
+				prepareView(); // initialization is complete successfully
+			} else {
+				processResults((String) message.obj); // handle initialization error
+			}
+		}
+
+		public void start() {
+			sendEmptyMessage(0);
+		}
+
+		private void end(String error) {
+			sendMessage(obtainMessage(1, error));
 		}
 	}
 
@@ -83,15 +131,20 @@ public class NetworkLibraryActivity extends NetworkBaseActivity {
 	private final class LibraryAdapter extends BaseAdapter {
 
 		public final int getCount() {
-			return myTree.subTrees().size() + 1; // subtrees + <search item>
+			if (!NetworkView.Instance().isInitialized()) {
+				return 0;
+			}
+			return myTree.subTrees().size() + 2; // subtrees + <search item>
 		}
 
 		public final NetworkTree getItem(int position) {
 			final int size = myTree.subTrees().size();
 			if (position == 0) {
-				return mySearchItem;
+				return NetworkView.Instance().getSearchItemTree();
 			} else if (position > 0 && position <= size) {
 				return (NetworkTree) myTree.subTrees().get(position - 1);
+			} else if (position == size + 1) {
+				return NetworkView.Instance().getAddCustomCatalogItemTree();
 			}
 			return null;
 		}
@@ -112,10 +165,17 @@ public class NetworkLibraryActivity extends NetworkBaseActivity {
 		return menu.add(0, index, Menu.NONE, label).setIcon(iconId);
 	}
 
+
+	private static final int MENU_SEARCH = 1;
+	private static final int MENU_REFRESH = 2;
+	private static final int MENU_ADD_CATALOG = 3;
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		addMenuItem(menu, 1, "networkSearch", R.drawable.ic_menu_networksearch);
+		addMenuItem(menu, MENU_SEARCH, "networkSearch", R.drawable.ic_menu_networksearch);
+		addMenuItem(menu, MENU_ADD_CATALOG, "addCustomCatalog", android.R.drawable.ic_menu_add);
+		addMenuItem(menu, MENU_REFRESH, "refreshCatalogsList", R.drawable.ic_menu_refresh);
 		return true;
 	}
 
@@ -123,15 +183,21 @@ public class NetworkLibraryActivity extends NetworkBaseActivity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
 		final boolean searchInProgress = NetworkView.Instance().containsItemsLoadingRunnable(NetworkSearchActivity.SEARCH_RUNNABLE_KEY);
-		menu.findItem(1).setEnabled(!searchInProgress);
+		menu.findItem(MENU_SEARCH).setEnabled(!searchInProgress);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case 1:
+			case MENU_SEARCH:
 				return onSearchRequested();
+			case MENU_ADD_CATALOG:
+				AddCustomCatalogItemActions.addCustomCatalog(this);
+				return true;
+			case MENU_REFRESH:
+				refreshCatalogsList();
+				return true;
 			default:
 				return true;
 		}
@@ -150,5 +216,35 @@ public class NetworkLibraryActivity extends NetworkBaseActivity {
 	@Override
 	public void onModelChanged() {
 		getListView().invalidateViews();
+	}
+
+	private void refreshCatalogsList() {
+		final NetworkView view = NetworkView.Instance();
+
+		final Handler handler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				if (msg.obj == null) {
+					view.finishBackgroundUpdate();
+				} else {
+					final ZLResource dialogResource = ZLResource.resource("dialog");
+					final ZLResource boxResource = dialogResource.getResource("networkError");
+					final ZLResource buttonResource = dialogResource.getResource("button");
+					new AlertDialog.Builder(NetworkLibraryActivity.this)
+						.setTitle(boxResource.getResource("title").getValue())
+						.setMessage((String) msg.obj)
+						.setIcon(0)
+						.setPositiveButton(buttonResource.getResource("ok").getValue(), null)
+						.create().show();
+				}
+			}
+		};
+
+		((ZLAndroidDialogManager)ZLAndroidDialogManager.Instance()).wait("updatingCatalogsList", new Runnable() {
+			public void run() {
+				final String result = view.runBackgroundUpdate(true);
+				handler.sendMessage(handler.obtainMessage(0, result));
+			}
+		}, this);
 	}
 }

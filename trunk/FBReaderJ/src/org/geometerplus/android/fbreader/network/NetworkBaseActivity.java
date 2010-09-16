@@ -37,6 +37,8 @@ import android.graphics.Bitmap;
 import org.geometerplus.zlibrary.ui.android.R;
 
 import org.geometerplus.zlibrary.core.resources.ZLResource;
+import org.geometerplus.zlibrary.core.filesystem.ZLResourceFile;
+import org.geometerplus.zlibrary.core.image.ZLFileImage;
 import org.geometerplus.zlibrary.core.image.ZLImage;
 
 import org.geometerplus.zlibrary.ui.android.image.ZLAndroidImageManager;
@@ -44,6 +46,7 @@ import org.geometerplus.zlibrary.ui.android.image.ZLAndroidImageData;
 
 import org.geometerplus.fbreader.network.NetworkTree;
 import org.geometerplus.fbreader.network.NetworkImage;
+import org.geometerplus.fbreader.network.tree.NetworkBookTree;
 
 
 abstract class NetworkBaseActivity extends ListActivity 
@@ -108,11 +111,14 @@ abstract class NetworkBaseActivity extends ListActivity
 
 	// this set is used to track whether this activity will be notified, when specific cover will be synchronized.
 	private HashSet<String> myAwaitedCovers = new HashSet<String>();
+	private ZLFileImage myFBReaderIcon = new ZLFileImage("image/auto", ZLResourceFile.createResourceFile("R.drawable.fbreader"));
 
-	protected void setupCover(final ImageView coverView, NetworkTree tree, int maxWidth, int maxHeight) {
-		coverView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+	private void setupCover(final ImageView coverView, NetworkTree tree, int width, int height) {
 		Bitmap coverBitmap = null;
-		final ZLImage cover = tree.getCover();
+		ZLImage cover = tree.getCover();
+		if (cover == null) { 
+			cover = myFBReaderIcon;
+		}
 		if (cover != null) {
 			ZLAndroidImageData data = null;
 			final ZLAndroidImageManager mgr = (ZLAndroidImageManager) ZLAndroidImageManager.Instance();
@@ -141,7 +147,7 @@ abstract class NetworkBaseActivity extends ListActivity
 				data = mgr.getImageData(cover);
 			}
 			if (data != null) {
-				coverBitmap = data.getBitmap(maxWidth, maxHeight);
+				coverBitmap = data.getBitmap(2 * width, 2 * height);
 			}
 		}
 		if (coverBitmap != null) {
@@ -151,6 +157,9 @@ abstract class NetworkBaseActivity extends ListActivity
 		}
 	}
 
+	private int myCoverWidth = -1;
+	private int myCoverHeight = -1;
+
 	protected View setupNetworkTreeItemView(View convertView, final ViewGroup parent, NetworkTree tree) {
 		final View view = (convertView != null) ? convertView :
 			LayoutInflater.from(parent.getContext()).inflate(R.layout.network_tree_item, parent, false);
@@ -158,12 +167,29 @@ abstract class NetworkBaseActivity extends ListActivity
 		((TextView)view.findViewById(R.id.network_tree_item_name)).setText(tree.getName());
 		((TextView)view.findViewById(R.id.network_tree_item_childrenlist)).setText(tree.getSecondString());
 
-		view.measure(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		final int maxHeight = view.getMeasuredHeight();
-		final int maxWidth = maxHeight * 2 / 3;
+		if (myCoverWidth == -1) {
+			view.measure(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			myCoverHeight = view.getMeasuredHeight();
+			myCoverWidth = myCoverHeight * 15 / 32;
+			view.requestLayout();
+		}
 
-		final ImageView iconView = (ImageView)view.findViewById(R.id.network_tree_item_icon);
-		setupCover(iconView, tree, maxWidth, maxHeight);
+		final ImageView coverView = (ImageView)view.findViewById(R.id.network_tree_item_icon);
+		coverView.getLayoutParams().width = myCoverWidth;
+		coverView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+		coverView.requestLayout();
+		setupCover(coverView, tree, myCoverWidth, myCoverWidth);
+
+		final ImageView statusView = (ImageView)view.findViewById(R.id.network_tree_item_status);
+		final int status = (tree instanceof NetworkBookTree) ?
+				NetworkBookActions.getBookStatus(((NetworkBookTree) tree).Book, Connection) : 0;
+		if (status != 0) {
+			statusView.setVisibility(View.VISIBLE);
+			statusView.setImageResource(status);
+		} else {
+			statusView.setVisibility(View.GONE);
+		}
+		statusView.requestLayout();
 
 		return view;
 	}
@@ -209,7 +235,7 @@ abstract class NetworkBaseActivity extends ListActivity
 			return;
 		}
 		if (confirm != null) {
-			final ZLResource resource = myResource.getResource("confirmQuestions");
+			//final ZLResource resource = myResource.getResource("confirmQuestions");
 			final ZLResource buttonResource = ZLResource.resource("dialog").getResource("button");
 			new AlertDialog.Builder(this)
 				.setTitle(networkTree.getName())

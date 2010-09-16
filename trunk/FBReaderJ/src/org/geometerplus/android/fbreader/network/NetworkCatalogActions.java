@@ -20,6 +20,7 @@
 package org.geometerplus.android.fbreader.network;
 
 import java.util.List;
+import java.util.Set;
 
 import android.app.AlertDialog;
 import android.os.Message;
@@ -48,6 +49,8 @@ class NetworkCatalogActions extends NetworkTreeActions {
 	public static final int SIGNOUT_ITEM_ID = 5;
 	public static final int REFILL_ACCOUNT_ITEM_ID = 6;
 
+	public static final int CUSTOM_CATALOG_EDIT = 7;
+	public static final int CUSTOM_CATALOG_REMOVE = 8;
 
 	@Override
 	public boolean canHandleTree(NetworkTree tree) {
@@ -59,7 +62,7 @@ class NetworkCatalogActions extends NetworkTreeActions {
 		if (tree instanceof NetworkCatalogRootTree) {
 			return tree.getName();
 		}
-		return tree.getName() + " - " + ((NetworkCatalogTree) tree).Item.Link.SiteName;
+		return tree.getName() + " - " + ((NetworkCatalogTree) tree).Item.Link.getSiteName();
 	}
 
 	@Override
@@ -98,6 +101,11 @@ class NetworkCatalogActions extends NetworkTreeActions {
 					}
 				}
 			}
+			INetworkLink link = catalogTree.Item.Link; 
+			if (link instanceof ICustomNetworkLink) {
+				addMenuItem(menu, CUSTOM_CATALOG_EDIT, "editCustomCatalog");
+				addMenuItem(menu, CUSTOM_CATALOG_REMOVE, "removeCustomCatalog");
+			}
 		} else {
 			if (item.URLByType.get(NetworkCatalogItem.URL_HTML_PAGE) != null) {
 				addMenuItem(menu, OPEN_IN_BROWSER_ITEM_ID, "openInBrowser");
@@ -113,7 +121,6 @@ class NetworkCatalogActions extends NetworkTreeActions {
 				}
 				break;
 			}
-			return;
 		}
 	}
 
@@ -247,6 +254,12 @@ class NetworkCatalogActions extends NetworkTreeActions {
 					((NetworkCatalogTree)tree).Item.Link.authenticationManager().refillAccountLink()
 				);
 				return true;
+			case CUSTOM_CATALOG_EDIT:
+				NetworkDialog.show(activity, NetworkDialog.DIALOG_CUSTOM_CATALOG, ((NetworkCatalogTree)tree).Item.Link, null);
+				return true;
+			case CUSTOM_CATALOG_REMOVE:
+				removeCustomLink((ICustomNetworkLink)((NetworkCatalogTree)tree).Item.Link);
+				return true;
 		}
 		return false;
 	}
@@ -262,6 +275,7 @@ class NetworkCatalogActions extends NetworkTreeActions {
 			myKey = key;
 		}
 
+		@Override
 		public void onUpdateItems(List<NetworkLibraryItem> items) {
 			for (NetworkLibraryItem item: items) {
 				myTree.ChildrenItems.add(item);
@@ -269,19 +283,26 @@ class NetworkCatalogActions extends NetworkTreeActions {
 			}
 		}
 
+		@Override
 		public void afterUpdateItems() {
 			if (NetworkView.Instance().isInitialized()) {
 				NetworkView.Instance().fireModelChanged();
 			}
 		}
 
-		public void onFinish(String errorMessage, boolean interrupted) {
-			if (interrupted) {
+		@Override
+		public void onFinish(String errorMessage, boolean interrupted,
+				Set<NetworkLibraryItem> uncommitedItems) {
+			if (interrupted &&
+					(!myTree.Item.supportsResumeLoading() || errorMessage != null)) {
 				myTree.ChildrenItems.clear();
 				myTree.clear();
 			} else {
+				myTree.removeItems(uncommitedItems);
 				myTree.updateLoadedTime();
-				afterUpdateCatalog(errorMessage, myTree.ChildrenItems.size() == 0);
+				if (!interrupted) {
+					afterUpdateCatalog(errorMessage, myTree.ChildrenItems.size() == 0);
+				}
 				final NetworkLibrary library = NetworkLibrary.Instance();
 				library.invalidateVisibility();
 				library.synchronize();
@@ -324,11 +345,14 @@ class NetworkCatalogActions extends NetworkTreeActions {
 
 		private final NetworkCatalogTree myTree;
 		private final boolean myCheckAuthentication;
+		private final boolean myResumeNotLoad;
 
-		public ExpandCatalogRunnable(ItemsLoadingHandler handler, NetworkCatalogTree tree, boolean checkAuthentication) {
+		public ExpandCatalogRunnable(ItemsLoadingHandler handler,
+				NetworkCatalogTree tree, boolean checkAuthentication, boolean resumeNotLoad) {
 			super(handler);
 			myTree = tree;
 			myCheckAuthentication = checkAuthentication;
+			myResumeNotLoad = resumeNotLoad;
 		}
 
 		public String getResourceKey() {
@@ -339,7 +363,7 @@ class NetworkCatalogActions extends NetworkTreeActions {
 			/*if (!NetworkOperationRunnable::tryConnect()) {
 				return;
 			}*/
-			final NetworkLink link = myTree.Item.Link;
+			final INetworkLink link = myTree.Item.Link;
 			if (myCheckAuthentication && link.authenticationManager() != null) {
 				NetworkAuthenticationManager mgr = link.authenticationManager();
 				AuthenticationStatus auth = mgr.isAuthorised(true);
@@ -357,6 +381,9 @@ class NetworkCatalogActions extends NetworkTreeActions {
 		}
 
 		public String doLoading(NetworkOperationData.OnNewItemListener doWithListener) {
+			if (myResumeNotLoad) {
+				return myTree.Item.resumeLoading(doWithListener);
+			}
 			return myTree.Item.loadChildren(doWithListener);
 		}
 	}
@@ -368,10 +395,15 @@ class NetworkCatalogActions extends NetworkTreeActions {
 		}
 		NetworkView.Instance().tryResumeLoading(activity, tree, url, new Runnable() {
 			public void run() {
+				boolean resumeNotLoad = false;
 				if (tree.hasChildren()) {
 					if (tree.isContentValid()) {
-						NetworkView.Instance().openTree(activity, tree, url);
-						return;
+						if (tree.Item.supportsResumeLoading()) {
+							resumeNotLoad = true;
+						} else {
+							NetworkView.Instance().openTree(activity, tree, url);
+							return;
+						}
 					} else {
 						tree.ChildrenItems.clear();
 						tree.clear();
@@ -382,7 +414,7 @@ class NetworkCatalogActions extends NetworkTreeActions {
 				NetworkView.Instance().startItemsLoading(
 					activity,
 					url,
-					new ExpandCatalogRunnable(handler, tree, true)
+					new ExpandCatalogRunnable(handler, tree, true, resumeNotLoad)
 				);
 				NetworkView.Instance().openTree(activity, tree, url);
 			}
@@ -404,7 +436,7 @@ class NetworkCatalogActions extends NetworkTreeActions {
 		NetworkView.Instance().startItemsLoading(
 			activity,
 			url,
-			new ExpandCatalogRunnable(handler, tree, false)
+			new ExpandCatalogRunnable(handler, tree, false, false)
 		);
 	}
 
@@ -429,5 +461,13 @@ class NetworkCatalogActions extends NetworkTreeActions {
 			}
 		};
 		((ZLAndroidDialogManager)ZLAndroidDialogManager.Instance()).wait("signOut", runnable, activity);
+	}
+
+	private void removeCustomLink(ICustomNetworkLink link) {
+		final NetworkLibrary library = NetworkLibrary.Instance();
+		library.removeCustomLink(link);
+		library.updateChildren();
+		library.synchronize();
+		NetworkView.Instance().fireModelChanged();
 	}
 }

@@ -19,52 +19,29 @@
 
 package org.geometerplus.android.fbreader.network;
 
+import android.app.Activity;
 import android.view.Menu;
 import android.view.ContextMenu;
 
 import org.geometerplus.fbreader.network.NetworkTree;
-import org.geometerplus.fbreader.network.SearchResult;
 
 
-class SearchItemActions extends NetworkTreeActions {
+class AddCustomCatalogItemActions extends NetworkTreeActions {
 
-	public static final int RUN_SEARCH_ITEM_ID = 0;
-
+	public static final int RUN_ITEM_ID = 0;
 
 	@Override
 	public boolean canHandleTree(NetworkTree tree) {
-		return tree instanceof SearchItemTree;
-	}
-
-	@Override
-	public String getTreeTitle(NetworkTree tree) {
-		final SearchResult result = ((SearchItemTree) tree).getSearchResult();
-		if (result != null) {
-			return result.Summary;
-		}
-		return tree.getName();
+		return tree instanceof AddCustomCatalogItemTree;
 	}
 
 	@Override
 	public void buildContextMenu(NetworkBaseActivity activity, ContextMenu menu, NetworkTree tree) {
-		menu.setHeaderTitle(tree.getName());
-
-		final boolean isLoading = NetworkView.Instance().containsItemsLoadingRunnable(NetworkSearchActivity.SEARCH_RUNNABLE_KEY);
-
-		if (!isLoading) {
-			addMenuItem(menu, RUN_SEARCH_ITEM_ID, "search");
-		} else {
-			addMenuItem(menu, TREE_NO_ACTION, "stoppingNetworkSearch");
-		}
 	}
 
 	@Override
 	public int getDefaultActionCode(NetworkTree tree) {
-		final boolean isLoading = NetworkView.Instance().containsItemsLoadingRunnable(NetworkSearchActivity.SEARCH_RUNNABLE_KEY);
-		if (!isLoading) {
-			return RUN_SEARCH_ITEM_ID;
-		}
-		return TREE_NO_ACTION;
+		return RUN_ITEM_ID;
 	}
 
 	@Override
@@ -85,10 +62,14 @@ class SearchItemActions extends NetworkTreeActions {
 	@Override
 	public boolean runAction(NetworkBaseActivity activity, NetworkTree tree, int actionCode) {
 		switch (actionCode) {
-			case RUN_SEARCH_ITEM_ID:
-				activity.onSearchRequested();
+			case RUN_ITEM_ID:
+				addCustomCatalog(activity);
 				return true;
 		}
 		return false;
+	}
+
+	public static void addCustomCatalog(Activity activity) {
+		NetworkDialog.show(activity, NetworkDialog.DIALOG_CUSTOM_CATALOG, null, null);
 	}
 }
