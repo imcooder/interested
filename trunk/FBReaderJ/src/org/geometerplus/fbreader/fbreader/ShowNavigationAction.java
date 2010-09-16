@@ -19,20 +19,17 @@
 
 package org.geometerplus.fbreader.fbreader;
 
-class VolumeKeyScrollingAction extends FBAction {
-	private final boolean myForward;
-
-	VolumeKeyScrollingAction(FBReader fbreader, boolean forward) {
+class ShowNavigationAction extends FBAction {
+	ShowNavigationAction(FBReader fbreader) {
 		super(fbreader);
-		myForward = forward;
 	}
-		
-	public boolean isEnabled() {
-		return ScrollingPreferences.Instance().VolumeKeysOption.getValue();
+
+	@Override
+	public boolean isVisible() {
+		return Reader.canNavigate();
 	}
 
 	public void run() {
-		boolean isInverted = ScrollingPreferences.Instance().InvertVolumeKeysOption.getValue();
-		Reader.getTextView().doScrollPage(isInverted ? !myForward : myForward);
-	}		
+		Reader.navigate();
+	}
 }
