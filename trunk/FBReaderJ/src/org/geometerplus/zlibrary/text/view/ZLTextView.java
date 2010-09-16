@@ -21,20 +21,11 @@ package org.geometerplus.zlibrary.text.view;
 
 import java.util.*;
 
-import org.geometerplus.zlibrary.core.util.ZLColor;
-
 import org.geometerplus.zlibrary.core.application.ZLApplication;
-import org.geometerplus.zlibrary.core.image.ZLImage;
-import org.geometerplus.zlibrary.core.image.ZLImageData;
-import org.geometerplus.zlibrary.core.image.ZLImageManager;
 import org.geometerplus.zlibrary.core.view.ZLPaintContext;
 import org.geometerplus.zlibrary.text.model.*;
 import org.geometerplus.zlibrary.text.hyphenation.*;
-//import org.geometerplus.zlibrary.text.view.ZLTextParagraphCursor.Processor;
 import org.geometerplus.zlibrary.text.view.style.ZLTextStyleCollection;
-import org.vimgadgets.linebreak.LineBreaker;
-
-import com.hanvon.*;
 
 public abstract class ZLTextView extends ZLTextViewBase {
 	public interface ScrollingMode {
@@ -413,6 +404,182 @@ public abstract class ZLTextView extends ZLTextViewBase {
 		return sizeOfText;
 	}
 
+	// Can be called only when (myModel.getParagraphsNumber() != 0)
+	private synchronized float computeCharsPerPage() {
+		setTextStyle(ZLTextStyleCollection.Instance().getBaseStyle());
+
+		final int textWidth = getTextAreaWidth();
+		final int textHeight = getTextAreaHeight();
+
+		final int num = myModel.getParagraphsNumber();
+		final int totalTextSize = myModel.getTextLength(num - 1);
+		final float charsPerParagraph = ((float) totalTextSize) / num;
+
+		final float charWidth = computeCharWidth();
+
+		final int indentWidth = getElementWidth(ZLTextElement.IndentElement, 0);
+		final float effectiveWidth = textWidth - (indentWidth + 0.5f * textWidth) / charsPerParagraph;
+		float charsPerLine = Math.min(effectiveWidth / charWidth,
+				charsPerParagraph * 1.2f);
+
+		final int strHeight = getWordHeight() + Context.getDescent();
+		final int effectiveHeight = (int) (textHeight - (getTextStyle().getSpaceBefore() 
+				+ getTextStyle().getSpaceAfter()) / charsPerParagraph);
+		final int linesPerPage = effectiveHeight / strHeight;
+
+		/*System.err.println("PAGE: textWidth = " + textWidth);
+		System.err.println("PAGE: textHeight = " + textHeight);
+		System.err.println("PAGE: indentWidth = " + indentWidth);
+		System.err.println("PAGE: strHeight = " + strHeight);
+		System.err.println("PAGE: lang = " + getLanguage());
+		System.err.println("PAGE: charWidth = " + charWidth);
+		System.err.println("PAGE: effectiveWidth = " + effectiveWidth);
+		System.err.println("PAGE: effectiveHeight = " + effectiveHeight);
+		System.err.println("PAGE: linesPerPage = " + linesPerPage);
+		System.err.println("PAGE: charsPerParagraph = " + charsPerParagraph + " (factor = " + 1.0f / charsPerParagraph + ")");
+		System.err.println("PAGE: charsPerLine = " + charsPerLine);*/
+
+		return charsPerLine * linesPerPage;
+	}
+
+	private synchronized int computeTextPageNumber(int textSize) {
+		if (myModel == null || myModel.getParagraphsNumber() == 0) {
+			return 1;
+		}
+
+//		System.err.println(">------------------------------------------->");
+
+		final float factor = 1.0f / computeCharsPerPage();
+		final float pages = textSize * factor;
+		int result = Math.max((int) (pages + 1.0f - 0.5f * factor), 1);
+
+		/*System.err.println("PAGE: textSize = " + textSize);
+		System.err.println("PAGE: factor = " + factor);
+		System.err.println("PAGE: pages = " + pages);
+		System.err.println("PAGE: result = " + result);
+		System.err.println("<-------------------------------------------<");*/
+		return result;
+	}
+
+	private static final char[] ourDefaultLetters = "System developers have used modeling languages for decades to specify, visualize, construct, and document systems. The Unified Modeling Language (UML) is one of those languages. UML makes it possible for team members to collaborate by providing a common language that applies to a multitude of different systems. Essentially, it enables you to communicate solutions in a consistent, tool-supported language.".toCharArray();
+
+	private final char[] myLettersBuffer = new char[512];
+	private int myLettersBufferLength = 0;
+	private ZLTextModel myLettersModel = null;
+
+	private final float computeCharWidth() {
+		if (myLettersModel != myModel) {
+			myLettersModel = myModel;
+			myLettersBufferLength = 0;
+
+			int paragraph = 0;
+			final int textSize = myModel.getTextLength(myModel.getParagraphsNumber() - 1);
+			if (textSize > myLettersBuffer.length) {
+				paragraph = myModel.findParagraphByTextLength((textSize - myLettersBuffer.length) / 2);
+			}
+			while (paragraph < myModel.getParagraphsNumber()
+					&& myLettersBufferLength < myLettersBuffer.length) {
+				ZLTextParagraph.EntryIterator it = myModel.getParagraph(paragraph++).iterator();
+				while (it.hasNext()
+						&& myLettersBufferLength < myLettersBuffer.length) {
+					it.next();
+					if (it.getType() == ZLTextParagraph.Entry.TEXT) {
+						final int len = Math.min(it.getTextLength(),
+								myLettersBuffer.length - myLettersBufferLength);
+						System.arraycopy(it.getTextData(), it.getTextOffset(),
+								myLettersBuffer, myLettersBufferLength, len);
+						myLettersBufferLength += len;
+					}
+				}
+			}
+
+			if (myLettersBufferLength == 0) {
+				myLettersBufferLength = Math.min(myLettersBuffer.length, ourDefaultLetters.length);
+				System.arraycopy(ourDefaultLetters, 0, myLettersBuffer, 0, myLettersBufferLength);
+			}
+		}
+
+		final float charWidth = computeCharWidth(myLettersBuffer, myLettersBufferLength);
+		return charWidth;
+	}
+
+	private final float computeCharWidth(char[] pattern, int length) {
+		return Context.getStringWidth(pattern, 0, length) / ((float) length);
+	}
+
+	public final synchronized int computePageNumber() {
+		return computeTextPageNumber(getScrollbarFullSize());
+	}
+
+	public final synchronized int computeCurrentPage() {
+		return computeTextPageNumber(
+			getScrollbarThumbPosition(PAGE_CENTRAL) 
+			+ getScrollbarThumbLength(PAGE_CENTRAL)
+		);
+	}
+
+	public final synchronized void gotoPage(int page) {
+		if (myModel == null || myModel.getParagraphsNumber() == 0) {
+			return;
+		}
+
+		final float factor = computeCharsPerPage();
+		final float textSize = page * factor;
+
+		/*System.err.println(">------------------------------------------->");
+		System.err.println("SETPAGE: page = " + page);
+		System.err.println("SETPAGE: factor = " + factor);
+		System.err.println("SETPAGE: textSize = " + textSize);*/
+
+		int intTextSize = (int) textSize;
+		int paragraphIndex = myModel.findParagraphByTextLength(intTextSize);
+
+		if (paragraphIndex > 0 && myModel.getTextLength(paragraphIndex) > intTextSize) {
+			/*System.err.println("SETPAGE: drop overlength paragraph: " + paragraphIndex + " (" + myModel.getTextLength(paragraphIndex) + ")");*/
+			--paragraphIndex;
+		}
+		intTextSize = myModel.getTextLength(paragraphIndex);
+
+		int sizeOfTextBefore = myModel.getTextLength(paragraphIndex - 1);
+		while (paragraphIndex > 0 && intTextSize == sizeOfTextBefore) {
+			/*System.err.println("SETPAGE: drop empty paragraph: " + paragraphIndex);*/
+			--paragraphIndex;
+			intTextSize = sizeOfTextBefore;
+			sizeOfTextBefore = myModel.getTextLength(paragraphIndex - 1);
+		}
+
+		final int paragraphLength = intTextSize - sizeOfTextBefore;
+
+		/*System.err.println("SETPAGE: paragraphIndex = " + paragraphIndex);
+		System.err.println("SETPAGE: intTextSize = " + intTextSize);
+		System.err.println("SETPAGE: sizeOfTextBefore = " + sizeOfTextBefore);
+		System.err.println("SETPAGE: paragraphLength = " + paragraphLength);*/
+
+		final int wordIndex;
+		if (paragraphLength == 0) {
+			wordIndex = 0;
+		} else {
+			preparePaintInfo(myCurrentPage);
+			final ZLTextWordCursor cursor = new ZLTextWordCursor(myCurrentPage.EndCursor);
+			cursor.moveToParagraph(paragraphIndex);
+			wordIndex = cursor.getParagraphCursor().getParagraphLength();
+		}
+
+		/*System.err.println("SETPAGE: wordIndex = " + wordIndex);
+		System.err.println("<-------------------------------------------<");*/
+
+		gotoPositionByEnd(paragraphIndex, wordIndex, 0);
+	}
+
+	public void gotoHome() {
+		final ZLTextWordCursor cursor = getStartCursor();
+		if (!cursor.isNull() && cursor.isStartOfParagraph() && cursor.getParagraphIndex() == 0) {
+			return;
+		}
+		gotoPosition(0, 0, 0);
+		preparePaintInfo();
+	}
+
 	private static final char[] SPACE = new char[] { ' ' };
 	private void drawTextLine(ZLTextPage page, ZLTextLineInfo info, int from, int to, int y) {
 		final ZLTextParagraphCursor paragraph = info.ParagraphCursor;
@@ -484,7 +651,7 @@ public abstract class ZLTextView extends ZLTextViewBase {
 				index++;
 				if (area.ChangeStyle) {
 					setTextStyle(area.Style);
-				}				
+				}
 				setTextStyle(area.Style);
 				
 				final int areaX = area.XStart;
@@ -858,6 +1025,18 @@ public abstract class ZLTextView extends ZLTextViewBase {
 		}
 	}
 
+	private final synchronized void gotoPositionByEnd(int paragraphIndex, int wordIndex, int charIndex) {
+		if (myModel != null && myModel.getParagraphsNumber() > 0) {
+			myCurrentPage.moveEndCursor(paragraphIndex, wordIndex, charIndex);
+			myPreviousPage.reset();
+			myNextPage.reset();
+			preparePaintInfo(myCurrentPage);
+			if (myCurrentPage.isEmptyPage()) {
+				scrollPage(false, ScrollingMode.NO_OVERLAPPING, 0);
+			}
+		}
+	}
+
 	protected synchronized void preparePaintInfo() {
 		myPreviousPage.reset();
 		myNextPage.reset();
@@ -1113,7 +1292,7 @@ public abstract class ZLTextView extends ZLTextViewBase {
 		return myCurrentPage.TextElementMap.binarySearch(x, y);
 	}
 
-	private static int lowerBound(int[] array, int value) {
+	/*private static int lowerBound(int[] array, int value) {
 		int leftIndex = 0;
 		int rightIndex = array.length - 1;
 		if (array[rightIndex] <= value) {
@@ -1128,9 +1307,10 @@ public abstract class ZLTextView extends ZLTextViewBase {
 			}
 		}
 		return leftIndex;
-	}
+	}*/
 
-	public boolean onStylusMovePressed(int x, int y) {		
+	@Override
+	public boolean onStylusMovePressed(int x, int y) {
 		if (mySelectionModel.extendTo(x, y)) {
 			ZLApplication.Instance().repaintView();
 			return true;
@@ -1138,6 +1318,7 @@ public abstract class ZLTextView extends ZLTextViewBase {
 		return false;
 	}
 
+	@Override
 	public boolean onStylusRelease(int x, int y) {
 		mySelectionModel.deactivate();
 		return false;

@@ -34,7 +34,7 @@ public class ZLTextHyperlinkArea {
 		Hyperlink = hyperlink;
 		myList = list;
 		myFromIndex = fromIndex;
-		myToIndex = fromIndex + 1;		
+		myToIndex = fromIndex + 1;
 	}
 
 	void extend() {

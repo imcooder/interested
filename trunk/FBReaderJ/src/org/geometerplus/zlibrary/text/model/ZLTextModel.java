@@ -35,10 +35,10 @@ public interface ZLTextModel {
 	ZLTextMark getPreviousMark(ZLTextMark position);
 
 	List<ZLTextMark> getMarks();
-	List<ZLTextUnderLineMark> getUnderLineMarks();
+
 	// text length for paragraphs from 0 to index
 	int getTextLength(int index);
+	int findParagraphByTextLength(int length);
 	
 	int search(final String text, int startIndex, int endIndex, boolean ignoreCase);
-	boolean setUnderline(int paragraphIndexLeft, int elementIndexLeft, int charIndexLeft, int paragraphIndexRight, int elementIndexRight, int charIndexRight);
 }

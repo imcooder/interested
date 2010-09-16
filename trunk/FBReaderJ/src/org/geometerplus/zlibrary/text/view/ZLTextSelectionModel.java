@@ -23,9 +23,6 @@ import java.util.*;
 
 import org.geometerplus.zlibrary.core.application.ZLApplication;
 
-import android.util.Log;
-import com.hanvon.Trace;
-
 final class ZLTextSelectionModel {
 	final static class BoundElement extends ZLTextPosition {
 		boolean Exists;
@@ -103,7 +100,7 @@ final class ZLTextSelectionModel {
 	private boolean myIsActive;
 	private boolean myIsEmpty = true;
 	private boolean myDoUpdate;
-	private boolean myTextIsUpToDate = true;
+	//private boolean myTextIsUpToDate = true;
 
 	private int myStoredX;
 	private int myStoredY;
@@ -111,7 +108,6 @@ final class ZLTextSelectionModel {
 	private final Bound myFirstBound = new Bound();
 	private final Bound mySecondBound = new Bound();
 
-	private final HashSet myCursors = new HashSet();
 	private final StringBuilder myText = new StringBuilder();
 
 	ZLTextSelectionModel(ZLTextView view) {
@@ -127,13 +123,11 @@ final class ZLTextSelectionModel {
 		myIsEmpty = false;
 		setBound(myFirstBound, x, y);
 		mySecondBound.copyFrom(myFirstBound);
-		myCursors.clear();
 		myText.delete(0, myText.length());
-		myTextIsUpToDate = true;
+		//myTextIsUpToDate = true;
 	}
 
 	boolean extendTo(int x, int y) {
-		Trace.DBGMSG(1, "3\n");
 		if (!myIsActive || myView.myCurrentPage.TextElementMap.isEmpty()) {
 			return false;
 		}
@@ -146,17 +140,14 @@ final class ZLTextSelectionModel {
 
 		if (!mySecondBound.Before.Exists) {
 			startSelectionScrolling(false);
-			Trace.DBGMSG(1, "4\n");
 		} else if (!mySecondBound.After.Exists) {
 			startSelectionScrolling(true);
-			Trace.DBGMSG(1, "5\n");
 		} else {
 			stopSelectionScrolling();
-			Trace.DBGMSG(1, "6\n");
 		}
 
 		if (!oldRange.Left.equalsTo(newRange.Left) || !oldRange.Right.equalsTo(newRange.Right)) {
-			myTextIsUpToDate = false;
+			//myTextIsUpToDate = false;
 			myText.delete(0, myText.length());
 			return true;
 		}
@@ -170,7 +161,7 @@ final class ZLTextSelectionModel {
 			myDoUpdate = false;
 			setBound(mySecondBound, myStoredX, myStoredY);
 			//myView.copySelectedTextToClipboard(ZLDialogManager::CLIPBOARD_SELECTION);
-			myTextIsUpToDate = false;
+			//myTextIsUpToDate = false;
 			myText.delete(0, myText.length());
 		}
 	}
@@ -186,9 +177,8 @@ final class ZLTextSelectionModel {
 		myIsEmpty = true;
 		myIsActive = false;
 		myDoUpdate = false;
-		myCursors.clear();
 		myText.delete(0, myText.length());
-		myTextIsUpToDate = true;
+		//myTextIsUpToDate = true;
 	}
 
 	Range getRange() {
