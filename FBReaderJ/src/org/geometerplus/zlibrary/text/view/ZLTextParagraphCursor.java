@@ -24,7 +24,6 @@ import org.vimgadgets.linebreak.LineBreaker;
 
 import org.geometerplus.zlibrary.core.image.*;
 import org.geometerplus.zlibrary.text.model.*;
-import org.geometerplus.zlibrary.text.view.ZLTextWord.MarkType;
 
 public final class ZLTextParagraphCursor {
 	private static final class Processor {
@@ -35,57 +34,23 @@ public final class ZLTextParagraphCursor {
 		private int myFirstMark;
 		private int myLastMark;
 		private final List<ZLTextMark> myMarks;
-		private int myFirstUnderLineMark;
-		private int myLastUnderLineMark;
-		private final List<ZLTextUnderLineMark> myUnderLineMarks;
-		private Processor(ZLTextParagraph paragraph, LineBreaker lineBreaker, List<ZLTextMark> marks, List<ZLTextUnderLineMark> underlineMarks, int paragraphIndex, ArrayList<ZLTextElement> elements) {
+		
+		private Processor(ZLTextParagraph paragraph, LineBreaker lineBreaker, List<ZLTextMark> marks, int paragraphIndex, ArrayList<ZLTextElement> elements) {
 			myParagraph = paragraph;
 			myLineBreaker = lineBreaker;
 			myElements = elements;
 			myMarks = marks;
-			myUnderLineMarks = underlineMarks;
+			final ZLTextMark mark = new ZLTextMark(paragraphIndex, 0, 0);
+			int i;
+			for (i = 0; i < myMarks.size(); i++) {
+				if (((ZLTextMark)myMarks.get(i)).compareTo(mark) >= 0) {
+					break;
+				}
+			}
+			myFirstMark = i;
+			myLastMark = myFirstMark;
+			for (; (myLastMark != myMarks.size()) && (((ZLTextMark)myMarks.get(myLastMark)).ParagraphIndex == paragraphIndex); myLastMark++);
 			myOffset = 0;
-			
-			
-			// /
-			{
-				final ZLTextMark mark = new ZLTextMark(paragraphIndex, 0, 0);
-				int i;
-				for (i = 0; i < myMarks.size(); i++) {
-					if (((ZLTextMark) myMarks.get(i)).compareTo(mark) >= 0) {
-						break;
-					}
-				}
-				myFirstMark = i;
-				myLastMark = myFirstMark;
-				for (; (myLastMark != myMarks.size())
-						&& (((ZLTextMark) myMarks.get(myLastMark)).ParagraphIndex == paragraphIndex); myLastMark++) {
-					;
-				}
-
-			}
-
-			// ////////////////////////////
-			{
-				myFirstUnderLineMark = 0;
-				myLastUnderLineMark = 0;
-				final ZLTextUnderLineMark underlineMark = new ZLTextUnderLineMark(
-						paragraphIndex, 0, 0);
-				int i;
-				for (i = 0; i < myUnderLineMarks.size(); i++) {
-					if (((ZLTextUnderLineMark) myUnderLineMarks.get(i))
-							.compareTo(underlineMark) >= 0) {
-						break;
-					}
-				}
-				myFirstUnderLineMark = i;
-				myLastUnderLineMark = myFirstUnderLineMark;
-				for (; (myLastUnderLineMark != myUnderLineMarks.size())
-						&& (((ZLTextUnderLineMark) myUnderLineMarks
-								.get(myLastUnderLineMark)).nParagraphIndex == paragraphIndex); myLastUnderLineMark++) {
-					;
-				}
-			}
 		}
 
 		void fill() {
@@ -131,7 +96,7 @@ public final class ZLTextParagraphCursor {
 		private static byte[] ourBreaks = new byte[1024];
 		private static final int NO_SPACE = 0;
 		private static final int SPACE = 1;
-		private static final int NON_BREAKABLE_SPACE = 2;
+		//private static final int NON_BREAKABLE_SPACE = 2;
 		private void processTextEntry(final char[] data, final int offset, final int length) {
 			if (length != 0) {
 				if (ourBreaks.length < length) {
@@ -142,11 +107,12 @@ public final class ZLTextParagraphCursor {
 
 				final ZLTextElement hSpace = ZLTextElement.HSpace;
 				final ArrayList<ZLTextElement> elements = myElements;
-				char ch;
-				char previousChar = data[offset];
+				char ch = 0;
+				char previousChar = 0;
 				int spaceState = NO_SPACE;
 				int wordStart = 0;
 				for (int index = 0; index < length; ++index) {
+					previousChar = ch;
 					ch = data[offset + index];
 					if (Character.isSpace(ch)) {
 						if (index > 0 && spaceState == NO_SPACE) {
@@ -195,14 +161,7 @@ public final class ZLTextParagraphCursor {
 			for (int i = myFirstMark; i < myLastMark; ++i) {
 				final ZLTextMark mark = (ZLTextMark)myMarks.get(i);
 				if ((mark.Offset < paragraphOffset + len) && (mark.Offset + mark.Length > paragraphOffset)) {
-					word.addMark(mark.Offset - paragraphOffset, mark.Length, MarkType.TYPE_HIGHLINGHT_SEARCH);
-				}
-			}
-			
-			for (int i = myFirstUnderLineMark; i < myLastUnderLineMark; ++i) {
-				final ZLTextUnderLineMark underlineMark = (ZLTextUnderLineMark)myUnderLineMarks.get(i);
-				if ((underlineMark.nOffset < offset + len) && (underlineMark.nOffset + underlineMark.nLength > offset)) {
-					word.addMark(Math.max(underlineMark.nOffset, offset) - offset, Math.min(underlineMark.nOffset + underlineMark.nLength, offset + len) - Math.max(underlineMark.nOffset, offset), MarkType.TYPE_HIGHLINGHT);
+					word.addMark(mark.Offset - paragraphOffset, mark.Length);
 				}
 			}
 			myElements.add(word);		
@@ -232,7 +191,7 @@ public final class ZLTextParagraphCursor {
 		ZLTextParagraph	paragraph = Model.getParagraph(Index);
 		switch (paragraph.getKind()) {
 			case ZLTextParagraph.Kind.TEXT_PARAGRAPH:
-				new Processor(paragraph, new LineBreaker(Model.getLanguage()), Model.getMarks(), Model.getUnderLineMarks(), Index, myElements).fill();
+				new Processor(paragraph, new LineBreaker(Model.getLanguage()), Model.getMarks(), Index, myElements).fill();
 				break;
 			default:
 				break;
