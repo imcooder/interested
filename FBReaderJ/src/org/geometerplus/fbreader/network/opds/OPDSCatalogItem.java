@@ -29,33 +29,68 @@ import org.geometerplus.fbreader.network.*;
 
 class OPDSCatalogItem extends NetworkCatalogItem {
 
-	OPDSCatalogItem(NetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType) {
+	static class State extends NetworkOperationData {
+
+		public String LastLoadedId;
+
+		public State(INetworkLink link, OnNewItemListener listener) {
+			super(link, listener);
+		}
+	}
+	private State myLoadingState;
+
+	OPDSCatalogItem(INetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType) {
 		super(link, title, summary, cover, urlByType);
 	}
 
-	OPDSCatalogItem(NetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType, int visibility) {
+	OPDSCatalogItem(INetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType, int visibility) {
 		super(link, title, summary, cover, urlByType, visibility);
 	}
 
-	OPDSCatalogItem(NetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType, int visibility, int catalogType) {
+	OPDSCatalogItem(INetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType, int visibility, int catalogType) {
 		super(link, title, summary, cover, urlByType, visibility, catalogType);
 	}
 
-	@Override
-	public String loadChildren(NetworkOperationData.OnNewItemListener listener) {
-
-		final NetworkOperationData data = new NetworkOperationData(Link, listener);
-
-		ZLNetworkRequest networkRequest =
-			((OPDSLink) Link).createNetworkData(URLByType.get(URL_CATALOG), data);
-
+	private String doLoadChildren(NetworkOperationData.OnNewItemListener listener,
+			ZLNetworkRequest networkRequest) {
 		while (networkRequest != null) {
 			final String errorMessage = ZLNetworkManager.Instance().perform(networkRequest);
 			if (errorMessage != null) {
+				myLoadingState = null;
 				return errorMessage;
 			}
-			networkRequest = data.resume();
+			if (listener.confirmInterrupt()) {
+				return null;
+			}
+			networkRequest = myLoadingState.resume();
 		}
 		return null;
+	}
+
+	@Override
+	public final String loadChildren(NetworkOperationData.OnNewItemListener listener) {
+		OPDSNetworkLink opdsLink = (OPDSNetworkLink) Link;
+
+		myLoadingState = opdsLink.createOperationData(Link, listener);
+
+		ZLNetworkRequest networkRequest =
+			opdsLink.createNetworkData(URLByType.get(URL_CATALOG), myLoadingState);
+
+		return doLoadChildren(listener, networkRequest);
+	}
+
+	@Override
+	public final boolean supportsResumeLoading() {
+		return true;
+	}
+
+	@Override
+	public final String resumeLoading(NetworkOperationData.OnNewItemListener listener) {
+		if (myLoadingState == null) {
+			return null;
+		}
+		myLoadingState.Listener = listener;
+		ZLNetworkRequest networkRequest = myLoadingState.resume();
+		return doLoadChildren(listener, networkRequest);
 	}
 }

@@ -52,7 +52,7 @@ public abstract class NetworkCatalogItem extends NetworkLibraryItem {
 	 * @param cover      cover url. Can be <code>null</code>.
 	 * @param urlByType  map contains URLs and their types. Must be not <code>null</code>.
 	 */
-	public NetworkCatalogItem(NetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType) {
+	public NetworkCatalogItem(INetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType) {
 		this(link, title, summary, cover, urlByType, VISIBLE_ALWAYS, CATALOG_OTHER);
 	}
 
@@ -67,7 +67,7 @@ public abstract class NetworkCatalogItem extends NetworkLibraryItem {
 	 * @param visibility value defines when this library item will be shown in the network library. 
 	 *                   Can be one of the VISIBLE_* values.
 	 */
-	public NetworkCatalogItem(NetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType, int visibility) {
+	public NetworkCatalogItem(INetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType, int visibility) {
 		this(link, title, summary, cover, urlByType, visibility, CATALOG_OTHER);
 	}
 
@@ -83,7 +83,7 @@ public abstract class NetworkCatalogItem extends NetworkLibraryItem {
 	 *                   Can be one of the VISIBLE_* values.
 	 * @param catalogType value defines type of this catalog. Can be one of the CATALOG_* values.
 	 */
-	public NetworkCatalogItem(NetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType, int visibility, int catalogType) {
+	public NetworkCatalogItem(INetworkLink link, String title, String summary, String cover, Map<Integer, String> urlByType, int visibility, int catalogType) {
 		super(link, title, summary, cover);
 		Visibility = visibility;
 		CatalogType = catalogType;
@@ -92,13 +92,14 @@ public abstract class NetworkCatalogItem extends NetworkLibraryItem {
 
 	public abstract String loadChildren(NetworkOperationData.OnNewItemListener listener); // returns Error Message
 
-	/*public final String loadChildren(final List<NetworkLibraryItem> children) {
-		return loadChildren(new CatalogListener() {
-			public void onNewItem(NetworkLibraryItem item) {
-				children.add(item);
-			}
-		});
-	}*/
+	public boolean supportsResumeLoading() {
+		return false;
+	}
+
+	public String resumeLoading(NetworkOperationData.OnNewItemListener listener) { // returns Error Message
+		return NetworkErrors.errorMessage(NetworkErrors.ERROR_UNSUPPORTED_OPERATION);
+	}
+
 
 	/**
 	 * Method is called each time this item is displayed to the user.

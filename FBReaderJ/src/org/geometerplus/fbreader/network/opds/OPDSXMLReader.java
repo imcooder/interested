@@ -31,22 +31,23 @@ import org.geometerplus.fbreader.network.atom.*;
 class OPDSXMLReader extends ZLXMLReaderAdapter {
 
 	public static final String KEY_PRICE = "price";
-	public static final String KEY_CURRENCY = "currency";
-	public static final String KEY_FORMAT = "format";
 
 
-	private final OPDSFeedReader myFeedReader;
+	protected final OPDSFeedReader myFeedReader;
 
 	private OPDSFeedMetadata myFeed;
 	private OPDSEntry myEntry;
 
 	private ATOMAuthor myAuthor;
 	private ATOMId myId;
-	private ATOMLink myLink;
+	private OPDSLink myLink;
 	private ATOMCategory myCategory;
 	private ATOMUpdated myUpdated;
 	private ATOMPublished myPublished;
 	private DCDate myDCIssued;
+	private ATOMIcon myIcon;
+
+	private String myPriceCurrency;
 
 	//private ATOMTitle myTitle;      // TODO: implement ATOMTextConstruct & ATOMTitle
 	//private ATOMSummary mySummary;  // TODO: implement ATOMTextConstruct & ATOMSummary
@@ -57,18 +58,18 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 	}
 
 
-	private String myDublinCoreNamespaceId;
-	private String myAtomNamespaceId;
-	private String myOpenSearchNamespaceId;
-	private String myCalibreNamespaceId;
-	private String myOpdsNamespaceId;
+	protected String myDublinCoreNamespaceId;
+	protected String myAtomNamespaceId;
+	protected String myOpenSearchNamespaceId;
+	protected String myCalibreNamespaceId;
+	protected String myOpdsNamespaceId;
 
 	@Override
-	public boolean processNamespaces() {
+	public final boolean processNamespaces() {
 		return true;
 	}
 
-	private static String intern(String str) {
+	public static String intern(String str) {
 		if (str == null || str.length() == 0) {
 			return null;
 		}
@@ -100,72 +101,76 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 	}
 
 
-	private static final int START = 0;
-	private static final int FEED = 1;
-	private static final int F_ENTRY = 2;
-	private static final int F_ID = 3;
-	private static final int F_LINK = 4;
-	private static final int F_CATEGORY = 5;
-	private static final int F_TITLE = 6;
-	private static final int F_UPDATED = 7;
-	private static final int F_AUTHOR = 8;
-	private static final int FA_NAME = 9;
-	private static final int FA_URI = 10;
-	private static final int FA_EMAIL = 11;
-	private static final int FE_AUTHOR = 12;
-	private static final int FE_ID = 13;
-	private static final int FE_CATEGORY = 14;
-	private static final int FE_LINK = 15;
-	private static final int FE_PUBLISHED = 16;
-	private static final int FE_SUMMARY = 17;
-	private static final int FE_CONTENT = 18;
-	private static final int FE_TITLE = 19;
-	private static final int FE_UPDATED = 20;
-	private static final int FE_DC_LANGUAGE = 21;
-	private static final int FE_DC_ISSUED = 22;
-	private static final int FE_DC_PUBLISHER = 23;
-	private static final int FE_CALIBRE_SERIES = 24;
-	private static final int FE_CALIBRE_SERIES_INDEX = 25;
-	private static final int FEL_PRICE = 26;
-	private static final int FEL_FORMAT = 27;
-	private static final int FEA_NAME = 28;
-	private static final int FEA_URI = 29;
-	private static final int FEA_EMAIL = 30;
-	private static final int OPENSEARCH_TOTALRESULTS = 31;
-	private static final int OPENSEARCH_ITEMSPERPAGE = 32;
-	private static final int OPENSEARCH_STARTINDEX = 33;
-	private static final int FEC_HACK_SPAN = 34;
+	protected static final int START = 0;
+	protected static final int FEED = 1;
+	protected static final int F_ENTRY = 2;
+	protected static final int F_ID = 3;
+	protected static final int F_LINK = 4;
+	protected static final int F_CATEGORY = 5;
+	protected static final int F_TITLE = 6;
+	protected static final int F_UPDATED = 7;
+	protected static final int F_AUTHOR = 8;
+	protected static final int FA_NAME = 9;
+	protected static final int FA_URI = 10;
+	protected static final int FA_EMAIL = 11;
+	protected static final int FE_AUTHOR = 12;
+	protected static final int FE_ID = 13;
+	protected static final int FE_CATEGORY = 14;
+	protected static final int FE_LINK = 15;
+	protected static final int FE_PUBLISHED = 16;
+	protected static final int FE_SUMMARY = 17;
+	protected static final int FE_CONTENT = 18;
+	protected static final int FE_TITLE = 19;
+	protected static final int FE_UPDATED = 20;
+	protected static final int FE_DC_LANGUAGE = 21;
+	protected static final int FE_DC_ISSUED = 22;
+	protected static final int FE_DC_PUBLISHER = 23;
+	protected static final int FE_CALIBRE_SERIES = 24;
+	protected static final int FE_CALIBRE_SERIES_INDEX = 25;
+	protected static final int FEL_PRICE = 26;
+	protected static final int FEL_FORMAT = 27;
+	protected static final int FEA_NAME = 28;
+	protected static final int FEA_URI = 29;
+	protected static final int FEA_EMAIL = 30;
+	protected static final int OPENSEARCH_TOTALRESULTS = 31;
+	protected static final int OPENSEARCH_ITEMSPERPAGE = 32;
+	protected static final int OPENSEARCH_STARTINDEX = 33;
+	protected static final int FEC_HACK_SPAN = 34;
+	protected static final int F_SUBTITLE = 35;
+	protected static final int F_ICON = 36;
 
 
-	private static final String TAG_FEED = "feed";
-	private static final String TAG_ENTRY = "entry";
-	private static final String TAG_AUTHOR = "author";
-	private static final String TAG_NAME = "name";
-	private static final String TAG_URI = "uri";
-	private static final String TAG_EMAIL = "email";
-	private static final String TAG_ID = "id";
-	private static final String TAG_CATEGORY = "category";
-	private static final String TAG_LINK = "link";
-	private static final String TAG_PUBLISHED = "published";
-	private static final String TAG_SUMMARY = "summary";
-	private static final String TAG_CONTENT = "content";
-	private static final String TAG_TITLE = "title";
-	private static final String TAG_UPDATED = "updated";
-	private static final String TAG_PRICE = "price";
+	protected static final String TAG_FEED = "feed";
+	protected static final String TAG_ENTRY = "entry";
+	protected static final String TAG_AUTHOR = "author";
+	protected static final String TAG_NAME = "name";
+	protected static final String TAG_URI = "uri";
+	protected static final String TAG_EMAIL = "email";
+	protected static final String TAG_ID = "id";
+	protected static final String TAG_CATEGORY = "category";
+	protected static final String TAG_LINK = "link";
+	protected static final String TAG_PUBLISHED = "published";
+	protected static final String TAG_SUMMARY = "summary";
+	protected static final String TAG_CONTENT = "content";
+	protected static final String TAG_TITLE = "title";
+	protected static final String TAG_UPDATED = "updated";
+	protected static final String TAG_PRICE = "price";
+	protected static final String TAG_SUBTITLE = "subtitle";
+	protected static final String TAG_ICON = "icon";
 
-	private static final String TAG_HACK_SPAN = "span";
+	protected static final String TAG_HACK_SPAN = "span";
 
-	private static final String DC_TAG_LANGUAGE = "language";
-	private static final String DC_TAG_ISSUED = "issued";
-	private static final String DC_TAG_PUBLISHER = "publisher";
-	private static final String DC_TAG_FORMAT = "format";
+	protected static final String DC_TAG_LANGUAGE = "language";
+	protected static final String DC_TAG_ISSUED = "issued";
+	protected static final String DC_TAG_PUBLISHER = "publisher";
+	protected static final String DC_TAG_FORMAT = "format";
 
-	private static final String CALIBRE_TAG_SERIES = "series";
-	private static final String CALIBRE_TAG_SERIES_INDEX = "series_index";
+	protected static final String CALIBRE_TAG_SERIES = "series";
+	protected static final String CALIBRE_TAG_SERIES_INDEX = "series_index";
 
-	private static final String OPENSEARCH_TAG_TOTALRESULTS = "totalResults";
-	private static final String OPENSEARCH_TAG_ITEMSPERPAGE = "itemsPerPage";
-	private static final String OPENSEARCH_TAG_STARTINDEX = "startIndex";
+	protected static final String OPENSEARCH_TAG_TOTALRESULTS = "totalResults";
+	protected static final String OPENSEARCH_TAG_ITEMSPERPAGE = "itemsPerPage";
+	protected static final String OPENSEARCH_TAG_STARTINDEX = "startIndex";
 
 
 	private int myState = START;
@@ -173,9 +178,14 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 	private final StringBuffer myBuffer = new StringBuffer();
 	private HtmlToString myHtmlToString = new HtmlToString();
 
+	private boolean myFeedMetadataProcessed;
+
+	protected final int getState() {
+		return myState;
+	}
 
 	@Override
-	public boolean startElementHandler(String tag, ZLStringMap attributes) {
+	public final boolean startElementHandler(String tag, ZLStringMap attributes) {
 		final int index = tag.indexOf(':');
 		final String tagPrefix;
 		if (index != -1) {
@@ -185,16 +195,35 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 			tagPrefix = null;
 			tag = tag.intern();
 		}
+		return startElementHandler(tagPrefix, tag, attributes, extractBufferContent());
+	}
 
-		final char[] bufferContentArray = myBuffer.toString().trim().toCharArray();
-		final String bufferContent;
-		if (bufferContentArray.length == 0) {
-			bufferContent = null;
+	@Override
+	public final boolean endElementHandler(String tag) {
+		final int index = tag.indexOf(':');
+		final String tagPrefix;
+		if (index != -1) {
+			tagPrefix = tag.substring(0, index).intern();
+			tag = tag.substring(index + 1).intern();
 		} else {
-			bufferContent = new String(bufferContentArray);
+			tagPrefix = null;
+			tag = tag.intern();
 		}
-		myBuffer.delete(0, myBuffer.length());
+		return endElementHandler(tagPrefix, tag, extractBufferContent());
+	}
 
+	private final String extractBufferContent() {
+		final char[] bufferContentArray = myBuffer.toString().trim().toCharArray();
+		myBuffer.delete(0, myBuffer.length());
+		if (bufferContentArray.length == 0) {
+			return null;
+		}
+		return new String(bufferContentArray);
+	}
+
+	public boolean startElementHandler(final String tagPrefix, final String tag,
+			final ZLStringMap attributes, final String bufferContent) {
+		boolean interruptReading = false;
 		switch (myState) {
 			case START:
 				if (tagPrefix == myAtomNamespaceId && tag == TAG_FEED) {
@@ -202,6 +231,7 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 					myFeed = new OPDSFeedMetadata();
 					myFeed.readAttributes(attributes);
 					myState = FEED;
+					myFeedMetadataProcessed = false;
 				}
 				break;
 			case FEED:
@@ -214,8 +244,12 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 						myId = new ATOMId();
 						myId.readAttributes(attributes);
 						myState = F_ID;
+					} else if (tag == TAG_ICON) {
+						myIcon = new ATOMIcon();
+						myIcon.readAttributes(attributes);
+						myState = F_ICON;
 					} else if (tag == TAG_LINK) {
-						myLink = new ATOMLink();
+						myLink = new OPDSLink();
 						myLink.readAttributes(attributes);
 						myState = F_LINK;
 					} else if (tag == TAG_CATEGORY) {
@@ -227,6 +261,11 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 						//myTitle.readAttributes(attributes);
 						myHtmlToString.setupTextContent(attributes.getValue("type"));
 						myState = F_TITLE;
+					} else if (tag == TAG_SUBTITLE) {
+						//mySubtitle = new ATOMTitle(); // TODO:implement ATOMTextConstruct & ATOMSubtitle
+						//mySubtitle.readAttributes(attributes);
+						myHtmlToString.setupTextContent(attributes.getValue("type"));
+						myState = F_SUBTITLE;
 					} else if (tag == TAG_UPDATED) {
 						myUpdated = new ATOMUpdated();
 						myUpdated.readAttributes(attributes);
@@ -236,8 +275,9 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 						myEntry.readAttributes(attributes);
 						myState = F_ENTRY;
 						// Process feed metadata just before first feed entry
-						if (myFeed != null && myFeed.Id != null) {
-							myFeedReader.processFeedMetadata(myFeed, true);
+						if (myFeed != null && !myFeedMetadataProcessed) {
+							interruptReading = myFeedReader.processFeedMetadata(myFeed, true);
+							myFeedMetadataProcessed = true;
 						}
 					} 
 				} else if (tagPrefix == myOpenSearchNamespaceId) {
@@ -265,7 +305,7 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 						myCategory.readAttributes(attributes);
 						myState = FE_CATEGORY;
 					} else if (tag == TAG_LINK) {
-						myLink = new ATOMLink();
+						myLink = new OPDSLink();
 						myLink.readAttributes(attributes);
 						myState = FE_LINK;
 					} else if (tag == TAG_PUBLISHED) {
@@ -334,8 +374,7 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 				break;
 			case FE_LINK:
 				if (tagPrefix == myOpdsNamespaceId && tag == TAG_PRICE) {
-					// FIXME: HACK: price handling must be implemented not through attributes!!!
-					myLink.addAttribute(KEY_CURRENCY, attributes.getValue("currencycode"));
+					myPriceCurrency = attributes.getValue("currencycode");
 					myState = FEL_PRICE;
 				} if (tagPrefix == myDublinCoreNamespaceId && tag == DC_TAG_FORMAT) {
 					myState = FEL_FORMAT;
@@ -351,44 +390,26 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 			case FE_SUMMARY:
 			case FE_TITLE:
 			case F_TITLE:
+			case F_SUBTITLE:
 				myHtmlToString.processTextContent(false, tag, attributes, bufferContent);
 				break;
 			default:
 				break;
 		}
 
-		return false;
+		return interruptReading;
 	}
 
-	@Override
-	public boolean endElementHandler(String tag) {
-		final int index = tag.indexOf(':');
-		final String tagPrefix;
-		if (index >= 0) {
-			tagPrefix = tag.substring(0, index).intern();
-			tag = tag.substring(index + 1).intern();
-		} else {
-			tagPrefix = null;
-			tag = tag.intern();
-		}
-
-		final char[] bufferContentArray = myBuffer.toString().trim().toCharArray();
-		final String bufferContent;
-		if (bufferContentArray.length == 0) {
-			bufferContent = null;
-		} else {
-			bufferContent = new String(bufferContentArray);
-		}
-		myBuffer.delete(0, myBuffer.length());
-
+	public boolean endElementHandler(final String tagPrefix, final String tag,
+			final String bufferContent) {
 		boolean interruptReading = false;
 		switch (myState) {
 			case START:
 				break;
 			case FEED:
 				if (tagPrefix == myAtomNamespaceId && tag == TAG_FEED) {
-					if (myFeed != null && myFeed.Id != null) {
-						myFeedReader.processFeedMetadata(myFeed, false);
+					if (myFeed != null) {
+						interruptReading = myFeedReader.processFeedMetadata(myFeed, false);
 					}
 					myFeed = null;
 					myFeedReader.processFeedEnd();
@@ -397,7 +418,7 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 				break;
 			case F_ENTRY:
 				if (tagPrefix == myAtomNamespaceId && tag == TAG_ENTRY) {
-					if (myEntry != null && myEntry.Id != null) {
+					if (myEntry != null) {
 						interruptReading = myFeedReader.processFeedEntry(myEntry);
 					}
 					myEntry = null;
@@ -412,6 +433,17 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 						myFeed.Id = myId;
 					}
 					myId = null;
+					myState = FEED;
+				} 
+				break;
+			case F_ICON:
+				if (tagPrefix == myAtomNamespaceId && tag == TAG_ICON) {
+					// FIXME:uri can be lost:buffer will be truncated, if there are extension tags inside the <id> tag
+					if (bufferContent != null && myFeed != null) {
+						myIcon.Uri = bufferContent;
+						myFeed.Icon = myIcon;
+					}
+					myIcon = null;
 					myState = FEED;
 				} 
 				break;
@@ -439,6 +471,18 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 					final String title = myHtmlToString.finishTextContent(bufferContent);
 					if (myFeed != null) {
 						myFeed.Title = title;
+					}
+					myState = FEED;
+				} else {
+					myHtmlToString.processTextContent(true, tag, null, bufferContent);
+				} 
+				break;
+			case F_SUBTITLE:
+				if (tagPrefix == myAtomNamespaceId && tag == TAG_SUBTITLE) {
+					// TODO:implement ATOMTextConstruct & ATOMSubtitle
+					final String subtitle = myHtmlToString.finishTextContent(bufferContent);
+					if (myFeed != null) {
+						myFeed.Subtitle = subtitle;
 					}
 					myState = FEED;
 				} else {
@@ -502,8 +546,9 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 				break;
 			case FEL_PRICE:
 				if (tagPrefix == myOpdsNamespaceId && tag == TAG_PRICE) {
-					if (bufferContent != null) {
-						myLink.addAttribute(KEY_PRICE, bufferContent.intern());
+					if (bufferContent != null && myPriceCurrency != null) {
+						myLink.Prices.add(new OPDSPrice(bufferContent.intern(), myPriceCurrency));
+						myPriceCurrency = null;
 					}
 					myState = FE_LINK;
 				}
@@ -511,7 +556,7 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 			case FEL_FORMAT:
 				if (tagPrefix == myDublinCoreNamespaceId && tag == DC_TAG_FORMAT) {
 					if (bufferContent != null) {
-						myLink.addAttribute(KEY_FORMAT, bufferContent.intern());
+						myLink.Formats.add(bufferContent.intern());
 					}
 					myState = FE_LINK;
 				}
@@ -688,7 +733,7 @@ class OPDSXMLReader extends ZLXMLReaderAdapter {
 	}
 
 	@Override
-	public void characterDataHandler(char[] data, int start, int length) {
+	public final void characterDataHandler(char[] data, int start, int length) {
 		final int startIndex = myBuffer.length();
 		myBuffer.append(data, start, length);
 		int index = startIndex;
