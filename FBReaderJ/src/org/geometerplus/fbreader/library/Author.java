@@ -19,9 +19,6 @@
 
 package org.geometerplus.fbreader.library;
 
-import java.util.*;
-import org.geometerplus.zlibrary.core.util.*;
-
 public final class Author {
 	public final String DisplayName;
 	public final String SortKey;
@@ -31,10 +28,6 @@ public final class Author {
 		SortKey = sortKey;
 	}
 		
-	public static boolean areEquals(Author author0, Author author1) {
-		return author0 == null ? author1 == null : author0.equals(author1);
-	}
-
 	public static int hashCode(Author author) {
 		return author == null ? 0 : author.hashCode();
 	}
