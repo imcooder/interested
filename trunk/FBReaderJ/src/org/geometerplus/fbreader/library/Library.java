@@ -23,7 +23,8 @@ import java.io.File;
 import java.util.*;
 
 import org.geometerplus.zlibrary.core.filesystem.*;
-import org.geometerplus.zlibrary.core.library.ZLibrary;
+import org.geometerplus.zlibrary.core.util.ZLMiscUtil;
+
 import org.geometerplus.fbreader.Paths;
 
 public final class Library {
@@ -42,7 +43,7 @@ public final class Library {
 	private final LibraryTree myRecentBooks = new RootTree();
 	private final LibraryTree mySearchResult = new RootTree();
 
-	private	boolean myDoRebuild = true;
+	private boolean myDoRebuild = true;
 
 	private Library() {
 	}
@@ -121,7 +122,7 @@ public final class Library {
 	}
 
 	private void collectBooks() {
-		final long start = System.currentTimeMillis();
+		//final long start = System.currentTimeMillis();
 		//android.os.Debug.startMethodTracing("/sdcard/ll0");
 		final List<ZLPhysicalFile> physicalFilesList = collectPhysicalFiles();
 		//android.os.Debug.stopMethodTracing();
@@ -161,11 +162,14 @@ public final class Library {
 		}
 
 		public boolean equals(Object object) {
+			if (this == object) {
+				return true;
+			}
 			if (!(object instanceof AuthorSeriesPair)) {
 				return false;
 			}
 			AuthorSeriesPair pair = (AuthorSeriesPair)object;
-			return Author.areEquals(myAuthor, pair.myAuthor) && mySeries.equals(pair.mySeries);
+			return ZLMiscUtil.equals(myAuthor, pair.myAuthor) && mySeries.equals(pair.mySeries);
 		}
 
 		public int hashCode() {
@@ -188,7 +192,7 @@ public final class Library {
 			tagTreeMap.put(tag, tagTree);
 		}
 		return tagTree;
-	} 
+	}
 
 	private void build() {
 		//System.err.println("before build: " + System.currentTimeMillis() % 20000);
@@ -307,7 +311,7 @@ public final class Library {
 		ids.add(0, bookId);
 		if (ids.size() > 12) {
 			ids.remove(12);
-		} 
+		}
 		db.saveRecentBookIds(ids);
 	}
 
@@ -321,7 +325,7 @@ public final class Library {
 			if (file.children().size() != 1) {
 				return false;
 			}
-		} 
+		}
 		return true;
 	}
 
