@@ -21,7 +21,6 @@ package org.geometerplus.fbreader.fbreader;
 
 public interface ActionCode {
 	String SHOW_LIBRARY = "library";
-	String SHOW_OPTIONS = "preferences-old";
 	String SHOW_PREFERENCES = "preferences";
 	String SHOW_BOOK_INFO = "bookInfo";
 	String SHOW_CONTENTS = "toc";
@@ -40,9 +39,7 @@ public interface ActionCode {
 	String VOLUME_KEY_SCROLL_BACKWARD = "volumeKeyScrollBackward";
 	String TRACKBALL_SCROLL_FORWARD = "trackballScrollForward";
 	String TRACKBALL_SCROLL_BACKWARD = "trackballScrollBackward";
-	String SCROLL_TO_HOME = "gotoHome";
-	String SCROLL_TO_START_OF_TEXT = "gotoSectionStart";
-	String SCROLL_TO_END_OF_TEXT = "gotoSectionEnd";
+	String SHOW_NAVIGATION = "navigate";
 	String CANCEL = "cancel";
 	String ROTATE = "rotate";
 	String INCREASE_FONT = "increaseFont";
@@ -50,15 +47,8 @@ public interface ActionCode {
 	String TOGGLE_FULLSCREEN = "toggleFullscreen";
 	String FULLSCREEN_ON = "onFullscreen";
 	String QUIT = "quit";
-	String GOTO_NEXT_TOC_SECTION = "nextTOCSection";
-	String GOTO_PREVIOUS_TOC_SECTION = "previousTOCSection";
 	String COPY_SELECTED_TEXT_TO_CLIPBOARD = "copyToClipboard";
 	String CLEAR_SELECTION = "clearSelection";
 	String OPEN_SELECTED_TEXT_IN_DICTIONARY = "openInDictionary";
 	String FOLLOW_HYPERLINK = "followHyperlink";
-	
-	String SELECTION_UNDERLINE = "underLine";
-	String SELECTION_TRANSLATE = "translate";
-	String SELECTION_COPYSTRING = "copystring";
-	String SELECTION_HIGHLIGHT = "highLight";
 };

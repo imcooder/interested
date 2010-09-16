@@ -19,14 +19,9 @@
 
 package org.geometerplus.fbreader.fbreader;
 
-import java.io.*;
-import java.util.*;
-import org.geometerplus.zlibrary.core.util.*;
-
 import org.geometerplus.zlibrary.core.filesystem.*;
 import org.geometerplus.zlibrary.core.application.*;
 import org.geometerplus.zlibrary.core.dialogs.ZLDialogManager;
-import org.geometerplus.zlibrary.core.library.ZLibrary;
 import org.geometerplus.zlibrary.core.options.*;
 
 import org.geometerplus.zlibrary.text.hyphenation.ZLTextHyphenator;
@@ -35,6 +30,7 @@ import org.geometerplus.fbreader.bookmodel.BookModel;
 import org.geometerplus.fbreader.library.Library;
 import org.geometerplus.fbreader.library.Book;
 import org.geometerplus.fbreader.library.Bookmark;
+import org.geometerplus.fbreader.optionsDialog.OptionsDialog;
 
 public final class FBReader extends ZLApplication {
 	public final ZLStringOption BookSearchPatternOption =
@@ -65,10 +61,6 @@ public final class FBReader extends ZLApplication {
 	final ZLStringOption ColorProfileOption =
 		new ZLStringOption("Options", "ColorProfile", ColorProfile.DAY);
 
-	public final int autoPageElapse[] = {0, 10, 30, 60};
-	public final ZLIntegerRangeOption AutoPageOption =
-		new ZLIntegerRangeOption("Options", "AutoPage", 0, 100, 0);
-	
 	private final ZLKeyBindings myBindings = new ZLKeyBindings("Keys");
 
 	public final FBView BookTextView;
@@ -87,7 +79,6 @@ public final class FBReader extends ZLApplication {
 		addAction(ActionCode.ROTATE, new RotateAction(this));
 
 		addAction(ActionCode.SHOW_LIBRARY, new ShowLibraryAction(this));
-		addAction(ActionCode.SHOW_OPTIONS, new ShowOptionsDialogAction(this));
 		addAction(ActionCode.SHOW_PREFERENCES, new PreferencesAction(this));
 		addAction(ActionCode.SHOW_BOOK_INFO, new BookInfoAction(this));
 		addAction(ActionCode.SHOW_CONTENTS, new ShowTOCAction(this));
@@ -99,16 +90,12 @@ public final class FBReader extends ZLApplication {
 		addAction(ActionCode.FIND_PREVIOUS, new FindPreviousAction(this));
 		addAction(ActionCode.CLEAR_FIND_RESULTS, new ClearFindResultsAction(this));
 		
-		addAction(ActionCode.SCROLL_TO_HOME, new ScrollToHomeAction(this));
-		//addAction(ActionCode.SCROLL_TO_START_OF_TEXT, new DummyAction(this));
-		//addAction(ActionCode.SCROLL_TO_END_OF_TEXT, new DummyAction(this));
+		addAction(ActionCode.SHOW_NAVIGATION, new ShowNavigationAction(this));
 		addAction(ActionCode.VOLUME_KEY_SCROLL_FORWARD, new VolumeKeyScrollingAction(this, true));
 		addAction(ActionCode.VOLUME_KEY_SCROLL_BACKWARD, new VolumeKeyScrollingAction(this, false));
 		addAction(ActionCode.TRACKBALL_SCROLL_FORWARD, new TrackballScrollingAction(this, true));
 		addAction(ActionCode.TRACKBALL_SCROLL_BACKWARD, new TrackballScrollingAction(this, false));
 		addAction(ActionCode.CANCEL, new CancelAction(this));
-		//addAction(ActionCode.GOTO_NEXT_TOC_SECTION, new DummyAction(this));
-		//addAction(ActionCode.GOTO_PREVIOUS_TOC_SECTION, new DummyAction(this));
 		//addAction(ActionCode.COPY_SELECTED_TEXT_TO_CLIPBOARD, new DummyAction(this));
 		//addAction(ActionCode.OPEN_SELECTED_TEXT_IN_DICTIONARY, new DummyAction(this));
 		//addAction(ActionCode.CLEAR_SELECTION, new DummyAction(this));
@@ -117,12 +104,6 @@ public final class FBReader extends ZLApplication {
 		addAction(ActionCode.SWITCH_TO_DAY_PROFILE, new SwitchProfileAction(this, ColorProfile.DAY));
 		addAction(ActionCode.SWITCH_TO_NIGHT_PROFILE, new SwitchProfileAction(this, ColorProfile.NIGHT));
 
-		
-		addAction(ActionCode.SELECTION_UNDERLINE, new UnderLineAction(this));
-		addAction(ActionCode.SELECTION_COPYSTRING, new CopyStringAction(this));
-		addAction(ActionCode.SELECTION_TRANSLATE, new TranslationAction(this));
-		addAction(ActionCode.SELECTION_HIGHLIGHT, new HighLightAction(this));
-		
 		BookTextView = new FBView(this);
 		FootnoteView = new FBView(this);
 
@@ -278,5 +259,9 @@ public final class FBReader extends ZLApplication {
 		if ((Model != null) && (BookTextView != null)) {
 			Model.Book.storePosition(BookTextView.getStartCursor());
 		}
+	}
+
+	public void showOptionsDialog() {
+		new OptionsDialog(this).getDialog().run();
 	}
 }

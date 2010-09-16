@@ -28,7 +28,6 @@ class UnderLineAction extends FBAction {
 		super(fbreader);
 	}
 
-	public void run() {		
-		Reader.getTextView().applyUnderToSelection();
+	public void run() {				
 	}
 }
