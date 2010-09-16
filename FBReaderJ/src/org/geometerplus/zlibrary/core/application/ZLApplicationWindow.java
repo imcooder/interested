@@ -19,9 +19,6 @@
 
 package org.geometerplus.zlibrary.core.application;
 
-import java.util.*;
-import org.geometerplus.zlibrary.core.util.*;
-
 abstract public class ZLApplicationWindow {
 	private ZLApplication myApplication;
 
@@ -47,6 +44,8 @@ abstract public class ZLApplicationWindow {
 
 	abstract protected void rotate();
 	abstract protected boolean canRotate();
+	abstract protected void navigate();
+	abstract protected boolean canNavigate();
 
 	abstract protected void close();
 }
